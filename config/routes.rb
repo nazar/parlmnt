@@ -21,4 +21,6 @@ Votes::Application.routes.draw do
 
   resources :comments, :only => [:index, :create, :update]
 
+  match '/' => 'bills#index'     #TODO temp... remove this once landing page is done
+
 end
