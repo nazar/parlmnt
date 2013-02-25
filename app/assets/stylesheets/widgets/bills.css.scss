@@ -1,0 +1,239 @@
+//variables
+
+$billBorder: #e6e6e6;
+$infoText: #7c7c7c;
+$infoUnderline: #e4e4e4;
+
+//bills namespace
+#bills {
+
+  .bill {
+    @include box-shadow(0, 1px, 2px, 0, #999);
+
+    border: 1px solid $billBorder;
+
+    width: 310px;
+    margin: 0 15px 15px 0;
+
+    .bill-title-info {
+      @include display-flex-box();
+
+      width: 100%;
+
+      .bill-name {
+        @include box-flex(1);
+
+        //position: relative;
+        height: 34px;
+        vertical-align: middle;
+
+        h2 {
+          padding-left: 3px;
+          font-size: 12px;
+          line-height: 11px;
+          height: 30px;
+
+          display:table-cell;
+          vertical-align:middle;
+        }
+      }
+    }
+
+    .info {
+      @include display-flex-box;
+
+      margin: 2px 10px 2px 10px;
+
+      border-bottom: 1px dashed $infoUnderline;
+      font-size: 11px;
+
+      .title {
+        @include box-flex(0);
+        width: 60px;
+        font-weight: bold;
+        color: $infoText;
+      }
+
+      .data {
+        @include box-flex(1);
+        color: darken($infoText, 15%);
+
+        li.sponsor {
+          display: inline;
+          float: left;
+          width: 54px;
+          padding-right: 4px;
+
+          img {
+            padding: 1px;
+            border: 1px solid silver;
+
+            &.s-labour{
+              border: 1px solid #c41230;
+            }
+            &.s-conservative{
+              border: 1px solid #037fb2;
+            }
+            &.s-liberal-democrat{
+              border: 1px solid #fbb724;
+            }
+          }
+
+          a {
+            display: block;
+            text-align: center;
+            line-height: 11px;
+            padding: 2px 0 3px 0;
+          }
+        }
+
+
+      }
+    }
+
+    .extra {
+      background-color: #F3F3F2;
+      box-shadow: inset 1px 1px 5px #e2e2e0;
+
+      padding: 5px;
+
+      .stats {
+        font-size: 11px;
+        line-height: 11px;
+
+        i {
+          padding-right: 5px;
+        }
+
+        .watch {
+          float: right;
+          opacity: 0.35;
+
+          &:hover {
+            opacity: 1.0;
+          }
+        }
+      }
+    }
+
+
+  }
+
+}
+
+//templates/bill_popup.dust CSS
+
+$popupWidth: 700px;
+$column1: 215px;
+$column2: 462px;
+
+.bill-popup {
+
+  width: $popupWidth;
+  margin-left: -350px;
+
+  h1 {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  h2 {
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    line-height: 14px;
+
+    color: #646060;
+
+    border-bottom: 1px solid #acacac;
+  }
+
+  .modal-header {
+    .votes, .bill-name {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .votes {
+      padding-right: 5px;
+    }
+  }
+
+  .table-container {
+    display: table;
+    width: 100%;
+  }
+
+  .documents, .stages {
+    display: table-cell;
+  }
+
+  .summary {
+    width: $column1;
+  }
+
+  .sponsors {
+    width: $column2;
+  }
+
+
+  .summary-sponsors-container {
+    font-size: 11px;
+
+    .summary, .sponsors {
+      display: table-cell;
+    }
+
+    .summary {
+      line-height: 15px;
+
+      td.header {
+        width: 70px;
+        font-weight: bold;;
+      }
+    }
+
+    .sponsors {
+      li.sponsor {
+        display: inline;
+        float: left;
+        width: 105px;
+        padding-right: 4px;
+
+        img {
+          padding: 1px;
+          border: 1px solid silver;
+
+          &.s-labour{
+            border: 1px solid #c41230;
+          }
+          &.s-conservative{
+            border: 1px solid #037fb2;
+          }
+          &.s-liberal-democrat{
+            border: 1px solid #fbb724;
+          }
+        }
+
+        a {
+          display: block;
+          text-align: center;
+          line-height: 11px;
+          padding: 2px 0 3px 0;
+        }
+      }
+
+    }
+
+  }
+
+  .stages, .bill-document {
+    font-size: 11px;
+  }
+
+  .comments .comment {
+    border-top: 1px solid white;
+  }
+
+}

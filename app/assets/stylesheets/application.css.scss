@@ -1,0 +1,33 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+*/
+
+// globals
+@import 'mixins/css3';
+@import 'mixins/flex-box';
+
+//misc third party stuff
+@import '3rdparty/animate';
+@import '3rdparty/isotope';
+@import '3rdparty/bootstrap';
+@import '3rdparty/bootstrap-modal';
+
+//client widgets
+@import 'widgets/bills';
+@import 'widgets/commentable';
+@import 'widgets/session';
+@import 'widgets/navbar';
+@import 'widgets/side-bar';
+@import 'widgets/summary';
+@import 'widgets/votable';
+
+//module/controller specific styling
+@import 'modules/bills';
+
+//screens specific app overrides
+@import 'global/application';
+
+

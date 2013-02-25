@@ -1,0 +1,24 @@
+{
+  "author":"Nazar",
+  "name":"Votes",
+  "description":"Votes Website",
+  "version":"0.0.1",
+  "repository":{
+    "type":"git",
+    "url":"git://github.com/nazar/Bongoapp.git"
+  },
+  "engines":{
+    "node":">=0.6.17 <0.7.0"
+  },
+  "dependencies":{
+    "dustjs-linkedin": "1.1.1",
+    "dusty":"https://github.com/nazar/dusty/tarball/master"
+  },
+  "devDependencies":{
+    "less": "1.3.1",
+    "chai":"1.1.1",
+    "chai-factories":"0.1.0",
+    "mocha":"1.3.0",
+    "requirejs": "2.1.1"
+  }
+}

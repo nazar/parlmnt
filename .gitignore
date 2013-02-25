@@ -1,0 +1,13 @@
+.bundle
+.idea
+
+tmp
+log/*.log
+db/*.sqlite3
+.sass-cache
+
+public/assets/application.js
+
+config/initializers/secret_token.rb
+
+vendor/gems

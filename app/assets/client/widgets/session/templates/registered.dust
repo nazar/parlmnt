@@ -1,0 +1,13 @@
+<ul class="nav pull-right" id="registered">
+  <li>
+    <div class="btn-group">
+      <button class="btn btn-small btn-inverse"><img class="avatar" src="{avatar}" alt="{name}"></button>
+      <button class="btn btn-small btn-inverse dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#settings">Settings</a></li>
+      </ul>
+    </div>
+  </li>
+</ul>

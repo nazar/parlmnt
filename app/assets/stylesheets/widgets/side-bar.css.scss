@@ -1,0 +1,27 @@
+.container-fluid  {
+
+  & > .sidebar {
+    position: relative;
+    top: 0;
+    left:auto;
+    width: 210px;
+
+    &.well {
+      padding: 5px;
+      padding-bottom: 15px;
+    }
+
+    &.collapsed {
+      display: none;
+      margin-left: 10px;
+    }
+  }
+
+  & > .content {
+    margin-left: 240px;
+
+    &.collapsed {
+      margin-left: 10px;
+    }
+  }
+}

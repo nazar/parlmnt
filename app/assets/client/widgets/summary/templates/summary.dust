@@ -1,0 +1,6 @@
+<div>
+  <div class="loader">
+    <img src="/images/loading.gif">
+  </div>
+  <h1>{title} <small>{summary}</small></h1>
+</div>

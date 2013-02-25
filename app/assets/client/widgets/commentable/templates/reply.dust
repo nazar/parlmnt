@@ -1,0 +1,5 @@
+<textarea name="" placeholder="Reply..." cols="20" rows="1"></textarea>
+<div class="buttons">
+  <button class="save btn btn-primary">Save</button>
+  <button class="cancel btn">Cancel</button>
+</div>

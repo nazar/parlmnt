@@ -1,0 +1,32 @@
+<div id="register-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Register to Voice your Opinion</h3>
+  </div>
+  <div class="modal-body">
+    <h5 class="title">Register using either your Facebook or GMail accounts.</h5>
+    <div class="intro">
+      <div class="auth">
+        <a href="/auth/facebook">
+          <img src="/images/fb-connect.png" alt="">
+          <div class="caption">Facebook Connect</div>
+        </a>
+      </div>
+      <div class="auth">
+        <a href="/auth/google_oauth2">
+          <img src="/images/gmail-oauth.png" alt="">
+          <div class="caption">GMail Connect</div>
+        </a>
+      </div>
+      <div class="auth">
+        <a href="/auth/twitter">
+          <img src="/images/twitter-auth.png" alt="">
+          <div class="caption">Twitter Connect</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>

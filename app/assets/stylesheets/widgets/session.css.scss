@@ -1,0 +1,27 @@
+#register-modal {
+
+  .title {
+    padding-bottom: 20px;
+  }
+
+  div.intro {
+    display: table-row;
+
+    .caption {
+      font-size: 10px;
+    }
+  }
+
+  div.auth {
+    display: table-cell;
+    text-align: center;
+    padding-right: 20px;
+  }
+
+}
+
+#registered {
+  img.avatar {
+    height: 16px;
+  }
+}

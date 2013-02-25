@@ -1,0 +1,47 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+gb1:
+  id: 1
+  name: 'Civil Aviation Bill'
+  house: 2
+  url_details: 'http://services.parliament.uk/bills/2012-13/civilaviation.html'
+
+gb2:
+  id: 2
+  name: 'Defamation Bill'
+  house: 2
+  url_details: 'http://services.parliament.uk/bills/2012-13/defamation.html'
+
+pm1:
+  id: 3
+  name: 'Antarctic Bill'
+  house: 2
+  url_details: 'http://services.parliament.uk/bills/2012-13/antarctic.html'
+
+pm2:
+  id: 4
+  name: 'Social Care Portability Bill'
+  house: 1
+  url_details: 'http://services.parliament.uk/bills/2012-13/defamation.html'
+
+pv1:
+  id: 5
+  name: 'Leeds City Council Bill'
+  house: 2
+  url_details: 'http://services.parliament.uk/bills/2012-13/leedscitycouncil.html'
+
+pv2:
+  id: 6
+  name: 'London Local Authorities and Transport for London (No. 2) Bill'
+  house: 1
+  url_details: 'http://services.parliament.uk/bills/2012-13/londonlocalauthoritiesandtransportforlondonno2hl.html'
+
+sp1:
+  id: 7
+  name: 'Torture (Damages) Bill'
+  house: 2
+  url_details: 'http://services.parliament.uk/bills/2007-08/torturedamageshl.html'

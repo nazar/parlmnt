@@ -1,0 +1,13 @@
+<div class="comment-container clearfix">
+  <div class="votes"></div>
+  <div class="avatar"><img src="{avatar}" alt="{name}"></div>
+  <div class="content-container">
+    <div class="stats">{cached_votes_score} points <span title='{@date format="long" key="{created_at}" /}'>{@date format="relative" key="{created_at}" /}</span></div>
+    <p class="body">{body}</p>
+    {@if cond="'{loggedIn}'"}
+      <div class="comment-actions">
+        <span><a href="#" class="reply">reply</a></span>
+      </div>
+    {/if}
+  </div>
+</div>

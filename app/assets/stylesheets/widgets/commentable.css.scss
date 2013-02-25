@@ -1,0 +1,81 @@
+.commentable {
+
+  .comment {
+    font-size: 11px;
+    line-height: 11px;
+    padding-top: 3px;
+    border-top: 2px solid #ffffff;
+
+    .comment-container {
+
+      .avatar {
+        float: left;
+        vertical-align: top;
+        width: 35px;
+
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .content-container {
+        position: relative;
+        min-height: 32px;
+        float: left;
+
+        .body {
+          font-size: 13px;
+          margin-top: 4px;
+          margin-bottom: 4px;
+        }
+
+        .time {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+
+          color: #8E8EAF;
+        }
+      }
+    }
+
+    .child {
+      margin-left: 15px;
+    }
+
+    .comment-actions {
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+  }
+
+  .votes {
+    padding-top: 0;
+    float: left;
+  }
+
+  .reply {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    textarea {
+      width: 400px;
+      height: 40px;
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+  }
+
+
+  .add-comment {
+    padding-top: 10px;
+
+    textarea {
+      height: 40px;
+      width: 400px;
+    }
+  }
+
+}
