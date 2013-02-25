@@ -1,0 +1,20 @@
+=form_tag '/admin/setups/update_setup' do
+  -@groups.each do |group|
+    %fieldset
+      %legend
+        %span #{group.first.to_s.humanize}
+      %ol
+        -group.last.sort{|a,b| a.first.to_s <=> b.first.to_s}.each do |setting|
+          -unless setting.last[:internal]
+            %li
+              %label{:for => setting.first.to_s}
+                =setting.first.to_s.humanize
+              - value = Setup.send(setting.first)
+              - value = value.class == Symbol ? ":#{value.to_s}" : value
+              = text_field_tag setting.first.to_s, value
+              %p.inline-hints= setting.last[:description]
+
+  %fieldset.buttons
+    %ol
+      %li.commit=submit_tag 'Save Settings'
+      %li.cancel=link_to 'Cancel', '/admin/setup'

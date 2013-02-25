@@ -4,6 +4,25 @@ class Setup < ActiveRecord::Base
 
     :timestamps => {
       :last_sponsors_import => {:description => 'Last Sponsors import', :default => nil, :internal => true},
+    },
+
+    :security => {
+      :secret_token => {:description => 'Cookie secret key', :default => String.random_string(100)}
+    },
+
+    :omniauth_facebook => {
+       :facebook_app_key => {:description => 'Facebook App Key'},
+       :facebook_app_secret => {:description => 'Facebook App Secret'}
+    },
+
+    :omniauth_gmail => {
+      :gmail_app_key => {:description => 'Gmail App Key'},
+      :gmail_app_secret => {:description => 'Gmail App Secret'}
+    },
+
+    :omniauth_twitter => {
+      :twitter_app_key => {:description => 'Twitter App Key'},
+      :twitter_app_secret => {:description => 'Twitter App Secret'}
     }
 
   }

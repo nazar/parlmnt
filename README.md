@@ -25,9 +25,14 @@ All client code is located at /root/app/assets/client and is effectively a self 
 
 A widget based approach is employed to organise the application's views with each widget having exclusive responsibility for managing an application domain. Event messaging is employed to notify interested widgets of action or requests. This helps minimise widget dependencies (although not completely)
 
-#TODO
+# Installation
 
-* Better README file!!
-* Launch parlmnt.com
-* Get more devs
-* ?
+**TODO**
+
+# Contribution
+
+**TODO**
+
+# Credits
+
+**TODO**
