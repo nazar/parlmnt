@@ -31,5 +31,7 @@ Votes::Application.configure do
 
   config.assets.compile = true
 
+  config.action_mailer.default_url_options = { :host => 'localhost:3030' }
+
 
 end

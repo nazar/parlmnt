@@ -16,11 +16,11 @@
           <li><a href="#api">API</a></li>
           <li><a href="#about">About</a></li>
         </ul>
-        <form class="search form-search pull-right">
-          <div class="input-append">
-            <input class="span3 search-query" type="text" placeholder="Search...">
-            <button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button></div>
-        </form>
+        <!--<form class="search form-search pull-right">-->
+          <!--<div class="input-append">-->
+            <!--<input class="span3 search-query" type="text" placeholder="Search...">-->
+            <!--<button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button></div>-->
+        <!--</form>-->
         <div id="session">
         </div>
       </div>

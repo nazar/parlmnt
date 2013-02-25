@@ -63,7 +63,7 @@ My nephew (and [parlmnt.com](parlmnt.com) co-founder) is a bright kid and I am t
 
 ## 3. Parlmt Configuration
 
-To start parlmnt:
+Start parlmnt:
 
 ```shell
   bundle exec rails s mongrel
@@ -71,17 +71,39 @@ To start parlmnt:
 
 Navigate to localhost:[port]/admin and login using **username:** admin@example.com and **password:** password
 
-Navigate to localhost:[port]/admin/setups/view_setup to configure omniauth and the Secret token
+Click on the Administrators Menu item and add a new administrator by simply adding their email address. The new administrator will receive a password reset email to the previously given email address during which time she can set the password. **Please delete the default administrator user once past this stage**.
+
+Navigate to localhost:[port]/admin/setups/view_setup to configure omniauth and the Secret token for all oauth providers.
+
+Restart parlmnt at this stage.
 
 ## 4. Data Import
+
+The newly created database will be empty. To populate parlmnt from parliament.uk run:
 
 ```shell
   bundle exec rake import:all
 ```
 
+The above should take about an hour to import but the end of the process all Bills, MPs and Lords should have been imported.
+
 # Contributing
 
-**TODO**
+## Building the Client
+
+[/root/app/assets/client](https://github.com/nazar/parlmnt/tree/master/app/assets/client) contains the client root, which has it's own build process. To install required tools for building:
+
+```shell
+  npm install
+```
+
+Once installed, the client would have to be rebuilt every time a change is made via:
+
+```shell
+  make
+```
+
+The above concatenates all JS files in order and is output to the build directory, which Rails's Sprockets accesses.
 
 # Contributors
 

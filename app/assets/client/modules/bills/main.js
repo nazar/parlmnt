@@ -10,7 +10,7 @@ require([
   'widgets/commentable/main'
 
 
-], function (sandbox, Session, navbarWidget, sidebarWidget, billWidget, summaryWidget, sessionWidget, votableWidget, commentableWidget)  {
+], function (sandbox, navbarWidget, sidebarWidget, billWidget, summaryWidget, sessionWidget, votableWidget, commentableWidget)  {
 
   var bills, sidebar, summary, session;
 

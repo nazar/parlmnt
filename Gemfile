@@ -30,6 +30,7 @@ gem 'rack', '1.4.1'    # session secret token error workaround
 
 group :development do
   gem 'mongrel', '>=1.2.0.pre2'
+  gem 'capistrano', '2.14.2'
 end
 
 group :test do
@@ -40,5 +41,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'therubyracer', '0.11.3'
   gem 'sass-rails', '3.2.5'
+  gem 'uglifier', '1.3.0'
 end
