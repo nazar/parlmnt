@@ -2,9 +2,6 @@ class BillsController < ApplicationController
 
   respond_to :json, :xml, :only => [:show]
 
-  caches_action :index, :expires_in => 1.minutes
-
-
   def index
     year = params[:year] || '2012'
 
