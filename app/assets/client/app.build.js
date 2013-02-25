@@ -5,8 +5,7 @@
 
   out:'./build/application.js',
 
-//  optimize: 'uglify',
-  optimize:      'none',
+  optimize: 'uglify',
   preserveLicenseComments: false,
 
   paths:{
