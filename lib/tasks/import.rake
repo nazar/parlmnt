@@ -59,8 +59,7 @@ namespace :import do
   task :bills => :environment do
     #first do summaries
     i = 0
-#    ['2007', '2008', '2009', '2010', '2011', '2012'].each do |year|
-    ['2012'].each do |year|
+    ['2007', '2008', '2009', '2010', '2011', '2012'].each do |year|
       Bill.import_bills_summaries(year) do |bill_summary|
         i += 1
         p "#{year} - #{i} - Importing Bill Summaries from #{bill_summary[:name]} at #{bill_summary[:url_details]}"

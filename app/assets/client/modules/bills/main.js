@@ -1,6 +1,5 @@
 require([
   'sandbox',
-  'models/session',
 
   'widgets/navbar/main',
   'widgets/sidebar/main',
@@ -221,23 +220,23 @@ require([
     summary.stopLoader();
   });
 
-  sandbox.subscribe('summaryChanged', function (summaryObject) { //'billsDetail'
+  sandbox.subscribe('summaryChanged', function (summaryObject) {
     summary.setTitledSummary(summaryObject);
   });
 
-  sandbox.subscribe('FilterChanged', function (selections) { //'billFilterBar'
+  sandbox.subscribe('FilterChanged', function (selections) {
     bills.filteringAndSorting(selections);
   });
 
-  sandbox.subscribe('BillSearchName', function (event, term) { //'billFilterBar'
+  sandbox.subscribe('BillSearchName', function (event, term) {
     bills.showMatchedBills(term);
   });
 
-  sandbox.subscribe('relayout', function () { //'Bill'
+  sandbox.subscribe('relayout', function () {
     bills.relayout();
   });
 
-  sandbox.subscribe('sessionReload', function() { //'session'
+  sandbox.subscribe('sessionReload', function() {
     sandbox.session.reload();
   });
 

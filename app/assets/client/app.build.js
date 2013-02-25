@@ -13,7 +13,6 @@
     //folder shortcuts
     "vendor":      './vendor',
     "widgets":     './widgets',
-    "models":      './models', //global models
     "modules":     './modules',
 
     //vendor libraries
