@@ -1,6 +1,6 @@
 # PARLMT.com
 
-[Parlmt](parlmnt.com) imports data from [www.parliament.uk](www.parliament.uk), specifically [Bills & Legislation](http://www.parliament.uk/business/bills-and-legislation/), [Members of Parliament](http://www.parliament.uk/mps-lords-and-offices/mps/) and [Members of House of Lords](http://www.parliament.uk/mps-lords-and-offices/lords/).
+[Parlmt](http://parlmnt.com) imports data from [www.parliament.uk](http://www.parliament.uk), specifically [Bills & Legislation](http://www.parliament.uk/business/bills-and-legislation/), [Members of Parliament](http://www.parliament.uk/mps-lords-and-offices/mps/) and [Members of House of Lords](http://www.parliament.uk/mps-lords-and-offices/lords/).
 
 This data serves two purposes:
 
@@ -33,13 +33,13 @@ Although the Parliament website is functional, it is somewhat lacking in interac
 
 ## Better API
 
-[Parliament.uk](Parliament.uk) presents  all its data as HTML. Specific data such as a Bill's [details](http://services.parliament.uk/bills/2012-13/antarctic.html), [stages](http://services.parliament.uk/bills/2012-13/antarctic/stages.html), [documents](http://services.parliament.uk/bills/2012-13/antarctic/documents.html), and most crucially [votes](http://www.publications.parliament.uk/pa/cm201213/cmhansrd/cm130129/debtext/130129-0002.htm#13012946000001) and so on can only be extracted by scraping the relevant pages.
+[Parliament.uk](http://Parliament.uk) presents  all its data as HTML. Specific data such as a Bill's [details](http://services.parliament.uk/bills/2012-13/antarctic.html), [stages](http://services.parliament.uk/bills/2012-13/antarctic/stages.html), [documents](http://services.parliament.uk/bills/2012-13/antarctic/documents.html), and most crucially [votes](http://www.publications.parliament.uk/pa/cm201213/cmhansrd/cm130129/debtext/130129-0002.htm#13012946000001) and so on can only be extracted by scraping the relevant pages.
 
 This application aims to provide a JSON and XML API for accessing both Bills and Parliamentarian's details.
 
 ## My Nephew
 
-My nephew (and [parlmnt.com](parlmnt.com) co-founder) is a bright kid and I am trying to nudge him to showing at least a passing interest in computing and software development. Several aspects of this application were designed with his feedback.
+My nephew (and [parlmnt.com](http://parlmnt.com) co-founder) is a bright kid and I am trying to nudge him to showing at least a passing interest in computing and software development. Several aspects of this application were designed with his feedback.
 
 
 # Installation
