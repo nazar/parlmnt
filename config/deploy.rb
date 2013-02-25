@@ -91,6 +91,7 @@ after('deploy:finalize_update') do
 
   #copy configs
   run "cp #{deploy_to}/#{shared_dir}/res/database.yml #{current_release}/config/database.yml"
+  run "cp #{deploy_to}/#{shared_dir}/res/secret_token.rb #{current_release}/config/initializers/secret_token.rb"
 end
 
 after 'deploy:update', 'deploy:cleanup'
