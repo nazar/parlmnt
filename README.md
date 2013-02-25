@@ -27,7 +27,42 @@ A widget based approach is employed to organise the application's views with eac
 
 # Installation
 
-**TODO**
+## 1. Setup Database
+
+```ruby
+  bundle exec rake db:migrate
+```
+
+## 2. Install Dependancies
+
+
+**ActiveAdmin**
+
+```ruby
+  bundle exec rails generate active_admin:install
+  bundle exec rake db:migrate
+```
+
+## 3. Parlmt Configuration
+
+Start parlmnt:
+
+```ruby
+  bundle exec rails s mongrel
+```
+
+Navigate to localhost:[port]/admin and login using **username:** admin@example.com and **password:** password
+
+Navigate to localhost:[port]/admin/setups/view_setup to configure omniauth and the Secret token
+
+
+## 4. Data Import
+
+```ruby
+  bundle exec rake import:all
+```
+
+
 
 # Contribution
 
