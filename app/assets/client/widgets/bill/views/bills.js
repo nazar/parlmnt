@@ -23,12 +23,12 @@ define([
         this._currentSort = '';
         this._currentFilters = [];
 
-        this._billViews = {};   //TODO need this? Only here for isotope.
-
         this._rendered = false;
       },
 
       render: function () {
+        var that = this;
+
         this.$el.find('div.bill').remove();
 
         this._updateSummary();
@@ -39,7 +39,7 @@ define([
         this._applyFilters();
         this._lazyLoadConfig();
 
-        $(window).trigger('scroll'); //kicks off isotope
+        that._triggerLazyImages();
 
         this._rendered = true;
         sandbox.publish('billsLoaded');
@@ -58,7 +58,6 @@ define([
         var that = this,
           bills = [];
 
-        this._billViews = {}; //resets views
         this.billCollection.each(function(bill) {
           bills.push(that._renderBill(bill))
         });
@@ -98,29 +97,21 @@ define([
 
         if (!this._debouncedSearch) {
           this._debouncedSearch = (function(term) {
-            var tst = [];
+            var matches;
 
             if (term) {
-              Object.each(that._billViews, function(id, billView) {
-                billView.applyNameFilter(term, {
-                  show: function(view) {
-                    tst.push(view.el);
-                  }
-                });
+              matches = sandbox.dom.$('.bill').filter(function() {
+                return sandbox.dom.$(this).data('name').toLowerCase().has(term);
               });
-
-              if (tst.length > 0) {
-                that.$el.isotope({filter: that.$(tst)});  //FIXME should work in addition to _currentFilters
-              }
+              that.$el.isotope({filter: sandbox.dom.$(matches)});
+              //
+              that._triggerLazyImages({hidden: true});
             } else {
-              this._applyFilters();       //TODO that?
+              that._applyFilters();
             }
-
-          }).debounce(500);
+          }).debounce(1000);
         }
-
         this._debouncedSearch(term);
-
       },
 
       relayout: function() {
@@ -138,8 +129,6 @@ define([
 
         billView.render();
 
-        this._billViews[bill.get('id')] = billView;
-
         return billView.el;
       },
 
@@ -154,7 +143,7 @@ define([
       },
 
       _isotopeConfig: function() {
-        var $window = $(window);
+        var that = this;
 
         if (this._rendered) {
           this.$el.isotope('destroy');
@@ -172,7 +161,7 @@ define([
             }
           },
           onLayout: function() {
-            $window.trigger('scroll');
+            that._triggerLazyImages();
           }
         });
       },
@@ -180,13 +169,24 @@ define([
       _lazyLoadConfig: function() {
         this.$el.find('img.lazy').lazyload({
           effect : "fadeIn",
-          failure_limit: Math.max(this.billCollection.length - 1, 0)
+          failure_limit: Math.max(this.billCollection.length - 1, 0)//,
         });
       },
 
       _applyFilters: function() {
         this.$el.isotope({sortBy: this._currentSort});
         this.$el.isotope({filter: this._currentFilters.join('')});
+      },
+
+      _triggerLazyImages: function(options) {
+        options = options || {};
+
+        if (options.hidden) {
+          sandbox.dom.$('.bill:not(.isotope-hidden)').find('img.lazy').trigger('appear');
+        } else {
+          sandbox.dom.$(window).trigger('scroll');
+        }
+
       }
 
 

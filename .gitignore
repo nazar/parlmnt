@@ -11,3 +11,7 @@ public/assets/application.js
 config/initializers/secret_token.rb
 
 vendor/gems
+
+
+Gemfile.lock
+app/assets/client/build/application.js

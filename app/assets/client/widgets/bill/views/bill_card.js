@@ -53,6 +53,7 @@ define([
           that._setBillSortData();
           that._setBillFilterClasses();
           that._setBillPartyClasses();
+          that._setBillData();
         });
 
         return this;
@@ -132,6 +133,10 @@ define([
         this.model.sponsorParties().each(function(party) {
           that.$el.addClass('party-' + party.dasherize());
         });
+      },
+
+      _setBillData: function() {
+        this.$el.data('name', this.model.get('name'));
       }
 
 

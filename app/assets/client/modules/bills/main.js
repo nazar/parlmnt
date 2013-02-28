@@ -228,7 +228,7 @@ require([
     bills.filteringAndSorting(selections);
   });
 
-  sandbox.subscribe('BillSearchName', function (event, term) {
+  sandbox.subscribe('BillSearchName', function (term) {
     bills.showMatchedBills(term);
   });
 
