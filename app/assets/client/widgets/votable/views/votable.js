@@ -15,7 +15,7 @@ define([
       },
 
       initialize: function(options) {
-        sandbox.util.bindAll(this, 'render', '_doOnVoteChanged');
+        sandbox.util.bindAll(this, 'render', '_doOnVoteChanged', '_doVoteIfSession');
 
         this.$el = options.$el;
 
@@ -52,21 +52,34 @@ define([
       /////////// EVENT Handlers
 
       _voteUp: function() {
-        this.model.voteUp();
-        this._saveVote();
 
-        sandbox.analytics.track('Up voted a {v}'.assign({v: this.votable_type}), {
-          votable_id: this.model.get('votable_id_id')
+        this._doVoteIfSession(function() {
+          this.model.voteUp();
+          this._saveVote();
+
+          sandbox.analytics.track('Up voted a {v}'.assign({v: this.votable_type}), {
+            votable_id: this.model.get('votable_id_id')
+          });
         });
       },
 
       _voteDown: function() {
-        this.model.voteDown();
-        this._saveVote();
+        this._doVoteIfSession(function() {
+          this.model.voteDown();
+          this._saveVote();
 
-        sandbox.analytics.track('Down voted a {v}'.assign({v: this.votable_type}), {
-          votable_id: this.model.get('votable_id_id')
+          sandbox.analytics.track('Down voted a {v}'.assign({v: this.votable_type}), {
+            votable_id: this.model.get('votable_id_id')
+          });
         });
+      },
+
+      _doVoteIfSession: function(fn) {
+        if (sandbox.session.loggedIn()) {
+          fn();
+        } else {
+          sandbox.publish('NeedRegistration');
+        }
       },
 
 

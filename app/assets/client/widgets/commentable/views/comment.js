@@ -49,17 +49,22 @@ define([
         e.preventDefault();
 
         if (!this._isReplying()) {
-          sandbox.template.render('commentable/templates/reply', {}, function (o) {
-            var $reply = sandbox.dom.$('<div class="reply"></div>');
 
-            $reply.html(o);
-            that._hReplyAction($reply);
-            that.$el.find('.content-container:first').append($reply.addClass('animated fadeInDown'));
-          });
+          if (sandbox.session.loggedIn()) {
+            sandbox.template.render('commentable/templates/reply', {}, function (o) {
+              var $reply = sandbox.dom.$('<div class="reply"></div>');
 
-          sandbox.analytics.track('Replying to Bill Comment', {
-            bill_id: that.model.get('commentable_id')
-          });
+              $reply.html(o);
+              that._hReplyAction($reply);
+              that.$el.find('.content-container:first').append($reply.addClass('animated fadeInDown'));
+            });
+
+            sandbox.analytics.track('Replying to Bill Comment', {
+              bill_id: that.model.get('commentable_id')
+            });
+          } else {
+            sandbox.publish('NeedRegistration');
+          }
         }
       },
 
@@ -83,9 +88,7 @@ define([
       /////////// PRIVATES //////////////
 
       _toJSON: function() {
-        return Object.merge(this.model.toJSON(), {
-          loggedIn: sandbox.session.loggedIn()
-        });
+        return this.model.toJSON();
       },
 
       _hCommentActions: function($el) {

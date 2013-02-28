@@ -10,6 +10,10 @@ define([
     return function (options) {
       var session = new SessionManagerView(options);
 
+      sandbox.subscribe('NeedRegistration', function() {
+        session.startRegisteration();
+      });
+
       return session;
     };
 
