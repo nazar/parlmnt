@@ -51,6 +51,10 @@ define([
         return this.model.get('token').length > 0;
       },
 
+      startRegisteration: function() {
+        this._$modal.modal('show');
+      },
+
       //// PRIVATE ////
 
       _renderRegisteredUser: function() {

@@ -33,7 +33,7 @@ define([
 
       renderAddComment: function() {
         var that = this,
-          $comment = sandbox.dom.$('<div></div>');
+          $comment = sandbox.dom.$('<div class="please-register"></div>');
 
         if (sandbox.session.loggedIn()) {
           sandbox.template.render('commentable/templates/add-comment', {}, function (o) {
@@ -43,7 +43,10 @@ define([
             that._hAddEvents($comment);
           });
         } else {
-          $comment.html('Login or Register to add and reply to comments');
+          $comment.html('<a href="#">Login or Register</a> to add and reply to comments').find('a').click(function(e) {
+            e.preventDefault();
+            sandbox.publish('NeedRegistration');
+          });
         }
 
         return $comment;
