@@ -73,14 +73,6 @@ define([
 
       /// PUBLIC
 
-      applyNameFilter: function(term, options) {
-        var reg = new RegExp(term, 'i');
-
-        if ( this.model.get('name').has(reg) === true ) {
-          options.show(this);
-        }
-      },
-
       addToCommentable: function(comment) {
         this._commentable.addToCommentable(comment);
       },
