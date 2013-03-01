@@ -1,6 +1,8 @@
 .bundle
 .idea
 
+Gemfile.lock
+
 tmp
 log/*.log
 db/*.sqlite3

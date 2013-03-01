@@ -1,16 +1,16 @@
 namespace :import do
 
-  desc "Imports and populates all data sources"
+  desc 'Imports and populates all data sources'
   task :all => [:parties, :sponsors, :bills] do
 
   end
 
-  desc "Imports Parties"
+  desc 'Imports Parties'
   task :parties => :environment do
     load "#{Rails.root}/db/seeds.rb"
   end
 
-  desc "Imports and populates Sponsors"
+  desc 'Imports and populates Sponsors'
   task :sponsors => [:parties] do
 
     #MP summaries
@@ -55,11 +55,17 @@ namespace :import do
     Setup.last_sponsors_import = Time.now
   end
 
-  desc "Imports and populates Bills"
-  task :bills => :environment do
+  desc 'Imports and populates Bills'
+  task :bills, [:year]  => :environment do |t, args|
+
+    p args.to_yaml
+    p args[:year]
+
+    years = args[:year].present? ? [args[:year]] : ['2007', '2008', '2009', '2010', '2011', '2012']
+
     #first do summaries
     i = 0
-    ['2007', '2008', '2009', '2010', '2011', '2012'].each do |year|
+    years.each do |year|
       Bill.import_bills_summaries(year) do |bill_summary|
         i += 1
         p "#{year} - #{i} - Importing Bill Summaries from #{bill_summary[:name]} at #{bill_summary[:url_details]}"

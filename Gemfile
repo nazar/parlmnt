@@ -22,11 +22,14 @@ gem 'omniauth-google-oauth2', '0.1.13'
 gem 'omniauth-facebook', '1.4.1'
 gem 'omniauth-twitter', '0.0.13'
 
+#admin
 gem 'activeadmin', '0.4.0'   #stick to 0.4 for now as 0.5 has several changes
-gem 'formtastic', '~> 2.1.1'
+gem 'formtastic', '~> 2.1.1' # for AA
+
+gem 'whenever', '0.8.2'
 
 
-gem 'rack', '1.4.1'    # session secret token error workaround
+gem 'rack', '1.4.1'    # session secret token error workaround bc I have a few old rails apps on my server. Passenger 4 here I come
 
 group :development do
   gem 'mongrel', '>=1.2.0.pre2'
