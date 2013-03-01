@@ -88,13 +88,19 @@ define([
         }
       },
       originToString: function () {
-        return "House of " + originsToClass[this.origin].capitalize();
+        var klass = originsToClass[this.origin];
+
+        if (klass) {
+          return "House of " + klass.capitalize();
+        } else {
+          return '';
+        }
       },
       originToClass: function() {
         return originsToClass[this.origin];
       },
       locationToString: function () {
-        var loc = this.current_stage.location;
+        var loc = this.current_stage ? this.current_stage.location : null;
 
         if (loc) {
           return originsToClass[loc].capitalize();

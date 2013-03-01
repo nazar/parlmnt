@@ -51,7 +51,9 @@ class BillsController < ApplicationController
         end
       end
 
-      result[:current_stage] = stage_atts.inject({}){|r,a| r.merge(a => bill.current_stage.send(a)) }
+      if bill.current_stage.present?
+        result[:current_stage] = stage_atts.inject({}){|r,a| r.merge(a => bill.current_stage.send(a)) }
+      end
     end
 
   end

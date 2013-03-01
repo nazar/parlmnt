@@ -93,7 +93,21 @@ module BillImporter
     end
 
     def save_converted_bills_summary(bill_hash, year)
-      bill = where(:name => bill_hash[:name]).first
+      #take Bill -> Act changes when a bill gains royal assent. Check for Act in title, if so, check existence of a Bill first
+      name_test = /\sact$/i
+
+      if bill_hash[:name] =~ name_test
+        bill_name = bill_hash[:name].gsub(name_test, ' Bill')
+        bill = where(:name => bill_name).first
+
+        if bill.present?
+          #i haz hit. Rename
+          bill.name = bill_hash[:name]
+        end
+      else
+        bill = where(:name => bill_hash[:name]).first
+      end
+
       data = bill_hash.merge(:import_status => 1, :year => year)
 
       if bill.blank?
