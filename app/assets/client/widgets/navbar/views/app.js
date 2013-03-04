@@ -9,8 +9,6 @@ define([
   var AppView = sandbox.mvc.View({
 
     initialize: function (options) {
-      this.sessionEl = options.sessionEl;
-
       this._processItems(options.items);
 
       this.render();
@@ -23,11 +21,11 @@ define([
         that.$el.html(o);
         that._renderNavItems();
         that._renderSession();
+        that._renderSearch();
       });
 
       return this;
     },
-
 
     //// PRIVATE
 
@@ -50,7 +48,23 @@ define([
     },
 
     _renderSession: function() {
-      this.$el.find(this.sessionEl).html(sandbox.session.render().$el);
+      var that = this;
+
+      sandbox.publish('onRenderSession', {
+        rendered: function(html) {
+          that.$el.find('#session').html(html);
+        }
+      });
+    },
+
+    _renderSearch: function() {
+      var that = this;
+
+      sandbox.publish('onRenderSearch', {
+        rendered: function(html) {
+          that.$el.find('#search').html(html);
+        }
+      });
     }
 
 

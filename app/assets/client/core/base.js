@@ -30,7 +30,7 @@ define([
     },
 
     //Promises wrapper
-    P: {
+    P: {                   //TODO not sure if Q is overkill here.... think about it. Would $.Deferred suffice?
       defer: Q.defer,
       when: Q.when,
       then: Q.then,
@@ -43,6 +43,9 @@ define([
     ajax: {
       request: function (url, data) {
         return $.get(url, data, 'json');
+      },
+      post: function (url, data) {
+        return $.post(url, data, 'json');
       }
     },
 

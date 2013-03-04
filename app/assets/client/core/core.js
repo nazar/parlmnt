@@ -10,7 +10,6 @@ define(['base'], function (base) {
 
   // Surface Base definitions to Core
   //TODO don't need all of these - remove un-necessary surfaces
-  core.ajax     = base.ajax;
   core.dom      = base.dom;
   core.events   = base.events;
   core.mvc      = base.mvc;
@@ -56,6 +55,23 @@ define(['base'], function (base) {
       return base.events(event).subscribe(args);
     }
   };
+
+  core.ajax = {
+    request: base.ajax.request,
+    post: function (url, data, success) {
+      var auth_options = {},
+        auth_key = $("meta[name='csrf-param']").attr('content'),
+        auth_value = $("meta[name='csrf-token']").attr('content'),
+        authData = data || {};
+
+      auth_options[auth_key] = auth_value;
+
+      Object.merge(authData, auth_options);
+
+      return base.ajax.post(url, authData, success)
+    }
+  };
+
 
 
   return core;
