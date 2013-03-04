@@ -13,7 +13,7 @@ class Bill < ActiveRecord::Base
   validates_presence_of :house, :url_details, :name, :bill_updated_at
   validates_uniqueness_of :name
 
-  has_many :bill_stages, :order => 'stage_date ASC', :dependent => :destroy
+  has_many :bill_stages, :dependent => :destroy
   has_many :bill_documents, :dependent => :destroy
   has_many :bill_sponsors, :dependent => :destroy
 
@@ -50,6 +50,18 @@ class Bill < ActiveRecord::Base
 
     def with_api_includes
       includes([{:sponsors => :party}, :current_stage])
+    end
+
+    def acts #TODO could be drier
+      where('exists (select bill_stages.bill_id from bill_stages
+        where bill_stages.bill_id = bills.id
+        and bill_stages.location = 3)')
+    end
+
+    def bills #TODO could be drier
+      where('not exists (select bill_stages.bill_id from bill_stages
+        where bill_stages.bill_id = bills.id
+        and bill_stages.location = 3)')
     end
 
   end

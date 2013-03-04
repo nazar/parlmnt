@@ -12,25 +12,28 @@ define([
     var billsView,
       votableBuilder,
       billPopupView,
-      commentableBuilder;
+      commentableBuilder,
+      billCommentsPath;
 
     votableBuilder = options.votableBuilder;
     commentableBuilder = options.commentableBuilder;
+    billCommentsPath = options.commentsPath;
 
     billsView = new BillsContainerView({
       el: sandbox.dom.$q(options.el),
-      billCollection: new BillCollection(),
+      billCollection: new BillCollection({url: options.collectionRootPath}),
       channel: options.channel,
       votableBuilder: votableBuilder,
       commentableBuilder: commentableBuilder
     });
 
 
-    sandbox.subscribe('ShowBillPopup', function (options) { //('bills',
+    sandbox.subscribe('ShowBillPopup', function (options) {
 
       billPopupView = new BillsPopupView({
         votableBuilder: votableBuilder,
-        commentableBuilder: commentableBuilder
+        commentableBuilder: commentableBuilder,
+        commentsPath: billCommentsPath
       });
 
       billPopupView.showBill(options);

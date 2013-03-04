@@ -1,3 +1,8 @@
+require 'bundler/capistrano'
+require 'whenever/capistrano'
+
+set :whenever_command, 'bundle exec whenever'
+
 set :application, 'parlmnt'
 set :use_sudo,    false
 

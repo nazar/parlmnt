@@ -3,12 +3,10 @@
 
 define(['base'], function (base) {
 
-  var channels = {},
-    core = {},
-    _publishQueue = [],
-    isWidgetLoading = false;
+  var core = {};
 
   // Expose functions from Base for use in Core
+  core.routes = base.routes;
 
   // Surface Base definitions to Core
   //TODO don't need all of these - remove un-necessary surfaces
@@ -25,10 +23,6 @@ define(['base'], function (base) {
   core.util.shift = function(args) {
     var shift = [].shift;
     return shift.apply(args);
-  };
-
-  core.getChannels = function () {
-    return channels;
   };
 
   core.analytics = {

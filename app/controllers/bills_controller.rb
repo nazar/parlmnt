@@ -3,9 +3,9 @@ class BillsController < ApplicationController
   respond_to :json, :xml, :only => [:show]
 
   def index
-    year = params[:year] || '2012'
+    year = params[:year] || DateTime.now.year
 
-    @bills = Bill.find_by_year(year).includes([{:sponsors => [:party]}, :current_stage])
+    @bills = Bill.find_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage])
 
     respond_to do |format|
       format.html
@@ -18,6 +18,10 @@ class BillsController < ApplicationController
     @bill = Bill.where(:id => params[:id]).includes([{:sponsors => [:party]}, :current_stage, :bill_stages])
 
     respond_with @bill
+  end
+
+  def comments
+    commentable_comments('Bill', params[:id])
   end
 
 

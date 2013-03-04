@@ -134,10 +134,21 @@ define([
 
       _updateSummary: function() {
         var title,
-          summary;
+          summary,
+          countHidden,
+          countShowing,
+          term;
 
-        title = '{n} {bills}'.assign({n: this.billCollection.length, bills: this.billCollection.length > 0 ? 'Bills' : 'Bill'});
-        summary = 'Started in {year}'.assign({year: this._currentYear});
+        countHidden = sandbox.dom.$('.isotope-hidden').length;
+        countShowing = this.billCollection.length - countHidden;
+        term = countShowing  !== 1 ? 'Bills' : 'Bill';
+
+        if (countHidden > 0) {
+          title = 'Showing {vis} out of {total} {bills}'.assign({vis: countShowing, total: this.billCollection.length, bills: term});
+        } else {
+          title = 'Showing {n} {bills}'.assign({n: this.billCollection.length, bills: term});
+        }
+        summary = 'Active in {year}'.assign({year: this._currentYear});
 
         sandbox.publish('summaryChanged', {title: title, summary: summary});
       },
@@ -176,6 +187,8 @@ define([
       _applyFilters: function() {
         this.$el.isotope({sortBy: this._currentSort});
         this.$el.isotope({filter: this._currentFilters.join('')});
+        //
+        this._updateSummary();
       },
 
       _triggerLazyImages: function(options) {

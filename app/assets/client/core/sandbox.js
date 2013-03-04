@@ -13,14 +13,7 @@ define(['core'], function (core) {
     rest: core.util.rest,
     delay: core.util.delay,
     extend: core.util.extend,
-    cookie: core.util.cookie,
-
-    mixinSessionData: function(jsonObj) {
-      Object.merge(jsonObj, {
-        name: sandbox.session.username(),
-        avatar: sandbox.session.avatar()
-      });
-    }
+    cookie: core.util.cookie
   };
 
   sandbox.template = core.template;
@@ -33,6 +26,8 @@ define(['core'], function (core) {
   sandbox.Date    = core.Date;
 
   sandbox.ajax = core.ajax;
+
+  sandbox.routes = core.routes;
 
   sandbox.analytics = {
     init: core.analytics.init,

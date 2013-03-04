@@ -16,7 +16,6 @@ define([
     },
 
     isRegistered: function() {
-      console.log('logged', this.get('loggedIn') )
       return this.get('loggedIn');
     },
 

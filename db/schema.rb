@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225171021) do
+ActiveRecord::Schema.define(:version => 20130304113105) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130225171021) do
     t.datetime "updated_at",              :null => false
   end
 
+  add_index "bill_stages", ["bill_id"], :name => "index_bill_stages_on_bill_id"
   add_index "bill_stages", ["title"], :name => "index_bill_stages_on_title"
 
   create_table "bill_summaries", :force => true do |t|

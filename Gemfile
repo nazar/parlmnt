@@ -16,6 +16,9 @@ gem 'ancestry', '1.3.0'
 #voting
 gem 'acts_as_votable', '0.5.0'
 
+#javascript routes from rails
+gem 'js-routes', '0.8.7'
+
 #authentication using Google, Facebook and Twitter
 gem 'omniauth', '1.1.1'
 gem 'omniauth-google-oauth2', '0.1.13'
@@ -26,6 +29,7 @@ gem 'omniauth-twitter', '0.0.13'
 gem 'activeadmin', '0.4.0'   #stick to 0.4 for now as 0.5 has several changes
 gem 'formtastic', '~> 2.1.1' # for AA
 
+#cron jobs
 gem 'whenever', '0.8.2'
 
 

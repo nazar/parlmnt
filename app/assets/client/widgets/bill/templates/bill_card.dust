@@ -39,7 +39,7 @@
 
 
 <div class="info">
-  <div class="title">Started in</div>
+  <div class="title">Active in</div>
   <div class="data">{originToString}</div>
 </div>
 

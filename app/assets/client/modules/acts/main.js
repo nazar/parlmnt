@@ -36,16 +36,16 @@ define([
           "default": '2013',
           "items": {
             "2013": {
-              "tip": 'Bills in 2013'
+              "tip": 'Acts in 2013'
             },
             "2012": {
-              "tip": 'Bills in 2012'
+              "tip": 'Acts in 2012'
             },
             "2011": {
-              "tip": 'Bills in 2011'
+              "tip": 'Acts in 2011'
             },
             "2010": {
-              "tip": 'Bills in 2010'
+              "tip": 'Acts in 2010'
             }
           }
         },
@@ -78,7 +78,7 @@ define([
           }
         },
 
-        "Bill Type": {
+        "Act Type": {
           "type": 'toggle',
           "section": 'type',
           "items": {
@@ -101,7 +101,7 @@ define([
           }
         },
 
-        "Bill Origin": {
+        "Act Origin": {
           "type": 'toggle',
           "section": 'origin',
           "items": {
@@ -112,33 +112,6 @@ define([
             "Lords": {
               "code": 'lords',
               "tip": "House of Lords"
-            }
-          }
-        },
-
-        "Bill Stage": {
-          "type": 'toggle',
-          "section": 'stage',
-          "items": {
-            "1": {
-              "code": "1st",
-              "tip": 'First Reading'
-            },
-            "2": {
-              "code": "2nd",
-              "tip": 'Second Reading'
-            },
-            "C": {
-              "code": "co",
-              "tip": 'Committee'
-            },
-            "3": {
-              "code": "3rd",
-              "tip": 'Third Reading'
-            },
-            "A": {
-              "code": "am",
-              "tip": 'Amendments'
             }
           }
         },
@@ -166,7 +139,7 @@ define([
 
         },
 
-        "Filter Bill Titles": {
+        "Filter Act Titles": {
           "type": 'search',
           "section": 'nameFilter',
           "items": {
@@ -178,8 +151,6 @@ define([
                   var $this = $(e.target),
                     term = $this.val().toLowerCase(),
                     ignore = [37, 39];
-
-                  console.log('keyuuuuuup', e, term);
 
                   if (ignore.none(e.which) ) {
                     sandbox.publish('BillSearchName', term);
@@ -199,7 +170,7 @@ define([
       channel: 'billsDetail',
       votableBuilder: votableWidget,
       commentableBuilder: commentableWidget,
-      collectionRootPath: sandbox.routes.bills_path,
+      collectionRootPath: sandbox.routes.acts_path,
       commentsPath: sandbox.routes.comments_bill_path
     });
 
@@ -207,16 +178,16 @@ define([
 
     sandbox.analytics.init();
     sandbox.analytics.identify();
-    sandbox.analytics.track('Viewing Bills');
+    sandbox.analytics.track('Viewing Acts');
 
 
     //hook up all widgets view pub/sub
 
-    sandbox.subscribe('aboutToReload', function () { //'billsDetail'
+    sandbox.subscribe('aboutToReload', function () {
       summary.startLoader();
     });
 
-    sandbox.subscribe('billsLoaded', function () { //'billsDetail'
+    sandbox.subscribe('billsLoaded', function () {
       summary.stopLoader();
     });
 

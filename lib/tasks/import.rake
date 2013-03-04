@@ -58,10 +58,7 @@ namespace :import do
   desc 'Imports and populates Bills'
   task :bills, [:year]  => :environment do |t, args|
 
-    p args.to_yaml
-    p args[:year]
-
-    years = args[:year].present? ? [args[:year]] : ['2007', '2008', '2009', '2010', '2011', '2012']
+    years = args[:year].present? ? [args[:year]] : [ '2009', '2010', '2011', '2012', '2013']
 
     #first do summaries
     i = 0
@@ -81,6 +78,22 @@ namespace :import do
       p "(#{i} of #{total} - #{((i.to_f/total) * 100).round}%) Importing bill details for #{bill.name} from #{bill.url_details}"
       bill.import_bill_details
       bill.save!
+    end
+
+  end
+
+  desc 'Fix bill current stage'
+  task :fix_stages => :environment do
+    Bill.all.each do |bill|
+      bill.bill_stages.completed.latest.first.tap do |last_stage|
+        if last_stage.present?
+          bill.current_stage_id = last_stage[:id]
+          #also update the year to last stage
+          bill.year = last_stage.stage_date.year
+
+          bill.save if bill.changed?
+        end
+      end
     end
 
   end
