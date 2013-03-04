@@ -52,6 +52,18 @@ class Bill < ActiveRecord::Base
       includes([{:sponsors => :party}, :current_stage])
     end
 
+    def acts #TODO could be drier
+      where('exists (select bill_stages.bill_id from bill_stages
+        where bill_stages.bill_id = bills.id
+        and bill_stages.location = 3)')
+    end
+
+    def bills #TODO could be drier
+      where('not exists (select bill_stages.bill_id from bill_stages
+        where bill_stages.bill_id = bills.id
+        and bill_stages.location = 3)')
+    end
+
   end
 
   ###############

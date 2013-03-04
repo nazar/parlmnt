@@ -1,0 +1,2 @@
+module ActsHelper
+end

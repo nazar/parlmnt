@@ -137,10 +137,6 @@ require([
           "A": {
             "code": "am",
             "tip": 'Amendments'
-          },
-          "R": {
-            "code": "ra",
-            "tip": 'Royal Assent'
           }
         }
       },

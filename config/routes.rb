@@ -17,6 +17,12 @@ Votes::Application.routes.draw do
     end
   end
 
+  resources :acts, :only => [:index, :show] do
+    member do
+      get 'comments'
+    end
+  end
+
   resources :votes, :only => [:create]
 
   resources :comments, :only => [:index, :create, :update]
