@@ -22,7 +22,6 @@ define([
     billsView = new BillsContainerView({
       el: sandbox.dom.$q(options.el),
       billCollection: new BillCollection({url: options.collectionRootPath}),
-      channel: options.channel,
       votableBuilder: votableBuilder,
       commentableBuilder: commentableBuilder
     });

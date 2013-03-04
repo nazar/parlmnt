@@ -17,7 +17,7 @@ function (sandbox, Bill) {
     //// PUBLIC
 
     fetchByYear: function(year) {
-      return this.fetch({url: this.url({year: year})});
+      return this.fetch({url: this.url({year: year, format: 'json'})});
     }
 
   });

@@ -1,14 +1,10 @@
 define([
-  'sandbox',
-
-  'widgets/sidebar/models/menu_item' //TODO change this to section_items
+  'sandbox'
 ],
 
-  function (sandbox, MenuItem) {
+  function (sandbox) {
 
     var MenuItems = sandbox.mvc.Collection({
-
-      model: MenuItem,
 
       initialize: function () {
         this.itemSelections = {};
