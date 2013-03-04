@@ -36,6 +36,10 @@ class Bill < ActiveRecord::Base
       where(:name => name)
     end
 
+    def search_by_term(term)
+      where('name like ?', "%#{term}%")
+    end
+
     def find_by_year(year)
       where(:year => year)
     end

@@ -172,8 +172,6 @@ define([
                     term = $this.val().toLowerCase(),
                     ignore = [37, 39];
 
-                  console.log('keyuuuuuup', e, term);
-
                   if (ignore.none(e.which) ) {
                     sandbox.publish('BillSearchName', term);
                   }

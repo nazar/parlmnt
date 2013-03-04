@@ -12,13 +12,8 @@
       <div class="nav-collapse">
         <ul class="nav">
         </ul>
-        <!--<form class="search form-search pull-right">-->
-          <!--<div class="input-append">-->
-            <!--<input class="span3 search-query" type="text" placeholder="Search...">-->
-            <!--<button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button></div>-->
-        <!--</form>-->
-        <div id="session">
-        </div>
+        <div id="search"></div>
+        <div id="session"></div>
       </div>
     </div>
   </div>
