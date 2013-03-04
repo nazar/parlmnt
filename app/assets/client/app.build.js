@@ -49,6 +49,7 @@
     "q":           'vendor/q.0.8.12',
     "analytics":   'vendor/analytics.0.6.1.min',
     "radio":       'vendor/radio.0.2',
+    "routes":      'vendor/jsroutes',
 
 
     //core files

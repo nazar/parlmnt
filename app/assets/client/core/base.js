@@ -10,10 +10,10 @@ define([
   'dust-custom-helpers',
   'q',
   'radio',
+  'routes',
   'analytics'
 
-], function ($, _, Backbone, Dust, DustCustomHelpers, Q, Radio, A) { //
-
+], function ($, _, Backbone, Dust, DustCustomHelpers, Q, Radio, Routes, A) { //
   return {
 
     // dom wraps jQuery and exposes certain jQuery functions
@@ -134,7 +134,9 @@ define([
       shift: [].shift
     },
 
-    analytics: analytics
+    analytics: analytics,
+
+    routes: window.Routes
 
   };
 

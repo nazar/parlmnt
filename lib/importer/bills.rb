@@ -17,6 +17,7 @@ module BillImporter
   }
 
   BILLS_HP_YEAR_MAP = {
+    '2013' => '13',
     '2012' => '13',
     '2011' => '12',
     '2010' => '12',

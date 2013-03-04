@@ -12,18 +12,16 @@ define([
       initialize: function(options) {
         this.$el = options.$el;
 
-        this.commentable_id = options.commentable_id;
-        this.commentable_type = options.commentable_type;
         this.votableBuilder = options.votableBuilder;
 
       },
 
       ////// PUBLIC
 
-      loadComments: function() {
+      loadComments: function(path) {
         var that = this;
 
-        sandbox.ajax.request('/comments', {commentable_type: this.commentable_type, commentable_id: this.commentable_id})
+        sandbox.ajax.request(path)
           .done(function(comments) {
             comments.each(function(comment) {
               that._jsonCommentToView(comment);

@@ -11,8 +11,9 @@ define([
       },
 
       initialize: function(options) {
-        this.votableBuilder = options.votableBuilder
-        this.commentableBuilder = options.commentableBuilder
+        this.votableBuilder = options.votableBuilder;
+        this.commentableBuilder = options.commentableBuilder;
+        this.commentsPath = options.commentsPath;
       },
 
       render: function() {
@@ -67,16 +68,14 @@ define([
 
       _initCommentable: function() {
         this._commentable = this.commentableBuilder({
-          $el: this._commentableDiv(),
-          commentable_type: 'Bill',
-          commentable_id: this.model.get('id')
+          $el: this._commentableDiv()
         });
 
         this._commentableDiv().append(this._commentable.renderAddComment());
       },
 
       _loadComments: function() {
-        this._commentable.loadComments();
+        this._commentable.loadComments( this.commentsPath(this.model.get('id')) );
       },
 
       _renderVotable: function() {

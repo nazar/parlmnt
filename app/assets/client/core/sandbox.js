@@ -34,6 +34,8 @@ define(['core'], function (core) {
 
   sandbox.ajax = core.ajax;
 
+  sandbox.routes = core.routes;
+
   sandbox.analytics = {
     init: core.analytics.init,
 

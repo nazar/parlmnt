@@ -12,10 +12,12 @@ define([
     var billsView,
       votableBuilder,
       billPopupView,
-      commentableBuilder;
+      commentableBuilder,
+      billCommentsPath;
 
     votableBuilder = options.votableBuilder;
     commentableBuilder = options.commentableBuilder;
+    billCommentsPath = options.commentsPath;
 
     billsView = new BillsContainerView({
       el: sandbox.dom.$q(options.el),
@@ -30,7 +32,8 @@ define([
 
       billPopupView = new BillsPopupView({
         votableBuilder: votableBuilder,
-        commentableBuilder: commentableBuilder
+        commentableBuilder: commentableBuilder,
+        commentsPath: billCommentsPath
       });
 
       billPopupView.showBill(options);

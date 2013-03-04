@@ -196,7 +196,8 @@ require([
     el: '#bills',
     channel: 'billsDetail',
     votableBuilder: votableWidget,
-    commentableBuilder: commentableWidget
+    commentableBuilder: commentableWidget,
+    commentsPath: sandbox.routes.comments_bill_path
   });
 
   summary.render().startLoader();

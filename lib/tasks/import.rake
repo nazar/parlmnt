@@ -58,10 +58,7 @@ namespace :import do
   desc 'Imports and populates Bills'
   task :bills, [:year]  => :environment do |t, args|
 
-    p args.to_yaml
-    p args[:year]
-
-    years = args[:year].present? ? [args[:year]] : ['2007', '2008', '2009', '2010', '2011', '2012']
+    years = args[:year].present? ? [args[:year]] : [ '2009', '2010', '2011', '2012', '2013']
 
     #first do summaries
     i = 0

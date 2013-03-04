@@ -20,6 +20,10 @@ class BillsController < ApplicationController
     respond_with @bill
   end
 
+  def comments
+    commentable_comments('Bill', params[:id])
+  end
+
 
   protected
 
