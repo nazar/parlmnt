@@ -7,7 +7,14 @@ define([
     //////////////// PUBLIC//////////
 
     isActive: function(windowPath) {
-      return windowPath.endsWith(this.get('path'));
+      var path = this.get('path');
+
+      //path can be a string or an array
+      if (Array.isArray(path)) {
+        return path.any(windowPath) || path.any(windowPath.remove(/^\//))
+      } else {
+        return windowPath.endsWith(this.get('path'));
+      }
     }
 
 
