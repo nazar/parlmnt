@@ -1,16 +1,16 @@
 define([
   'sandbox',
 
-  'modules/common/shared_global_init',
-
   'widgets/sidebar/main',
   'widgets/bill/main',
   'widgets/summary/main',
   'widgets/votable/main',
-  'widgets/commentable/main'
+  'widgets/commentable/main',
 
+  'modules/common/shared_global_init',
+  'modules/common/bills_pub_sub_init'
 
-], function (sandbox, globalInit, sidebarWidget, billWidget, summaryWidget, votableWidget, commentableWidget)  {
+], function (sandbox, sidebarWidget, billWidget, summaryWidget, votableWidget, commentableWidget, globalInit, billsInit)  {
 
 
   return function() {
@@ -197,42 +197,14 @@ define([
 
     summary.render().startLoader();
 
-    sandbox.analytics.init();
-    sandbox.analytics.identify();
-    sandbox.analytics.track('Viewing Bills');
-
-
-    //hook up all widgets view pub/sub
-
-    sandbox.subscribe('aboutToReload', function () {
-      summary.startLoader();
+    //finalise bills/acts shared inits
+    billsInit({
+      summary: summary,
+      bills: bills,
+      sidebar: sidebar,
+      tracking: 'Viewing Bills'
     });
 
-    sandbox.subscribe('billsLoaded', function () {
-      summary.stopLoader();
-    });
-
-    sandbox.subscribe('summaryChanged', function (summaryObject) {
-      summary.setTitleFromSummary(summaryObject, 'Bill');
-    });
-
-    sandbox.subscribe('FilterChanged', function (selections) {
-      bills.filteringAndSorting(selections);
-    });
-
-    sandbox.subscribe('BillSearchName', function (term) {
-      bills.showMatchedBills(term);
-    });
-
-    sandbox.subscribe('relayout', function () {
-      bills.relayout();
-    });
-
-    sandbox.subscribe('sessionReload', function() {
-      sandbox.session.reload();
-    });
-
-    sidebar.initDefaults();
   }
 
 

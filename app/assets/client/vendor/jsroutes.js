@@ -237,6 +237,10 @@
   rails_info_properties_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[2,[2,[2,[2,[7,"/",false],[6,"rails",false]],[7,"/",false]],[6,"info",false]],[7,"/",false]],[6,"properties",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// search => /search(.:format)
+  search_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"search",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // sessions_me => /sessions/me(.:format)
   sessions_me_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"sessions",false]],[7,"/",false]],[6,"me",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);

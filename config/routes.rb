@@ -7,6 +7,8 @@ Votes::Application.routes.draw do
   match '/auth/:provider/callback' => 'sessions#create'
   match '/sessions/me' => 'sessions#token'    #TODO alias not necessary
 
+  match '/search' => 'search#index', :via => [:post]
+
   #unRESTful routes
   post '/votes/vote' => 'votes#vote'
 
