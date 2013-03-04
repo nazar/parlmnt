@@ -221,7 +221,7 @@ define([
     });
 
     sandbox.subscribe('summaryChanged', function (summaryObject) {
-      summary.setTitledSummary(summaryObject);
+      summary.setTitleFromSummary(summaryObject, 'Bill');
     });
 
     sandbox.subscribe('FilterChanged', function (selections) {

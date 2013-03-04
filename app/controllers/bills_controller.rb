@@ -4,14 +4,9 @@ class BillsController < ApplicationController
 
   def index
     year = params[:year] || DateTime.now.year
-
     @bills = Bill.find_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage])
 
-    respond_to do |format|
-      format.html
-      format.json {render :json => bills_to_hash(@bills)}
-      format.xml {render :xml => bills_to_hash(@bills)}
-    end
+    bills_responder
   end
 
   def show
@@ -59,7 +54,14 @@ class BillsController < ApplicationController
         result[:current_stage] = stage_atts.inject({}){|r,a| r.merge(a => bill.current_stage.send(a)) }
       end
     end
+  end
 
+  def bills_responder
+    respond_to do |format|
+      format.html
+      format.json {render :json => bills_to_hash(@bills)}
+      format.xml {render :xml => bills_to_hash(@bills)}
+    end
   end
 
 end

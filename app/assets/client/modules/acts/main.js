@@ -145,7 +145,7 @@ define([
           "items": {
             "name": {
               "cssClass": 'input-medium',
-              "placeholder": 'Search Bill by Title',
+              "placeholder": 'Search Act by Title',
               "events": {
                 "keyup": function(e) {
                   var $this = $(e.target),
@@ -192,7 +192,7 @@ define([
     });
 
     sandbox.subscribe('summaryChanged', function (summaryObject) {
-      summary.setTitledSummary(summaryObject);
+      summary.setTitleFromSummary(summaryObject, 'Act');
     });
 
     sandbox.subscribe('FilterChanged', function (selections) {

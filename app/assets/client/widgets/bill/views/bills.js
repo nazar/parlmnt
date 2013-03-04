@@ -27,7 +27,7 @@ define([
       },
 
       render: function () {
-        var that = this;
+        this._triggerLoading();
 
         this.$el.find('div.bill').remove();
 
@@ -39,7 +39,7 @@ define([
         this._applyFilters();
         this._lazyLoadConfig();
 
-        that._triggerLazyImages();
+        this._triggerLazyImages();
 
         this._rendered = true;
         sandbox.publish('billsLoaded');
@@ -83,7 +83,7 @@ define([
         if (options.year && (this._currentYear !== options.year) ) {
           this._currentYear = options.year;
 
-          sandbox.publish('aboutToReload');
+          this._triggerLoading();
 
           //collection will be reset and rendered if year changes
           this.billCollection.fetchByYear(options.year);
@@ -133,24 +133,10 @@ define([
       },
 
       _updateSummary: function() {
-        var title,
-          summary,
-          countHidden,
-          countShowing,
-          term;
-
-        countHidden = sandbox.dom.$('.isotope-hidden').length;
-        countShowing = this.billCollection.length - countHidden;
-        term = countShowing  !== 1 ? 'Bills' : 'Bill';
-
-        if (countHidden > 0) {
-          title = 'Showing {vis} out of {total} {bills}'.assign({vis: countShowing, total: this.billCollection.length, bills: term});
-        } else {
-          title = 'Showing {n} {bills}'.assign({n: this.billCollection.length, bills: term});
-        }
-        summary = 'Active in {year}'.assign({year: this._currentYear});
-
-        sandbox.publish('summaryChanged', {title: title, summary: summary});
+        sandbox.publish('summaryChanged', {
+          total: this.billCollection.length,
+          hidden: sandbox.dom.$('.isotope-hidden').length
+        });
       },
 
       _isotopeConfig: function() {
@@ -200,6 +186,10 @@ define([
           sandbox.dom.$(window).trigger('scroll');
         }
 
+      },
+
+      _triggerLoading: function() {
+        sandbox.publish('aboutToReload');
       }
 
 
