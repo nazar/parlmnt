@@ -85,6 +85,22 @@ namespace :import do
 
   end
 
+  desc 'Fix bill current stage'
+  task :fix_stages => :environment do
+    Bill.all.each do |bill|
+      bill.bill_stages.completed.latest.first.tap do |last_stage|
+        if last_stage.present?
+          bill.current_stage_id = last_stage[:id]
+          #also update the year to last stage
+          bill.year = last_stage.stage_date.year
+
+          bill.save if bill.changed?
+        end
+      end
+    end
+
+  end
+
 
 
 end

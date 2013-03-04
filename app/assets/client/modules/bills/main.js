@@ -31,8 +31,11 @@ require([
       "Year": {
         "type":  'pick',
         "section":  'year',
-        "default": '2012',
+        "default": '2013',
         "items": {
+          "2013": {
+            "tip": 'Bills in 2013'
+          },
           "2012": {
             "tip": 'Bills in 2012'
           },
@@ -41,9 +44,6 @@ require([
           },
           "2010": {
             "tip": 'Bills in 2010'
-          },
-          "2009": {
-            "tip": 'Bills in 2009'
           }
         }
       },
