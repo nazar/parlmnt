@@ -21,5 +21,5 @@
 
 every 1.day do
   rake 'import:parties'
-  rake 'import:bills[2012'
+  rake 'import:bills[2012]'
 end
