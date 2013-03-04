@@ -7,8 +7,7 @@ define([
 
     var section = new SidebarContainer({
       "el": sandbox.dom.$q(options.el),
-      "choices": options.choices,
-      "channel": options.channel
+      "choices": options.choices
     });
 
     return section;

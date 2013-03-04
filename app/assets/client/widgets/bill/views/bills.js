@@ -9,7 +9,6 @@ define([
     var BillsContainerView = sandbox.mvc.View({
 
       initialize: function (options) {
-        this.channel = options.channel;
         this.votableBuilder = options.votableBuilder;
         this.commentableBuilder = options.commentableBuilder;
 

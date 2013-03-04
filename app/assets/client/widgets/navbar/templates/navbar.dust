@@ -11,13 +11,6 @@
 
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/bills">Bills</a></li>
-          <li><a href="/acts">Acts</a></li>
-          <!--<li><a href="#sponsors">MPs</a></li>-->
-          <!--<li><a href="#sponsors">Lords</a></li>-->
-          <!--<li><a href="#sponsors">API</a></li>-->
-          <!--<li><a href="#sponsors">About</a></li>-->
         </ul>
         <!--<form class="search form-search pull-right">-->
           <!--<div class="input-append">-->

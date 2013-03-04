@@ -5,14 +5,13 @@ define([
   'widgets/sidebar/collections/menu_items'
 ],
 
-  function (sandbox, MenuItemView, MenuSections) {
+  function (sandbox, MenuItemView, MenuItems) {
 
     var SidebarContainer =  sandbox.mvc.View({
 
       initialize: function (options) {
         sandbox.util.bindAll(this, 'render', 'renderNavigation', '_itemClicked');
 
-        this.channel = options.channel;
         this._initNavigation(options.choices);
 
         this.render();
@@ -62,7 +61,7 @@ define([
 
       _initNavigation: function (choices) {
         var that = this;
-        this.sections = new MenuSections();
+        this.sections = new MenuItems();
         Object.each(choices, function (header, options) {
           that.sections.addSectionItems( header, options );
         });

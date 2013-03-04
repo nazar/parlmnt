@@ -7,10 +7,10 @@
 
   var defaults = {
     prefix: '',
-    default_url_options: {"format":"json"}
+    default_url_options: {}
   };
 
-  var NodeTypes = {"CAT":2,"SLASH":7,"GROUP":1,"OR":4,"SYMBOL":3,"LITERAL":6,"DOT":8,"STAR":5};
+  var NodeTypes = {"SLASH":7,"CAT":2,"GROUP":1,"OR":4,"SYMBOL":3,"LITERAL":6,"STAR":5,"DOT":8};
   
   var Utils = {
 

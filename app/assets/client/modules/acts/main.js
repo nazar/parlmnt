@@ -1,29 +1,22 @@
 define([
   'sandbox',
 
-  'widgets/navbar/main',
+  'modules/common/shared_global_init',
+
   'widgets/sidebar/main',
   'widgets/bill/main',
   'widgets/summary/main',
-  'widgets/session/main',
   'widgets/votable/main',
   'widgets/commentable/main'
 
 
-], function (sandbox, navbarWidget, sidebarWidget, billWidget, summaryWidget, sessionWidget, votableWidget, commentableWidget)  {
+], function (sandbox, globalInit, sidebarWidget, billWidget, summaryWidget, votableWidget, commentableWidget)  {
 
 
   return function() {
-    var bills, sidebar, summary, session;
+    var bills, sidebar, summary;
 
-    //session manager
-    sandbox.session = sessionWidget();
-
-    //start app widgets
-    navbarWidget({
-      el: '#navbar',
-      sessionEl: '#session'
-    });
+    globalInit();
 
     //filter side bar
     sidebar = sidebarWidget({
@@ -167,7 +160,6 @@ define([
 
     bills = billWidget({
       el: '#bills',
-      channel: 'billsDetail',
       votableBuilder: votableWidget,
       commentableBuilder: commentableWidget,
       collectionRootPath: sandbox.routes.acts_path,
