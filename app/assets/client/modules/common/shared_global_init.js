@@ -37,7 +37,8 @@ define([
       el: '#navbar',
       items: {
         "Bills": {
-          url: sandbox.routes.bills_path()
+          url: sandbox.routes.bills_path(),
+          path: ['/bills', '/']   //TODO remove... temp fix for missing root page
         },
         "Acts": {
           url: sandbox.routes.acts_path()
