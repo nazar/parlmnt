@@ -21,14 +21,14 @@ define([
 
     billsView = new BillsContainerView({
       el: sandbox.dom.$q(options.el),
-      billCollection: new BillCollection(),
+      billCollection: new BillCollection({url: options.collectionRootPath}),
       channel: options.channel,
       votableBuilder: votableBuilder,
       commentableBuilder: commentableBuilder
     });
 
 
-    sandbox.subscribe('ShowBillPopup', function (options) { //('bills',
+    sandbox.subscribe('ShowBillPopup', function (options) {
 
       billPopupView = new BillsPopupView({
         votableBuilder: votableBuilder,

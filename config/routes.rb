@@ -25,7 +25,7 @@ Votes::Application.routes.draw do
 
   resources :votes, :only => [:create]
 
-  resources :comments, :only => [:index, :create, :update]
+  resources :comments, :only => [:create, :update]
 
   match '/' => 'bills#index'     #TODO temp... remove this once landing page is done
 

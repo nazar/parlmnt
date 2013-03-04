@@ -1,5 +1,6 @@
 define([
   'sandbox',
+
   'widgets/commentable/views/comment',
   'widgets/commentable/models/comment'
 ],

@@ -13,14 +13,7 @@ define(['core'], function (core) {
     rest: core.util.rest,
     delay: core.util.delay,
     extend: core.util.extend,
-    cookie: core.util.cookie,
-
-    mixinSessionData: function(jsonObj) {
-      Object.merge(jsonObj, {
-        name: sandbox.session.username(),
-        avatar: sandbox.session.avatar()
-      });
-    }
+    cookie: core.util.cookie
   };
 
   sandbox.template = core.template;
