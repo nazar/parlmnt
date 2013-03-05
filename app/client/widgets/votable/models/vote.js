@@ -5,7 +5,7 @@ define([
 
   var VoteModel = sandbox.mvc.Model({
 
-    urlRoot: '/votes',
+    urlRoot: '/votes',      //TODO supply jsroutes func
 
     /// PUBLIC functions
 

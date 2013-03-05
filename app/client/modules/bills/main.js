@@ -150,7 +150,7 @@ define([
               "tip": 'Labour',
               "cssClass": 'labour'
             },
-            "Ldm": {
+            "Ld": {
               "code": 'party-liberal-democrat',
               "tip": 'Liberal Democrats',
               "cssClass": 'ldm'

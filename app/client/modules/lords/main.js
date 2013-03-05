@@ -1,48 +1,29 @@
 define([
   'sandbox',
 
-  'widgets/sidebar/main',
+  'widgets/sponsor/main',
   'widgets/bill/main',
+
+  'widgets/sidebar/main',
   'widgets/summary/main',
   'widgets/votable/main',
   'widgets/commentable/main',
 
   'modules/common/shared_global_init',
-  'modules/common/bills_pub_sub_init'
+  'modules/common/sponsor_pub_sub_init'
 
-], function (sandbox, sidebarWidget, billWidget, summaryWidget, votableWidget, commentableWidget, globalInit, billsInit)  {
+], function (sandbox, sponsorWidget, billWidget, sidebarWidget, summaryWidget, votableWidget, commentableWidget, globalInit, pubSubInit)  {
 
 
   return function() {
-    var bills, sidebar, summary;
+    var sponsors, sidebar, summary;
 
     globalInit();
 
     //filter side bar
     sidebar = sidebarWidget({
       "el": '#sidebar',
-      "channel": 'billFilterBar',
       "choices": {
-        "Year": {
-          "type":  'pick',
-          "section":  'year',
-          "default": '2013',
-          "items": {
-            "2013": {
-              "tip": 'Acts in 2013'
-            },
-            "2012": {
-              "tip": 'Acts in 2012'
-            },
-            "2011": {
-              "tip": 'Acts in 2011'
-            },
-            "2010": {
-              "tip": 'Acts in 2010'
-            }
-          }
-        },
-
         "Sort by": {
           "type": 'pick',
           "section": 'sort',
@@ -52,9 +33,9 @@ define([
               "icon": '/images/name.png',
               "tip": 'Sort by Name'
             },
-            "last_updated": {
-              "icon": '/images/recent.png',
-              "tip": 'Sort by Recent Activity'
+            "bill_count": {
+              "icon": '/images/bill.png',
+              "tip": 'Sort by Bill numbers'
             },
             "popular": {
               "icon": '/images/popular.png',
@@ -67,44 +48,6 @@ define([
             "disliked": {
               "icon": '/images/disliked.png',
               "tip": 'Sort by Dislikes'
-            }
-          }
-        },
-
-        "Act Type": {
-          "type": 'toggle',
-          "section": 'type',
-          "items": {
-            "Pub": {
-              "code": 'pu',
-              "tip": 'Public'
-            },
-            "Pr": {
-              "code": 'pr',
-              "tip": 'Private'
-            },
-            "PM": {
-              "code": 'prm',
-              "tip": 'Private Members'
-            },
-            "H": {
-              "code": 'hy',
-              "tip": 'Hybrid'
-            }
-          }
-        },
-
-        "Act Origin": {
-          "type": 'toggle',
-          "section": 'origin',
-          "items": {
-            "Commons": {
-              "code": 'commons',
-              "tip": 'House of Commons'
-            },
-            "Lords": {
-              "code": 'lords',
-              "tip": "House of Lords"
             }
           }
         },
@@ -123,7 +66,7 @@ define([
               "tip": 'Labour',
               "cssClass": 'labour'
             },
-            "Ld": {
+            "Ldm": {
               "code": 'party-liberal-democrat',
               "tip": 'Liberal Democrats',
               "cssClass": 'ldm'
@@ -132,13 +75,13 @@ define([
 
         },
 
-        "Filter Act Titles": {
+        "Filter Bill Titles": {
           "type": 'search',
           "section": 'nameFilter',
           "items": {
             "name": {
               "cssClass": 'input-medium',
-              "placeholder": 'Search Act by Title',
+              "placeholder": 'Search Lords by Name',
               "events": {
                 "keyup": function(e) {
                   var $this = $(e.target),
@@ -146,7 +89,7 @@ define([
                     ignore = [37, 39];
 
                   if (ignore.none(e.which) ) {
-                    sandbox.publish('BillSearchName', term);
+                    sandbox.publish('SponsorSearchName', term);
                   }
                 }
               }
@@ -156,25 +99,33 @@ define([
       }
     });
 
-    summary = summaryWidget({el: '#bills-summary'});
+    summary = summaryWidget({el: '#sponsors-summary'});
 
-    bills = billWidget({
-      el: '#bills',
+    sponsors = sponsorWidget({
+      el: '#sponsors',
+      sponsorType: 'Lord',
       votableBuilder: votableWidget,
       commentableBuilder: commentableWidget,
-      collectionRootPath: sandbox.routes.acts_path,
+      collectionRootPath: sandbox.routes.lords_path,
+      commentsPath: sandbox.routes.comments_lord_path
+    });
+
+    billWidget({
+      votableBuilder: votableWidget,
+      commentableBuilder: commentableWidget,
+      collectionRootPath: sandbox.routes.bills_path,
       commentsPath: sandbox.routes.comments_bill_path
     });
 
     summary.render().startLoader();
 
-    //finalise bills/acts shared inits
-    billsInit({
+    pubSubInit({
       summary: summary,
-      bills: bills,
-      sidebar: sidebar,
-      tracking: 'Viewing Acts'
+      sponsors: sponsors,
+      tracking: 'Viewing Sponsors'
     });
+
+
 
   }
 

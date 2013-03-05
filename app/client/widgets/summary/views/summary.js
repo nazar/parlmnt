@@ -27,8 +27,9 @@ define([
         return this;
       },
 
-      setTitleFromSummary: function(summaryObject, objectName) {
+      setTitleFromSummary: function(summaryObject) {
         var visible = summaryObject.total - summaryObject.hidden,
+          objectName = summaryObject.type,
           desc = visible > 0 ? objectName.pluralize() : objectName,
           result = {};
 

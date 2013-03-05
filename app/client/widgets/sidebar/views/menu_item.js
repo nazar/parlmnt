@@ -83,7 +83,8 @@ define([
 
           if (itemOptions.tip) {
             $element.tooltip({
-              "title": itemOptions.tip
+              "title": itemOptions.tip,
+              "container": 'body'
             });
           }
 

@@ -21,11 +21,13 @@
 @import 'widgets/navbar';
 @import 'widgets/search';
 @import 'widgets/side-bar';
+@import 'widgets/sponsors';
 @import 'widgets/summary';
 @import 'widgets/votable';
 
 //module/controller specific styling
 @import 'modules/bills';
+@import 'modules/sponsors';
 
 //screens specific app overrides
 @import 'global/application';

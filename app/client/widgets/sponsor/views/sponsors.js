@@ -1,24 +1,26 @@
 define([
   'sandbox',
 
-  'widgets/bill/views/bill_card'
+  'widgets/sponsor/views/sponsor_card'
 ],
 
-  function (sandbox, BillCardView) {
+  function (sandbox, SponsorCardView) {
 
-    var BillsContainerView = sandbox.mvc.View({
+    var SponsorsContainerView = sandbox.mvc.View({
 
       initialize: function (options) {
+
+        this.sponsorType = options.sponsorType;
+
         this.votableBuilder = options.votableBuilder;
         this.commentableBuilder = options.commentableBuilder;
 
         sandbox.util.bindAll(this, 'render', 'addOne', 'addAll');
 
-        this.billCollection = options.billCollection;
-        this.billCollection.bind('add', this.addOne);
-        this.billCollection.bind('reset', this.render);
+        this.sponsorCollection = options.sponsorCollection;
+        this.sponsorCollection.bind('add', this.addOne);
+        this.sponsorCollection.bind('reset', this.render);
 
-        this._currentYear = '';
         this._currentSort = '';
         this._currentFilters = [];
 
@@ -27,8 +29,6 @@ define([
 
       render: function () {
         this._triggerLoading();
-
-        this.$el.find('div.bill').remove();
 
         this._updateSummary();
 
@@ -41,27 +41,31 @@ define([
         this._triggerLazyImages();
 
         this._rendered = true;
-        sandbox.publish('billsLoaded');
+        sandbox.publish('sponsorsLoaded');
 
         return this;
       },
 
       addOne: function (bill) {
-        this.$el.append(this._renderBill(bill));
+        this.$el.append(this._renderSponsor(bill));
       },
 
-      /**
-       * Optimised func to render all bills in memory then append at-once to the DOM
-       */
       addAll: function () {
         var that = this,
           bills = [];
 
-        this.billCollection.each(function(bill) {
-          bills.push(that._renderBill(bill))
+        this.sponsorCollection.each(function(bill) {
+          bills.push(that._renderSponsor(bill))
         });
 
         this.$el.append(bills);
+      },
+
+      ////// PUBLIC
+
+      loadSponsors: function() {
+        this._triggerLoading();
+        this.sponsorCollection.fetchSponsors();
       },
 
       filteringAndSorting: function (options) {
@@ -73,25 +77,16 @@ define([
         }
 
         this._currentFilters = [];
-        ['type', 'stage', 'origin', 'party'].each(function (key) {
+        ['party'].each(function (key) {
           if (options[key]) {
             that._currentFilters.push( '.' + options[key] )
           }
         });
 
-        if (options.year && (this._currentYear !== options.year) ) {
-          this._currentYear = options.year;
-
-          this._triggerLoading();
-
-          //collection will be reset and rendered if year changes
-          this.billCollection.fetchByYear(options.year);
-        } else {
-          this._applyFilters();
-        }
+        this._applyFilters();
       },
 
-      showMatchedBills: function(term) {
+      showMatchedSponsors: function(term) {
         var that = this;
 
         if (!this._debouncedSearch) {
@@ -99,7 +94,7 @@ define([
             var matches;
 
             if (term) {
-              matches = sandbox.dom.$('.bill').filter(function() {
+              matches = sandbox.dom.$('.sponsor').filter(function() {
                 return sandbox.dom.$(this).data('name').toLowerCase().has(term);
               });
               that.$el.isotope({filter: sandbox.dom.$(matches)});
@@ -120,23 +115,23 @@ define([
 
       //////// TEH PRIVATES ////////
 
-      _renderBill: function(bill) {
-        var billView = new BillCardView({
-          model: bill,
+      _renderSponsor: function(sponsor) {
+        var sponsorView = new SponsorCardView({
+          model: sponsor,
           votableBuilder: this.votableBuilder,
           commentableBuilder: this.commentableBuilder
         });
 
-        billView.render();
+        sponsorView.render();
 
-        return billView.el;
+        return sponsorView.el;
       },
 
       _updateSummary: function() {
         sandbox.publish('summaryChanged', {
-          total: this.billCollection.length,
+          total: this.sponsorCollection.length,
           hidden: sandbox.dom.$('.isotope-hidden').length,
-          type: 'Bill'
+          type: this.sponsorType
         });
       },
 
@@ -148,14 +143,14 @@ define([
         }
 
         this.$el.isotope({
-          itemSelector: '.bill',
+          itemSelector: '.sponsor',
           animationEngine : 'css',
           getSortData: {
             name: function ($el) {
               return $el.data('name');
             },
-            last_updated: function ($el) {
-              return Date.create($el.data('bill_updated_at')).getTime() * -1.0;
+            bill_count: function($el) {
+              return parseInt($el.data('bills'), 10) * -1;
             }
           },
           onLayout: function() {
@@ -167,7 +162,7 @@ define([
       _lazyLoadConfig: function() {
         this.$el.find('img.lazy').lazyload({
           effect : "fadeIn",
-          failure_limit: Math.max(this.billCollection.length - 1, 0)//,
+          failure_limit: Math.max(this.sponsorCollection.length - 1, 0)//,
         });
       },
 
@@ -196,6 +191,6 @@ define([
 
     });
 
-    return BillsContainerView;
+    return SponsorsContainerView;
 
   });

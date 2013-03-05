@@ -40,23 +40,6 @@ define([
         this.$itemList.append(section.$el);
       },
 
-      sortingAndFiltering: function (options) {
-        //fetching
-        //sorting
-        this.sortBillsBy(options.sort);
-        //filtering
-        this.filterBillsBy(options);
-      },
-
-      sortBillsBy: function (field) {
-
-      },
-
-      filterBillsBy: function (options) {
-
-      },
-
-
       ///////////// PRIVATE ///////////
 
       _initNavigation: function (choices) {

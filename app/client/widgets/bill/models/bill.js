@@ -34,7 +34,7 @@ define([
       return '{root}/{id}'.assign({root: this.urlRoot, id: this.get('id')});
     },
 
-    mutators: {
+    mutators: {       //TODO remove mutators. These funcs should really be in the View and not here. Move to view.jsoniser
       lastUpdatedShort: function() {
         return Date.create(this.bill_updated_at).relative();
       },

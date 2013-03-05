@@ -5,6 +5,7 @@ class Sponsor < ActiveRecord::Base
 
   include SponsorImporter
 
+  acts_as_votable
 
   SPONSOR_TYPES = {
     '1' => 'mp',
@@ -23,7 +24,10 @@ class Sponsor < ActiveRecord::Base
 
   belongs_to :party
 
+  has_many :bill_sponsors
   has_many :bills, :through => :bill_sponsors
+
+  has_many :comments, :class_name => 'Comment', :as => :commentable
 
 
   #########
@@ -101,6 +105,14 @@ class Sponsor < ActiveRecord::Base
 
   def sponsor_type_to_s
     Sponsor::SPONSOR_TYPES[sponsor_type.to_s]
+  end
+
+  def party_name
+    party.name if party.present?
+  end
+
+  def party_short_name
+    party.short if party.present?
   end
 
 

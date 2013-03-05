@@ -209,6 +209,10 @@
   acts_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"acts",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// api => /api(.:format)
+  api_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"api",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // bill => /bills/:id(.:format)
   bill_path: function(_id, options) {
   return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"bills",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
@@ -233,6 +237,30 @@
   comments_bill_path: function(_id, options) {
   return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[2,[2,[7,"/",false],[6,"bills",false]],[7,"/",false]],[3,"id",false]],[7,"/",false]],[6,"comments",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// comments_lord => /lords/:id/comments(.:format)
+  comments_lord_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[2,[2,[7,"/",false],[6,"lords",false]],[7,"/",false]],[3,"id",false]],[7,"/",false]],[6,"comments",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// comments_mp => /mps/:id/comments(.:format)
+  comments_mp_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[2,[2,[7,"/",false],[6,"mps",false]],[7,"/",false]],[3,"id",false]],[7,"/",false]],[6,"comments",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// lord => /lords/:id(.:format)
+  lord_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"lords",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// lords => /lords(.:format)
+  lords_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"lords",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// mp => /mps/:id(.:format)
+  mp_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"mps",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// mps => /mps(.:format)
+  mps_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"mps",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // rails_info_properties => /rails/info/properties(.:format)
   rails_info_properties_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[2,[2,[2,[2,[7,"/",false],[6,"rails",false]],[7,"/",false]],[6,"info",false]],[7,"/",false]],[6,"properties",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
@@ -244,6 +272,10 @@
 // sessions_me => /sessions/me(.:format)
   sessions_me_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"sessions",false]],[7,"/",false]],[6,"me",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// sponsor => /sponsors/:id(.:format)
+  sponsor_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"sponsors",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
 // votes => /votes(.:format)
   votes_path: function(options) {

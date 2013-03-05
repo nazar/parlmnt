@@ -3,8 +3,8 @@ body {
   padding-bottom: 40px;
 }
 
-.left {
-  float:left;
+hr {
+  margin-bottom: 3px;
 }
 
 footer p {
@@ -12,9 +12,19 @@ footer p {
   font-size: 12px;
 }
 
-hr {
-  margin-bottom: 3px;
+
+
+.left {
+  float:left;
 }
+
+
+
+#page-content {
+  min-height: 700px;
+}
+
+
 
 @font-face {
   font-family: 'harabara';

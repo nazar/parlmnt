@@ -1,0 +1,53 @@
+<div class="modal hide fade sponsor-popup" tabindex="-1" data-replace="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+    <div class="votes"></div>
+    <div class="sponsor-name">
+      <h1><a href="http://services.parliament.uk{url_details}" target="_blank">{name}</a></h1>
+    </div>
+
+  </div>
+  <div class="modal-body">
+
+    <div class="summary-sponsors-container table-container">
+
+      <div class="sponsor">
+        {@if cond="'{url_photo}'"}
+          <a href="http://www.parliament.uk{url_details}" target="_blank">
+            <img class="{sponsorPartyAsClasses}" src="{url_photo}" alt="{name}" data-tooltip="{name}" height="110"/>
+          </a>
+          <div><a href="http://www.parliament.uk{url_details}" target="_blank">{name}</a></div>
+        {:else}
+          <a><img src="/images/no_photo.png" alt="{name}" data-tooltip="{name}" height="110"/></a>
+          <a>{name}</a>
+        {/if}
+      </div>
+
+      {?sortedBills}
+        <div class="sponsor-bills">
+          <h2>Sponsored Bills</h2>
+          <div class="summary-container">
+            <ul>
+            {#sortedBills}
+              <li><a class="bill_link" data-id="{id}" href="#">{name}</a></li>
+            {/sortedBills}
+            </ul>
+          </div>
+        </div>
+      {/sortedBills}
+
+    </div>
+
+    <div class="sponsor-popup-comments">
+      <h2>Comments</h2>
+      <div class="commentable"></div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+  </div>
+
+</div>

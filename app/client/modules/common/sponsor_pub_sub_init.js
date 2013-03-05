@@ -7,10 +7,8 @@ define([
   return function(options) {
 
     var summary = options.summary,
-      bills = options.bills,
-      sidebar = options.sidebar,
+      sponsors = options.sponsors,
       tracking = options.tracking;
-
 
     sandbox.analytics.init();
     sandbox.analytics.identify();
@@ -21,7 +19,7 @@ define([
       summary.startLoader();
     });
 
-    sandbox.subscribe('billsLoaded', function () {
+    sandbox.subscribe('sponsorsLoaded', function () {
       summary.stopLoader();
     });
 
@@ -30,21 +28,21 @@ define([
     });
 
     sandbox.subscribe('FilterChanged', function (selections) {
-      bills.filteringAndSorting(selections);
+      sponsors.filteringAndSorting(selections);
     });
 
-    sandbox.subscribe('BillSearchName', function (term) {
-      bills.showMatchedBills(term);
+    sandbox.subscribe('SponsorSearchName', function (term) {
+      sponsors.showMatchedSponsors(term);
     });
 
     sandbox.subscribe('relayout', function () {
-      bills.relayout();
+      sponsors.relayout();
     });
 
     sandbox.subscribe('sessionReload', function() {
       sandbox.session.reload();
     });
 
-    sidebar.initDefaults();
+    sponsors.loadSponsors();
   }
 });

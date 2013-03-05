@@ -5,7 +5,7 @@ define([
 
   var CommentModel = sandbox.mvc.Model({
 
-    urlRoot: '/comments',
+    urlRoot: '/comments',     //TODO supply jsroutes url func
 
     defaults: {
       "children": []

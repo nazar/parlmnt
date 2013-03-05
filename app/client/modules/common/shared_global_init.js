@@ -37,11 +37,16 @@ define([
       el: '#navbar',
       items: {
         "Bills": {
-          url: sandbox.routes.bills_path(),
-          path: ['/bills', '/']   //TODO remove... temp fix for missing root page
+          url: sandbox.routes.bills_path()
         },
         "Acts": {
           url: sandbox.routes.acts_path()
+        },
+        "MPs": {
+          url: sandbox.routes.mps_path()
+        },
+        "Lords": {
+          url: sandbox.routes.lords_path()
         }
       }
     });

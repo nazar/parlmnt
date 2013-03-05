@@ -61,13 +61,14 @@
     templates:     './build/templates',
 
     //modules
-    "bills": 'modules/bills/main',
-    "acts":  'modules/acts/main'
-
     //MUST add any defined modules above to include that follows
+    "bills": 'modules/bills/main',
+    "acts":  'modules/acts/main',
+    "mps":   'modules/mps/main',
+    "lords":   'modules/lords/main'
   },
 
-  include: ['bills', 'acts'],   //MUST include all from modules section just above
+  include: ['bills', 'acts', 'mps', 'lords'],   //MUST include all from modules section just above
 
   deps: ['requirejs', 'sugar', 'q'],
 

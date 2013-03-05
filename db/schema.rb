@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304113105) do
+ActiveRecord::Schema.define(:version => 20130305152621) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -181,13 +181,18 @@ ActiveRecord::Schema.define(:version => 20130304113105) do
     t.string   "url_photo"
     t.string   "email"
     t.string   "constituency"
-    t.integer  "sponsor_type",      :limit => 2
-    t.integer  "import_status",     :limit => 2
+    t.integer  "sponsor_type",       :limit => 2
+    t.integer  "import_status",      :limit => 2
     t.integer  "party_id"
-    t.integer  "count_bills",                    :default => 0
+    t.integer  "count_bills",                     :default => 0
     t.datetime "import_updated_at"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.integer  "count_posts",                     :default => 0
+    t.integer  "cached_votes_total",              :default => 0
+    t.integer  "cached_votes_score",              :default => 0
+    t.integer  "cached_votes_up",                 :default => 0
+    t.integer  "cached_votes_down",               :default => 0
   end
 
   add_index "sponsors", ["name"], :name => "index_sponsors_on_name"
