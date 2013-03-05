@@ -1,0 +1,2 @@
+module LordsHelper
+end

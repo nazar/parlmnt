@@ -25,10 +25,25 @@ Votes::Application.routes.draw do
     end
   end
 
+  resources :sponsors, :only => [:show]
+
+  resources :mps, :only => [:index, :show] do
+    member do
+      get 'comments'
+    end
+  end
+
+  resources :lords, :only => [:index, :show] do
+    member do
+      get 'comments'
+    end
+  end
+
   resources :votes, :only => [:create]
 
   resources :comments, :only => [:create, :update]
 
-  match '/' => 'bills#index'     #TODO temp... remove this once landing page is done
+  match '/' => 'pages#landing'
+  match '/api' => 'pages#api'
 
 end

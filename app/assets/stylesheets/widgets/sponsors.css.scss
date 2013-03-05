@@ -1,0 +1,174 @@
+$sponsorBorder: #e6e6e6;
+$infoUnderline: #e4e4e4;
+
+#sponsors {
+
+  .sponsor {
+    @include box-shadow(0, 1px, 2px, 0, #999);
+
+    border: 1px solid $sponsorBorder;
+
+    width: 180px;
+    margin: 0 15px 15px 0;
+
+    .sponsor-title-info {
+      display: table;
+      width: 100%;
+
+      .votes {
+        display: table-cell;
+        width: 20px;
+      }
+
+      .sponsor-name {
+        display: table-cell;
+        height: 34px;
+        vertical-align: middle;
+
+        h2 {
+          padding-left: 3px;
+          font-size: 13px;
+          line-height: 13px;
+          height: 30px;
+
+          display:table-cell;
+          vertical-align:middle;
+        }
+      }
+    }
+
+    .info {
+      margin: 2px 10px 2px 10px;
+
+      border-bottom: 1px dashed $infoUnderline;
+
+      text-align: center;
+      font-size: 11px;
+
+      .sponsor-info {
+        width: 54px;
+        padding-right: 4px;
+        margin: auto;
+
+        img {
+          padding: 1px;
+          border: 1px solid silver;
+
+          width: 53px;
+          height: 80px;
+
+          &.s-labour{
+            border: 1px solid #c41230;
+          }
+          &.s-conservative{
+            border: 1px solid #037fb2;
+          }
+          &.s-liberal-democrat{
+            border: 1px solid #fbb724;
+          }
+        }
+
+        a {
+          display: block;
+          text-align: center;
+          line-height: 11px;
+          padding: 2px 0 3px 0;
+        }
+      }
+    }
+
+    .extra {
+      background-color: #F3F3F2;
+      box-shadow: inset 1px 1px 5px #e2e2e0;
+
+      padding: 5px;
+
+      .stats {
+        font-size: 11px;
+        line-height: 11px;
+
+        i {
+          padding-right: 5px;
+        }
+
+        .watch {
+          float: right;
+          opacity: 0.35;
+
+          &:hover {
+            opacity: 1.0;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+
+$popupWidth: 700px;
+$column1: 215px;
+$column2: 462px;
+
+.sponsor-popup {
+  width: $popupWidth;
+  margin-left: -350px;
+
+  h1 {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    line-height: 14px;
+
+    color: #646060;
+
+    border-bottom: 1px solid #acacac;
+  }
+
+  .modal-header {
+    .votes, .sponsor-name {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .votes {
+      padding-right: 5px;
+    }
+  }
+
+  .sponsor {
+    width: $column1;
+    text-align: center;
+  }
+
+  .sponsor-bills {
+    width: $column2;
+    vertical-align: top;
+
+    ul {
+      list-style: none;
+      margin: 0;
+    }
+  }
+
+  .summary-sponsors-container {
+    font-size: 11px;
+
+    .sponsor, .sponsor-bills {
+      display: table-cell;
+    }
+
+  }
+
+
+
+
+}

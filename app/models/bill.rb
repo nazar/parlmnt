@@ -5,7 +5,6 @@ class Bill < ActiveRecord::Base
 
   include BillImporter
 
-#  acts_as_commentable
   acts_as_votable
 
   attr_accessible :name, :url_details, :bill_updated_at, :house, :import_status, :summary, :bill_type, :origin, :bill_sponsors, :year, :bill_summary, :bill_documents

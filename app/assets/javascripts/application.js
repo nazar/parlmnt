@@ -1,1 +1,1 @@
-//= require ../client/build/application.js
+//= require ../../client/build/application.js
