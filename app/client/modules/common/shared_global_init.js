@@ -37,7 +37,8 @@ define([
       el: '#navbar',
       items: {
         "Bills": {
-          url: sandbox.routes.bills_path()
+          url: sandbox.routes.bills_path(),
+          path: ['/', '/bills']
         },
         "Acts": {
           url: sandbox.routes.acts_path()
