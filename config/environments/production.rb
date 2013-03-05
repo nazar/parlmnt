@@ -55,6 +55,7 @@ Votes::Application.configure do
   config.assets.digest = true
   config.assets.compress = true
   config.assets.css_compressor = :scss
+  config.assets.js_compressor = :uglifier
 
   config.action_mailer.default_url_options = { :host => 'parlmnt.com' }
 
