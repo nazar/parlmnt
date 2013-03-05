@@ -43,7 +43,7 @@ Votes::Application.routes.draw do
 
   resources :comments, :only => [:create, :update]
 
-  match '/' => 'pages#landing'
+  match '/' => 'bills#index'
   match '/api' => 'pages#api'
 
 end
