@@ -16,4 +16,4 @@ vendor/gems
 
 
 Gemfile.lock
-app/assets/client/build/application.js
+app/client/build/application.js
