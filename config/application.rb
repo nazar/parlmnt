@@ -62,6 +62,7 @@ module Votes
     config.assets.enabled = true
 
     config.assets.paths << "#{Rails.root}/app/client/build"
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
     #disable JS generators
     config.generators.javascripts = false
