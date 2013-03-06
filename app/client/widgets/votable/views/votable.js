@@ -52,17 +52,20 @@ define([
       /////////// EVENT Handlers
 
       _voteUp: function() {
+        var that = this;
 
         this._doVoteIfSession(function() {
-          this.model.voteUp();
-          this._saveVote();
+          that.model.voteUp();
+          that._saveVote();
         });
       },
 
       _voteDown: function() {
+        var that = this;
+
         this._doVoteIfSession(function() {
-          this.model.voteDown();
-          this._saveVote();
+          that.model.voteDown();
+          that._saveVote();
         });
       },
 

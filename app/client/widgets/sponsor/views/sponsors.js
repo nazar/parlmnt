@@ -12,9 +12,6 @@ define([
 
         this.sponsorType = options.sponsorType;
 
-        this.votableBuilder = options.votableBuilder;
-        this.commentableBuilder = options.commentableBuilder;
-
         sandbox.util.bindAll(this, 'render', 'addOne', 'addAll');
 
         this.sponsorCollection = options.sponsorCollection;
@@ -117,9 +114,7 @@ define([
 
       _renderSponsor: function(sponsor) {
         var sponsorView = new SponsorCardView({
-          model: sponsor,
-          votableBuilder: this.votableBuilder,
-          commentableBuilder: this.commentableBuilder
+          model: sponsor
         });
 
         sponsorView.render();

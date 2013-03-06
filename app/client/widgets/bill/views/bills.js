@@ -9,9 +9,6 @@ define([
     var BillsContainerView = sandbox.mvc.View({
 
       initialize: function (options) {
-        this.votableBuilder = options.votableBuilder;
-        this.commentableBuilder = options.commentableBuilder;
-
         sandbox.util.bindAll(this, 'render', 'addOne', 'addAll');
 
         this.billCollection = options.billCollection;
@@ -122,9 +119,7 @@ define([
 
       _renderBill: function(bill) {
         var billView = new BillCardView({
-          model: bill,
-          votableBuilder: this.votableBuilder,
-          commentableBuilder: this.commentableBuilder
+          model: bill
         });
 
         billView.render();

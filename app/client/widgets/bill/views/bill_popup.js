@@ -7,19 +7,10 @@ define([
 
     var BillPopupView = sandbox.mvc.View({
 
-      events: {
-      },
-
-      initialize: function(options) {
-        this.votableBuilder = options.votableBuilder;
-        this.commentableBuilder = options.commentableBuilder;
-        this.commentsPath = options.commentsPath;
-      },
-
       render: function() {
         var that = this;
 
-        sandbox.template.render('bill/templates/bill_popup', that.model.toJSON(), function(o) {
+        sandbox.template.render('bill/templates/bill_popup', that._toJSON(), function(o) {
           that.setElement(o);
 
           that._truncates();
@@ -55,6 +46,14 @@ define([
 
       //// PRIVATE ////
 
+      _toJSON: function() {
+        var json = this.model.toJSON();
+
+         return Object.merge(json, {
+           bill_documents_sorted: json.bill_documents.sortBy(function(d) { return d.name })
+         });
+      },
+
       _truncates: function() {
         this.$el.find('.documents').truncate({max_length: 100});
         this.$el.find('.stages').truncate({max_length: 100});
@@ -62,28 +61,31 @@ define([
       },
 
       _initCommentable: function() {
-        this._commentable = this.commentableBuilder({
-          $el: this._commentableDiv()
-        });
+        var that = this;
 
-        this._commentableDiv().append(this._commentable.renderAddComment());
+        sandbox.publish('Bill.RequestCommentable', {
+          $el: this._commentableDiv(),
+          commentable_id: this.model.get('id'),
+          yield: function(commentable) {
+            that._commentable = commentable;
+            that._commentableDiv().append(that._commentable.renderAddComment());
+          }
+        });
       },
 
       _loadComments: function() {
-        this._commentable.loadComments( this.commentsPath(this.model.get('id')) );
+        this._commentable.loadComments( this.model.get('id') );
       },
 
       _renderVotable: function() {
-        var votableView = this.votableBuilder({
+        sandbox.publish('Bill.RequestVotable', {
           $el: this.$el.find('.votes'),
-          votable_type: 'Bill',
           votable_id: this.model.get('id'),
-          votable_score: this.model.get('cached_votes_score')
+          votable_score: this.model.get('cached_votes_score'),
+          yield: function(votableView) {
+            votableView.render();
+          }
         });
-
-        votableView.render();
-
-        return votableView;
       },
 
       _commentableDiv: function() {

@@ -160,8 +160,6 @@ define([
 
     bills = billWidget({
       el: '#bills',
-      votableBuilder: votableWidget,
-      commentableBuilder: commentableWidget,
       collectionRootPath: sandbox.routes.acts_path,
       commentsPath: sandbox.routes.comments_bill_path
     });

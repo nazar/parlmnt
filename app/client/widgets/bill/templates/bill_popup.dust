@@ -80,9 +80,9 @@
     <div class="table-container">
       <div class="documents">
         <h2>Documents</h2>
-        {#bill_documents}
+        {#bill_documents_sorted}
           <div class="bill-document"><a href="{url_html}">{name}</a></div>
-        {/bill_documents}
+        {/bill_documents_sorted}
       </div>
       <div class="stages">
        <h2>Stages</h2>
