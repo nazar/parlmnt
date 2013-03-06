@@ -170,6 +170,10 @@ define([
         this.$el.isotope({sortBy: this._currentSort});
         this.$el.isotope({filter: this._currentFilters.join('')});
         //
+        setTimeout(function() {     //makes Firefox :)
+          this._triggerLazyImages();
+        }.bind(this),500);
+
         this._updateSummary();
       },
 
