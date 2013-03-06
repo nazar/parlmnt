@@ -71,7 +71,17 @@ define([
               "cssClass": 'ldm'
             }
           }
+        },
 
+        "MPs Visibility": {
+          "type": 'toggle',
+          "section": 'visibility',
+          "items": {
+            "Show un-billed": {
+              "code": 'show_unbilled',
+              "tip": 'Show MPs that have not sponsored a Bill'
+            }
+          }
         },
 
         "Filter Bill Titles": {

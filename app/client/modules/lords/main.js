@@ -70,7 +70,17 @@ define([
               "cssClass": 'ldm'
             }
           }
+        },
 
+        "Lords Visibility": {
+          "type": 'toggle',
+          "section": 'visibility',
+          "items": {
+            "Show un-billed": {
+              "code": 'show_unbilled',
+              "tip": 'Show Lords that have not sponsored a Bill'
+            }
+          }
         },
 
         "Filter Bill Titles": {

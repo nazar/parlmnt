@@ -22,6 +22,8 @@ define([
         this._currentFilters = [];
 
         this._rendered = false;
+        this._showUnbilled = false;
+        this._hidden = 0;
       },
 
       render: function () {
@@ -38,6 +40,7 @@ define([
         this._triggerLazyImages();
 
         this._rendered = true;
+
         sandbox.publish('sponsorsLoaded');
 
         return this;
@@ -51,8 +54,18 @@ define([
         var that = this,
           bills = [];
 
+        this._hidden = 0;
+
         this.sponsorCollection.each(function(bill) {
-          bills.push(that._renderSponsor(bill))
+          if (that._showUnbilled) {
+            bills.push(that._renderSponsor(bill))
+          } else {
+            if (bill.get('count_bills') > 0) {
+              bills.push(that._renderSponsor(bill))
+            } else {
+              that._hidden = that._hidden + 1;
+            }
+          }
         });
 
         this.$el.append(bills);
@@ -66,8 +79,15 @@ define([
       },
 
       filteringAndSorting: function (options) {
-        var that = this;
+        var that = this,
+          showUnbilled = options.visibility === 'show_unbilled';
 
+        if (this._showUnbilled !== showUnbilled) {
+          this._showUnbilled = showUnbilled;
+          this._triggerLoading();
+          this._resetSponsors();
+          this.render();
+        }
         //set states for requested options
         if (options.sort && (this._currentSort !== options.sort)) {
           this._currentSort = options.sort;
@@ -125,7 +145,7 @@ define([
       _updateSummary: function() {
         sandbox.publish('summaryChanged', {
           total: this.sponsorCollection.length,
-          hidden: sandbox.dom.$('.isotope-hidden').length,
+          hidden: sandbox.dom.$('.isotope-hidden').length + this._hidden,
           type: this.sponsorType
         });
       },
@@ -172,7 +192,7 @@ define([
         options = options || {};
 
         if (options.hidden) {
-          sandbox.dom.$('.bill:not(.isotope-hidden)').find('img.lazy').trigger('appear');
+          sandbox.dom.$('.sponsor:not(.isotope-hidden)').find('img.lazy').trigger('appear');
         } else {
           sandbox.dom.$(window).trigger('scroll');
         }
@@ -181,6 +201,12 @@ define([
 
       _triggerLoading: function() {
         sandbox.publish('aboutToReload');
+      },
+
+      _resetSponsors: function() {
+        this.$el.isotope('destroy');
+        this.$el.html('');
+        this._rendered = false;
       }
 
 

@@ -28,7 +28,7 @@ define([
           $group = sandbox.dom.$q('<div class="btn-group" data-toggle="buttons-radio"></div>');
 
         this.$el.addClass('nav-header');
-        this.$el.text(item.get('name'));
+        this.$el.append('<div class="group_name">{name}</div>'.assign({name: item.get('name')}));
 
         this._renderSectionItems($group, type);
         this.$el.append($group);
@@ -41,8 +41,8 @@ define([
       },
 
 
-
       /////////////// PRIVATE
+
 
       _renderSectionItems: function ($group, type) {
         var that = this,
