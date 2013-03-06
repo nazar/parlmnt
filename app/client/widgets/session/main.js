@@ -11,7 +11,7 @@ define([
       var session = new SessionManagerView(options);
 
       sandbox.subscribe('NeedRegistration', function() {
-        session.startRegisteration();
+        session.startRegistration();
       });
 
       return session;

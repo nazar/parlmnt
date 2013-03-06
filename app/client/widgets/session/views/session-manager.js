@@ -44,10 +44,12 @@ define([
       },
 
       loggedIn: function() {
-        return this.model.get('name').length > 0;
+        var name = this.model.get('name');
+
+        return name && (name.length > 0);
       },
 
-      startRegisteration: function() {
+      startRegistration: function() {
         this._$modal.modal('show');
       },
 

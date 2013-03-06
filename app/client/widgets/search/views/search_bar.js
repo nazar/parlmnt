@@ -93,7 +93,6 @@ define([
           $bills = sandbox.dom.$('<ul class="group"></ul>');
 
         if (response && response.bills && Array.isArray(response.bills)) {
-          console.log('response', response)
           response.bills.each(function(bill) {
             $bills.append(sandbox.dom.$('<li class="search-result"><a href="{path}" data-id="{id}">{name}</a></li>'.assign({id: bill.id, path: sandbox.routes.bill_path(bill.id), name: bill.name})))
           });
