@@ -48,11 +48,6 @@ define([
 
         this.model.fetch()
           .done(function() {
-            sandbox.analytics.track('Viewing Bill', {
-              bill_id: that.model.get('id'),
-              bill_name: that.model.get('name')
-            });
-
             that.render();
           });
       },

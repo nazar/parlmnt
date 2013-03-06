@@ -58,10 +58,6 @@ define([
               that._hReplyAction($reply);
               that.$el.find('.content-container:first').append($reply.addClass('animated fadeInDown'));
             });
-
-            sandbox.analytics.track('Replying to Bill Comment', {
-              bill_id: that.model.get('commentable_id')
-            });
           } else {
             sandbox.publish('NeedRegistration');
           }
@@ -79,10 +75,6 @@ define([
             $target.append($newComment.addClass('animated fadeInDown'));
             $reply.remove();
           });
-
-        sandbox.analytics.track('Replied to Bill Comment', {
-          bill_id: that.model.get('commentable_id')
-        });
       },
 
       /////////// PRIVATES //////////////

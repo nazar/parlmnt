@@ -172,8 +172,7 @@ define([
     billsInit({
       summary: summary,
       bills: bills,
-      sidebar: sidebar,
-      tracking: 'Viewing Acts'
+      sidebar: sidebar
     });
 
   }

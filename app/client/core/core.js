@@ -24,22 +24,6 @@ define(['base'], function (base) {
     return shift.apply(args);
   };
 
-  core.analytics = {
-    init: function() {
-      base.analytics.initialize({
-        "Google Analytics": 'UA-919326-10'
-      });
-    },
-
-    identify: function(user, traits) {
-      base.analytics.identify(user, traits);
-    },
-
-    track: function(user, action, traits) {
-      base.analytics.track(user, action, traits);
-    }
-  };
-
   core.events = {
     publish: function() {
       var event = core.util.shift(arguments),

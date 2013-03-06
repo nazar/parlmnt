@@ -121,8 +121,7 @@ define([
 
     pubSubInit({
       summary: summary,
-      sponsors: sponsors,
-      tracking: 'Viewing Sponsors'
+      sponsors: sponsors
     });
 
 

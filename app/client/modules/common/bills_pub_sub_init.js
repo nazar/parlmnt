@@ -8,13 +8,7 @@ define([
 
     var summary = options.summary,
       bills = options.bills,
-      sidebar = options.sidebar,
-      tracking = options.tracking;
-
-
-    sandbox.analytics.init();
-    sandbox.analytics.identify();
-    sandbox.analytics.track(tracking);
+      sidebar = options.sidebar;
 
 
     sandbox.subscribe('aboutToReload', function () {

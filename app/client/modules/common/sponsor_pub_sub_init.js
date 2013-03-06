@@ -7,13 +7,7 @@ define([
   return function(options) {
 
     var summary = options.summary,
-      sponsors = options.sponsors,
-      tracking = options.tracking;
-
-    sandbox.analytics.init();
-    sandbox.analytics.identify();
-    sandbox.analytics.track(tracking);
-
+      sponsors = options.sponsors;
 
     sandbox.subscribe('aboutToReload', function () {
       summary.startLoader();
