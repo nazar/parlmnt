@@ -13,16 +13,20 @@ define([
       initialize: function(options) {
         this.$el = options.$el;
 
-        this.votableBuilder = options.votableBuilder;
+        this.commentable_id = options.commentable_id;
+        this.commentable_type = options.commentable_type;
 
+        this.comments_path = options.comments_path;
+
+        this.votableBuilder = options.votableBuilder;
       },
 
       ////// PUBLIC
 
-      loadComments: function(path) {
+      loadComments: function(commentable_id) {
         var that = this;
 
-        sandbox.ajax.request(path)
+        sandbox.ajax.request(this.comments_path(commentable_id))
           .done(function(comments) {
             comments.each(function(comment) {
               that._jsonCommentToView(comment);
@@ -49,10 +53,6 @@ define([
         }
 
         return $comment;
-      },
-
-      addComment: function() {
-        this.$el.append(this.renderAddComment());
       },
 
       addToCommentable: function(commentable) {

@@ -19,7 +19,7 @@ class Vote
     end
 
     def votable_class(klass)
-      if %w(Bill Comment Vote).include?(klass.capitalize)
+      if %w(Bill Comment Vote Sponsor).include?(klass.capitalize)
         klass.classify.safe_constantize
       end
     end

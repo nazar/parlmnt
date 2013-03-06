@@ -1,8 +1,8 @@
 <ul class="nav pull-right" id="registered">
   <li>
     <div class="btn-group">
-      <button class="btn btn-small btn-inverse"><img class="avatar" src="{avatar}" alt="{name}"></button>
-      <button class="btn btn-small btn-inverse dropdown-toggle" data-toggle="dropdown">
+      <button class="btn btn-small"><img class="avatar" src="{avatar}" alt="{name}"></button>
+      <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">

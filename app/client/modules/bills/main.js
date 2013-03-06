@@ -4,13 +4,11 @@ define([
   'widgets/sidebar/main',
   'widgets/bill/main',
   'widgets/summary/main',
-  'widgets/votable/main',
-  'widgets/commentable/main',
 
   'modules/common/shared_global_init',
   'modules/common/bills_pub_sub_init'
 
-], function (sandbox, sidebarWidget, billWidget, summaryWidget, votableWidget, commentableWidget, globalInit, billsInit)  {
+], function (sandbox, sidebarWidget, billWidget, summaryWidget, globalInit, billsInit)  {
 
 
   return function() {
@@ -187,8 +185,6 @@ define([
 
     bills = billWidget({
       el: '#bills',
-      votableBuilder: votableWidget,
-      commentableBuilder: commentableWidget,
       collectionRootPath: sandbox.routes.bills_path,
       commentsPath: sandbox.routes.comments_bill_path
     });

@@ -18,9 +18,6 @@ define([
 
       initialize: function(options) {
         sandbox.util.bindAll(this, 'render');
-
-        this.votableBuilder = options.votableBuilder;
-        this.commentableBuilder = options.commentableBuilder;
       },
 
       render: function() {
@@ -31,7 +28,6 @@ define([
 
           that.$el.find('.info:last').css('border-bottom', 'none');
 
-          that._initCommentable();
           that._renderVotable();
 
           that._setSponsorFilterClasses();
@@ -55,11 +51,6 @@ define([
 
       /// PUBLIC
 
-      addToCommentable: function(comment) {
-        this._commentable.addToCommentable(comment);
-      },
-
-
       //// PRIVATE ////
 
       _toJSON: function() {
@@ -71,25 +62,15 @@ define([
         });
       },
 
-      _initCommentable: function() {
-        this._commentable = this.commentableBuilder({
-          $el: this.$el.find('.commentable'),
-          commentable_id: this.model.get('id'),
-          commentable_type: 'Sponsor'
-        });
-      },
-
       _renderVotable: function() {
-        var votableView = this.votableBuilder({
+        sandbox.publish('Sponsor.RequestVotable', {
           $el: this.$el.find('.votes'),
-          votable_type: 'Sponsor',
           votable_id: this.model.get('id'),
-          votable_score: this.model.get('cached_votes_score')
+          votable_score: this.model.get('cached_votes_score'),
+          yield: function(votableView) {
+            votableView.render();
+          }
         });
-
-        votableView.render();
-
-        return votableView;
       },
 
       _setSponsorFilterClasses: function() {

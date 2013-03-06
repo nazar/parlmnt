@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   def create
-    commentable = get_commentable
+    commentable = Comment.find_commentable(params[:commentable_type], params[:commentable_id])
     if commentable.present? && current_user.present?
       replying_to = params[:parent_id].present? ? Comment.find_by_id(params[:parent_id]) : nil
       comment = Comment.build_from(commentable, current_user, params[:body], replying_to)

@@ -6,13 +6,11 @@ define([
 
   'widgets/sidebar/main',
   'widgets/summary/main',
-  'widgets/votable/main',
-  'widgets/commentable/main',
 
   'modules/common/shared_global_init',
   'modules/common/sponsor_pub_sub_init'
 
-], function (sandbox, sponsorWidget, billWidget, sidebarWidget, summaryWidget, votableWidget, commentableWidget, globalInit, pubSubInit)  {
+], function (sandbox, sponsorWidget, billWidget, sidebarWidget, summaryWidget, globalInit, pubSubInit)  {
 
 
   return function() {
@@ -105,17 +103,12 @@ define([
     sponsors = sponsorWidget({
       el: '#sponsors',
       sponsorType: 'MP',
-      votableBuilder: votableWidget,
-      commentableBuilder: commentableWidget,
       collectionRootPath: sandbox.routes.mps_path,
       commentsPath: sandbox.routes.comments_mp_path
     });
 
     billWidget({
-      votableBuilder: votableWidget,
-      commentableBuilder: commentableWidget,
-      collectionRootPath: sandbox.routes.bills_path,
-      commentsPath: sandbox.routes.comments_bill_path
+      commentsPath: sandbox.routes.comments_mp_path
     });
 
     summary.render().startLoader();

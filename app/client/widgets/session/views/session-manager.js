@@ -43,12 +43,8 @@ define([
         return this.model.get('avatar');
       },
 
-      token: function() {
-        return this.model.get('token');
-      },
-
       loggedIn: function() {
-        return this.model.get('token').length > 0;
+        return this.model.get('name').length > 0;
       },
 
       startRegisteration: function() {
