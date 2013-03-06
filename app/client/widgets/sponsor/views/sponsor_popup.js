@@ -58,11 +58,6 @@ define([
 
         this.model.fetch()
           .done(function() {
-            sandbox.analytics.track('Viewing Sponsor', {
-              sponsor_id: that.model.get('id'),
-              sponsor_name: that.model.get('name')
-            });
-
             that.render();
           });
       },

@@ -56,10 +56,6 @@ define([
         this._doVoteIfSession(function() {
           this.model.voteUp();
           this._saveVote();
-
-          sandbox.analytics.track('Up voted a {v}'.assign({v: this.votable_type}), {
-            votable_id: this.model.get('votable_id_id')
-          });
         });
       },
 
@@ -67,10 +63,6 @@ define([
         this._doVoteIfSession(function() {
           this.model.voteDown();
           this._saveVote();
-
-          sandbox.analytics.track('Down voted a {v}'.assign({v: this.votable_type}), {
-            votable_id: this.model.get('votable_id_id')
-          });
         });
       },
 

@@ -29,34 +29,6 @@ define(['core'], function (core) {
 
   sandbox.routes = core.routes;
 
-  sandbox.analytics = {
-    init: core.analytics.init,
-
-    identify: function(traits) {
-      var baseTraits;
-
-      traits = traits || {};
-
-      if (sandbox.session) {
-        baseTraits = {
-          name: sandbox.session.username()
-        };
-        core.analytics.identify(sandbox.session.token(), Object.merge(baseTraits, traits))
-      }
-    },
-
-    track: function(action, traits) {
-      var user;
-
-      traits = traits | {};
-      user = sandbox.session ? sandbox.session.token() : 'anonymous';
-
-      core.analytics.track(user, action, traits);
-
-    }
-
-  };
-
   return sandbox;
 
 });
