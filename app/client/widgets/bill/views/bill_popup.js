@@ -19,7 +19,7 @@ define([
       render: function() {
         var that = this;
 
-        sandbox.template.render('bill/templates/bill_popup', that.model.toJSON(), function(o) {
+        sandbox.template.render('bill/templates/bill_popup', that._toJSON(), function(o) {
           that.setElement(o);
 
           that._truncates();
@@ -54,6 +54,14 @@ define([
 
 
       //// PRIVATE ////
+
+      _toJSON: function() {
+        var json = this.model.toJSON();
+
+         return Object.merge(json, {
+           bill_documents_sorted: json.bill_documents.sortBy(function(d) { return d.name })
+         });
+      },
 
       _truncates: function() {
         this.$el.find('.documents').truncate({max_length: 100});
