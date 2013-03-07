@@ -1,0 +1,53 @@
+#landing
+  #wrap
+    .hero-wrapper
+      .container
+        .hero-unit
+          %h2 Parlmnt - A more debatable and open source version of <a href="http://services.parliament.uk/bills/2012-13.html" target="_blank">Parliament.uk</a>.
+          %p.lead
+            View, search and voice your opinions through comments and votes on all Bills and Acts of Parliament.
+          %p.cta-actions
+            %a.btn.btn-success.btn-large{:href => '/bills'} View Bills of Parliament
+            %a.btn.btn-primary.btn-large{:href => '/mps'} View Parliamentarians
+
+        .hero-media
+          %img{:src => '/assets/pc-par.png'}
+
+    .container
+      .row.features
+        .headline.headline-simple.span12
+          %h3 What Make Parlmnt Interesting
+
+        .span3
+          %h2 Open Source
+          %p Parlmnt is an Open Source project, released under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT license</a>. Find us on <a href="https://github.com/nazar/parlmnt">GitHub</a>, where open participation is more than welcome.
+        .span3
+          %h2 Interactive
+          %p View, comment and vote on Bills, Acts, MPs and Lords; sort and filter these by several criteria including by political party and popularity.
+
+        .span3
+          %h2 Open and Free API
+          %p Access our free <a href="/api">API</a> for use in your website or applications without any restrictions.
+
+        .span3
+          %h2 Social Identity
+          %p Use your Facebook account to register. We only access public information like your name for use in identifying comments.
+
+      .row.call-to-action
+        .span9
+          %h4 Get Started in Seconds!
+          %p Register using your Facebook account to vote and comment on Bills and Acts of Parliament, MPs and Lords. Help our politicians by voicing your feedback and opinions.
+
+        .span3
+          %a#signup.btn.btn-success.btn-large.btn-block Sign up for Free
+
+:javascript
+  require(['sandbox', 'pages'], function(s, Pages) {
+    (function($){
+      Pages();
+      $('a#signup').click(function(){
+        s.publish('NeedRegistration');
+      });
+    })(s.dom.$);
+
+  });

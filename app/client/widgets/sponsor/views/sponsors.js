@@ -175,19 +175,21 @@ define([
       },
 
       _lazyLoadConfig: function() {
-        this.$el.find('img.lazy').lazyload({
-          effect : "fadeIn",
-          failure_limit: Math.max(this.sponsorCollection.length - 1, 0)//,
-        });
+        var that = this;
+
+        setTimeout(function() {
+          that.$el.find('img.lazy').lazyload({
+            effect : "fadeIn",
+            failure_limit: Math.max(that.sponsorCollection.length - 1, 0)//,
+          });
+        }, 750);
       },
 
       _applyFilters: function() {
         this.$el.isotope({sortBy: this._currentSort});
         this.$el.isotope({filter: this._currentFilters.join('')});
         //
-        setTimeout(function() {     //makes Firefox :)
-          this._triggerLazyImages();
-        }.bind(this),500);
+        this._triggerLazyImages();
 
         this._updateSummary();
       },
@@ -195,12 +197,13 @@ define([
       _triggerLazyImages: function(options) {
         options = options || {};
 
-        if (options.hidden) {
-          sandbox.dom.$('.sponsor:not(.isotope-hidden)').find('img.lazy').trigger('appear');
-        } else {
-          sandbox.dom.$(window).trigger('scroll');
-        }
-
+        setTimeout(function() {
+          if (options.hidden) {
+            sandbox.dom.$('.sponsor:not(.isotope-hidden)').find('img.lazy').trigger('appear');
+          } else {
+            sandbox.dom.$(window).trigger('scroll');
+          }
+        }, 750);
       },
 
       _triggerLoading: function() {
