@@ -1,0 +1,9 @@
+=inside_layout('application') do
+  #pages.container-fluid
+    .row-fluid
+      =yield
+
+  :javascript
+    require(['pages'], function(Pages) {
+      Pages();
+    });

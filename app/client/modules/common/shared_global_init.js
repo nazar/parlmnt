@@ -48,7 +48,11 @@ define([
         },
         "Lords": {
           url: sandbox.routes.lords_path()
+        },
+        "API": {
+          url: sandbox.routes.api_path()
         }
+
       }
     });
 

@@ -61,13 +61,14 @@
 
     //modules
     //MUST add any defined modules above to include that follows
-    "bills": 'modules/bills/main',
-    "acts":  'modules/acts/main',
-    "mps":   'modules/mps/main',
-    "lords":   'modules/lords/main'
+    "bills":  'modules/bills/main',
+    "acts":   'modules/acts/main',
+    "mps":    'modules/mps/main',
+    "lords":  'modules/lords/main',
+    "pages":  'modules/pages/main'
   },
 
-  include: ['bills', 'acts', 'mps', 'lords'],   //MUST include all from modules section just above
+  include: ['bills', 'acts', 'mps', 'lords', 'pages'],   //MUST include all from modules section just above
 
   deps: ['requirejs', 'sugar', 'q'],
 
