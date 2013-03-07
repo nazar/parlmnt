@@ -8,7 +8,7 @@
     <div class="intro">
       <div class="auth">
         <a href="/auth/facebook">
-          <img src="/images/fb-connect.png" alt="">
+          <img src="/assets/fb-connect.png" alt="">
           <div class="caption">Facebook Connect</div>
         </a>
       </div>

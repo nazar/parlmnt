@@ -11,6 +11,7 @@
 @import '3rdparty/animate';
 @import '3rdparty/isotope';
 @import '3rdparty/bootstrap';
+@import '3rdparty/bootstrap-responsive';
 @import '3rdparty/bootstrap-modal';
 
 //client widgets
@@ -27,6 +28,7 @@
 //module/controller specific styling
 @import 'modules/bills';
 @import 'modules/sponsors';
+@import 'modules/pages';
 
 //screens specific app overrides
 @import 'global/application';

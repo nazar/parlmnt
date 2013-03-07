@@ -43,7 +43,7 @@ Votes::Application.routes.draw do
 
   resources :comments, :only => [:create, :update]
 
-  match '/' => 'bills#index'
+  match '/' => 'bills#index'      #TODO teomprarily here until pages#landing is completed
   match '/api' => 'pages#api'
 
 end

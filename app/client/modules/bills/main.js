@@ -47,23 +47,23 @@ define([
           "default": 'name',
           "items": {
             "name": {
-              "icon": '/images/name.png',
+              "icon": '/assets/name.png',
               "tip": 'Sort by Name'
             },
             "last_updated": {
-              "icon": '/images/recent.png',
+              "icon": '/assets/recent.png',
               "tip": 'Sort by Recent Activity'
             },
             "popular": {
-              "icon": '/images/popular.png',
+              "icon": '/assets/popular.png',
               "tip": 'Sort by Popularity'
             },
             "liked": {
-              "icon": '/images/liked.png',
+              "icon": '/assets/liked.png',
               "tip": 'Sort by Likes'
             },
             "disliked": {
-              "icon": '/images/disliked.png',
+              "icon": '/assets/disliked.png',
               "tip": 'Sort by Dislikes'
             }
           }
