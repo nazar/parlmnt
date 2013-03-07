@@ -1,6 +1,6 @@
 body {
   padding-top: 60px;
-  padding-bottom: 40px;
+  //padding-bottom: 40px;
 }
 
 hr {
@@ -32,3 +32,18 @@ footer p {
 }
 
 
+
+#footer {
+  clear: both;
+  margin-top: 60px;
+  background: none repeat scroll 0 0 #F9F9F9;
+  border-top: 1px solid #F0F0F0;
+
+  .container {
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    font-size: 11px;
+    text-align: center;
+  }
+}

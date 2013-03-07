@@ -1,6 +1,6 @@
 <div>
   <div class="loader" style="display: none;">
-    <img src="/images/loading.gif">
+    <img src="/assets/loading.gif">
   </div>
   <h1>{title} <small>{summary}</small></h1>
 </div>

@@ -14,10 +14,10 @@
   <div class="sponsor-info">
     {@if cond="'{url_photo}'"}
       <a href="{sponsorUrl}" target="_blank">
-        <img class="lazy {sponsorPartyAsClasses}" src="/images/loading-sponsor.gif" data-original="{url_photo}" alt="{name}" data-tooltip="{name}" height="80" width="53"/>
+        <img class="lazy {sponsorPartyAsClasses}" data-original="{url_photo}" alt="{name}" data-tooltip="{name}" height="80" width="53"/>
       </a>
     {:else}
-      <a><img src="/images/no_photo.png" alt="{name}" data-tooltip="{name}" height="80" width="53"/></a>
+      <a><img src="/assets/no_photo.png" alt="{name}" data-tooltip="{name}" height="80" width="53"/></a>
     {/if}
     <div class="party">{party_name}</div>
   </div>
