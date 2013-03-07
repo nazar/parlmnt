@@ -22,7 +22,7 @@
           <li class="sponsor">
             {@if cond="'{url_photo}'"}
               <a href="http://www.parliament.uk{url_details}" target="_blank">
-                <img class="lazy {sponsorPartyAsClasses}" src="/images/loading-sponsor.gif" data-original="{url_photo}" alt="{name}" data-tooltip="{name}" height="80" width="53"/>
+                <img class="lazy {sponsorPartyAsClasses}"  data-original="{url_photo}" alt="{name}" data-tooltip="{name}" height="80" width="53"/>
               </a>
               <a href="http://www.parliament.uk{url_details}" target="_blank">{name}</a>
             {:else}
