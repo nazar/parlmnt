@@ -41,14 +41,8 @@ define([
       },
 
       _resultClicked: function(e) {
-        var $el;
-
-        e.preventDefault();
-
-        $el = sandbox.dom.$(e.target);
-        this._searchBox().val('');
-
-        sandbox.publish('ShowBillPopup', {id: $el.data('id')}); //TODO hackish... want model item instead.... revisit
+        //slight hack as the  sandbox.dom.$('html').one in func _popResults capture clicks to close the menu. TODO better fix
+        window.location = sandbox.dom.$(e.target).attr('href');
       },
 
       //// PRIVATE ////
@@ -65,10 +59,10 @@ define([
           this._debouncedSearch = (function(term) {
             if (term && (term.length >= minLength)) {
               sandbox.dom.$.post( sandbox.routes.search_path({term: term}), {}, function(response) {
-                that._popResults(response)
+                if (that._hasResults(response)) {
+                  that._popResults(response);
+                }
               });
-            } else {
-
             }
           }).debounce(this.searchDelay);
         }
@@ -87,43 +81,54 @@ define([
         return this.$el.find('.form-search');
       },
 
-      _popResults: function(response) {
-        var that = this,
-          $form = this._searchForm(),
-          $bills = sandbox.dom.$('<ul class="group"></ul>');
+      _hasResults: function(response) {
+        var results;
 
-        if (response && response.bills && Array.isArray(response.bills)) {
-          response.bills.each(function(bill) {
-            $bills.append(sandbox.dom.$('<li class="search-result"><a href="{path}" data-id="{id}">{name}</a></li>'.assign({id: bill.id, path: sandbox.routes.bill_path(bill.id), name: bill.name})))
-          });
+        results = Object.values(response).sum(function(r) {
+          return r.result.length;
+        });
 
-          if ($bills.length > 0) {
-            $form.popover({
-              html: true,
-              placement: 'bottom',
-              trigger: 'manual',
-              title: 'Search Results',
-              content: $bills
-            });
-
-            $form.popover('show');
-
-            sandbox.dom.$('html').one('click', function(e) {
-              e.preventDefault();
-              $form.popover('destroy');
-            });
-          }
-
-        }
-
+        return results > 0;
       },
 
-      _hidePopover: function() {
-        this._searchForm().popover('destroy');
+      _popResults: function(response) {
+        var $form = this._searchForm(),
+          $group = sandbox.dom.$('<ul class="group"></ul>'),
+          $result = sandbox.dom.$('<div class="search-container"></div>');
+
+        Object.each(response, function(group, groupResults) {
+          if (groupResults.result.length > 0) {
+            $group.append('<li class="header">{group}</li>'.assign({group: group.capitalize()}));
+            groupResults.result.each(function(result) {
+              var li = '<li class="search-result"><a href="{path}" data-id="{id}">{name}</a></li>'.assign({
+                id: result.id,
+                path: '#{route}/{id}'.assign({route: groupResults.route || group, id: result.id}),
+                name: result.name
+              });
+
+              $group.append(li)
+            });
+          }
+        });
+
+        $result.append($group);
+
+        $form.popover({
+          html: true,
+          placement: 'bottom',
+          trigger: 'manual',
+          title: 'Search Results',
+          content: $group
+        });
+
+        $form.popover('show');
+
+        //add a page listener to close menu on mouse click
+        sandbox.dom.$('html').one('click', function(e) {
+          e.preventDefault();
+          $form.popover('destroy');
+        });
       }
-
-
-
 
     });
 
