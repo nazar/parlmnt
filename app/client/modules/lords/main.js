@@ -79,7 +79,7 @@ define([
           }
         },
 
-        "Filter Bill Titles": {
+        "Filter By Lord Name": {
           "type": 'search',
           "section": 'nameFilter',
           "items": {

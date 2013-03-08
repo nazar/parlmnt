@@ -80,7 +80,7 @@ define([
           }
         },
 
-        "Filter Bill Titles": {
+        "Filter By MP Name": {
           "type": 'search',
           "section": 'nameFilter',
           "items": {
