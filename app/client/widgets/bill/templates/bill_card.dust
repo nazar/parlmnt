@@ -4,7 +4,7 @@
 
   <div class="bill-name">
     <div class="content">
-      <h2><a href="/bills/{id}" class="bill_link">{name}</a></h2>
+      <h2><a href="#bills/{id}" class="bill_link">{name}</a></h2>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
           {#sponsors}
             <li class="sponsor">
               {@if cond="'{url_photo}'"}
-                <a href="http://www.parliament.uk{url_details}" target="_blank">
+                <a href="#sponsors/{id}">
                   <img class="lazy {sponsorPartyAsClasses}"  data-original="{url_photo}" alt="{name}" data-tooltip="{name}" height="80" width="53"/>
                 </a>
                 <a href="http://www.parliament.uk{url_details}" target="_blank">{name}</a>

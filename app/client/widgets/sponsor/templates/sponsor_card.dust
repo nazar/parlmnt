@@ -4,7 +4,7 @@
 
   <div class="sponsor-name">
     <div class="content">
-      <h2><a href="{sponsorUrl}" class="sponsor_link" target="_blank">{name}</a></h2>
+      <h2><a href="#sponsors/{id}" class="sponsor_link">{name}</a></h2>
     </div>
   </div>
 

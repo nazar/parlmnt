@@ -7,6 +7,10 @@ define([
 
     var BillPopupView = sandbox.mvc.View({
 
+      initialize: function() {
+        sandbox.util.bindAll(this, '_closed');
+      },
+
       render: function() {
         var that = this;
 
@@ -20,6 +24,7 @@ define([
           that._renderVotable();
 
           that.$el.modal('show');
+          that.$el.on('hidden', that._closed)
         });
 
         return this;
@@ -27,6 +32,10 @@ define([
 
 
       /// EVENTS
+
+      _closed: function() {
+        sandbox.publish('BillPopupClosed', {id: this.model.get('id')});
+      },
 
 
       /// PUBLIC

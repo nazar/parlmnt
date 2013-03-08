@@ -46,6 +46,10 @@ define([
     });
 
 
+    sandbox.subscribe('SponsorPopupClosed', function(options) {
+      window.location.hash = '';
+    });
+
     sandbox.subscribe('Sponsor.RequestCommentable', function(options) {
       var commentable = commentableBuilder({
         $el: options.$el,

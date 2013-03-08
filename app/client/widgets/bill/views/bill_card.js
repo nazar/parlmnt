@@ -28,7 +28,6 @@ define([
       className: 'bill',
 
       events: {
-        "click a.bill_link": '_showBill',  //TODO BB route
         "click a.watch": '_watch'
       },
 
@@ -61,11 +60,6 @@ define([
         e.preventDefault();
       },
 
-      _showBill: function(e) {
-        e.preventDefault();
-
-        sandbox.publish('ShowBillPopup', {id: this.model.get('id')});
-      },
 
       /// PUBLIC
 

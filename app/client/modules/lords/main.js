@@ -25,11 +25,15 @@ define([
         "Sort by": {
           "type": 'pick',
           "section": 'sort',
-          "default": 'name',
+          "default": 'first_name',
           "items": {
-            "name": {
+            "first_name": {
               "icon": '/assets/name.png',
-              "tip": 'Sort by Name'
+              "tip": 'Sort by First Name'
+            },
+            "last_name": {
+              "icon": '/assets/name.png',
+              "tip": 'Sort by Last Name'
             },
             "bill_count": {
               "icon": '/assets/bill.png',
@@ -38,14 +42,6 @@ define([
             "popular": {
               "icon": '/assets/popular.png',
               "tip": 'Sort by Popularity'
-            },
-            "liked": {
-              "icon": '/assets/liked.png',
-              "tip": 'Sort by Likes'
-            },
-            "disliked": {
-              "icon": '/assets/disliked.png',
-              "tip": 'Sort by Dislikes'
             }
           }
         },

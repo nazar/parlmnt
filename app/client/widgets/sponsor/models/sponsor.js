@@ -35,6 +35,14 @@ define([
 
       return short[party] || party;
 
+    },
+
+    firstName: function() {
+      return this.get('name').split(' ').first();
+    },
+
+    lastName: function() {
+      return this.get('name').split(' ').last();
     }
 
 

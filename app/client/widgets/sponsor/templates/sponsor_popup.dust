@@ -30,7 +30,7 @@
           <div class="summary-container">
             <ul>
             {#sortedBills}
-              <li><a class="bill_link" data-id="{id}" href="#">{name}</a></li>
+              <li><a class="bill_link" data-id="{id}" href="#bills/{id}">{name}</a></li>
             {/sortedBills}
             </ul>
           </div>

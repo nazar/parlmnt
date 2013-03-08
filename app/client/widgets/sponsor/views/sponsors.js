@@ -161,8 +161,11 @@ define([
           itemSelector: '.sponsor',
           animationEngine : 'css',
           getSortData: {
-            name: function ($el) {
-              return $el.data('name');
+            first_name: function ($el) {
+              return $el.data('first_name');
+            },
+            last_name: function ($el) {
+              return $el.data('last_name');
             },
             bill_count: function($el) {
               return parseInt($el.data('bills'), 10) * -1;
