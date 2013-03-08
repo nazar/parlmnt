@@ -64,6 +64,14 @@ class Sponsor < ActiveRecord::Base
       where(:name => name)
     end
 
+    def search_by_name(name)
+      where('name like ?', "%#{name}%")
+    end
+
+    def order_name
+      order('name asc')
+    end
+
     #Special by_name finder as sponsors on bills have a different format to the list of either of MPs or Lords
     def find_sponsor_by_name(sponsor)
       #remove titles

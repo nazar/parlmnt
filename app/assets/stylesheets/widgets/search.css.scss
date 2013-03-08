@@ -4,6 +4,11 @@
     padding: 0;
   }
 
+  .popover {
+    max-width: 350px;
+    left: 880px;
+  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -12,6 +17,14 @@
     li {
       border-bottom: 1px dotted silver;
       padding: 2px 5px 2px 5px;
+
+      &.header {
+        font-weight: bold;
+      }
+    }
+
+    &.group {
+      width: 350px;
     }
   }
 }

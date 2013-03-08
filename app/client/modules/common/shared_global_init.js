@@ -60,12 +60,6 @@ define([
         "Acts": {
           url: sandbox.routes.acts_path()
         },
-        "MPs": {
-          url: sandbox.routes.mps_path()
-        },
-        "Lords": {
-          url: sandbox.routes.lords_path()
-        },
         "API": {
           url: sandbox.routes.api_path()
         }
