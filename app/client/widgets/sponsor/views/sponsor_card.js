@@ -58,7 +58,8 @@ define([
 
         return Object.merge(json, {
           "sponsorUrl": 'http://www.parliament.uk' + json.url_details,
-          "sponsorPartyAsClasses": 's-' + this._sponsorPartyClass()
+          "sponsorPartyAsClasses": 's-' + this._sponsorPartyClass(),
+          "sponsorParty": this.model.sponsorParty()
         });
       },
 
