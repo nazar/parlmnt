@@ -61,7 +61,7 @@
             {#sponsors}
               <li class="sponsor">
                 {@if cond="'{url_photo}'"}
-                  <a href="http://www.parliament.uk{url_details}" target="_blank">
+                  <a href="#sponsors/{id}">
                     <img class="{sponsorPartyAsClasses}" src="{url_photo}" alt="{name}" data-tooltip="{name}" height="110"/>
                   </a>
                   <a href="http://www.parliament.uk{url_details}" target="_blank">{name}</a>
