@@ -24,14 +24,14 @@ define([
 
     commentsPath = options.commentsPath;
 
-    sponsorsView = new SponsorsContainerView({
-      el: sandbox.dom.$(options.el),
-      sponsorType: options.sponsorType,
-      sponsorCollection: new SponsorCollection({url: options.collectionRootPath}),
-      votableBuilder: votableBuilder,
-      commentableBuilder: commentableBuilder
-    });
 
+    if (options.collectionRootPath) {
+      sponsorsView = new SponsorsContainerView({
+        el: sandbox.dom.$(options.el),
+        sponsorType: options.sponsorType,
+        sponsorCollection: new SponsorCollection({url: options.collectionRootPath})
+      });
+    }
 
     ///////// PUB SUBS
 
@@ -45,6 +45,10 @@ define([
       sponsorPopupView.showSponsor(options);
     });
 
+
+    sandbox.subscribe('SponsorPopupClosed', function(options) {
+      window.location.hash = '';
+    });
 
     sandbox.subscribe('Sponsor.RequestCommentable', function(options) {
       var commentable = commentableBuilder({

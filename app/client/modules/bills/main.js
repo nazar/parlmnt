@@ -1,14 +1,16 @@
 define([
   'sandbox',
 
-  'widgets/sidebar/main',
   'widgets/bill/main',
+  'widgets/sponsor/main',
+
+  'widgets/sidebar/main',
   'widgets/summary/main',
 
   'modules/common/shared_global_init',
   'modules/common/bills_pub_sub_init'
 
-], function (sandbox, sidebarWidget, billWidget, summaryWidget, globalInit, billsInit)  {
+], function (sandbox, billWidget, sponsorWidget, sidebarWidget, summaryWidget, globalInit, billsInit)  {
 
 
   return function() {
@@ -187,6 +189,10 @@ define([
       el: '#bills',
       collectionRootPath: sandbox.routes.bills_path,
       commentsPath: sandbox.routes.comments_bill_path
+    });
+
+    sponsorWidget({
+      commentsPath: sandbox.routes.comments_lord_path
     });
 
     summary.render().startLoader();

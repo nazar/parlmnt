@@ -40,5 +40,7 @@ define([
     });
 
     sidebar.initDefaults();
+
+    sandbox.mvc.startHistory();
   }
 });

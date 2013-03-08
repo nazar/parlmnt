@@ -44,6 +44,9 @@ define([
       billPopupView.showBill(options);
     });
 
+    sandbox.subscribe('BillPopupClosed', function(options) {
+      window.location.hash = '';
+    });
 
     sandbox.subscribe('Bill.RequestCommentable', function(options) {
       var commentable = commentableBuilder({

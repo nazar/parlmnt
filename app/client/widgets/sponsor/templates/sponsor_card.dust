@@ -4,7 +4,7 @@
 
   <div class="sponsor-name">
     <div class="content">
-      <h2><a href="{sponsorUrl}" class="sponsor_link" target="_blank">{name}</a></h2>
+      <h2><a href="#sponsors/{id}" class="sponsor_link">{name}</a></h2>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
     {:else}
       <a><img src="/assets/no_photo.png" alt="{name}" data-tooltip="{name}" height="80" width="53"/></a>
     {/if}
-    <div class="party">{party_name}</div>
+    <div class="party" title="{party_name}">{sponsorParty}</div>
   </div>
 </div>
 
@@ -29,7 +29,6 @@
     {count_bills}<i class="icon-leaf" title="bills" data-toggle="tooltip"></i>
     {cached_votes_up}<i class="icon-arrow-up" title="up votes"></i>
     {cached_votes_down}<i class="icon-arrow-down" title="down votes"></i>
-    <a href="#" class="watch"><i class="icon-eye-open" title="Watch"></i></a>
   </div>
   <div class="commentable"></div>
 </div>

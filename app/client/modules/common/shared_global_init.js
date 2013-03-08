@@ -11,7 +11,25 @@ define([
 
   return function() {
 
-    var search;
+    var search, Router;
+
+    Router = sandbox.mvc.Router({
+
+      routes: {
+        "bills/:id": 'showBill',
+        "sponsors/:id": 'showSponsor'
+      },
+
+      showBill:function(id) {
+        sandbox.publish('ShowBillPopup', {id: id});
+      },
+
+      showSponsor: function(id) {
+        sandbox.publish('ShowSponsorPopup', {id: id});
+      }
+    });
+
+    new Router();
 
     //session manager
     sandbox.session = sessionWidget();

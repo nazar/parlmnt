@@ -10,7 +10,7 @@ $infoUnderline: #e4e4e4;
 
     border: 1px solid $billBorder;
 
-    width: 310px;
+    width: 99%;
     margin: 0 15px 15px 0;
 
     .bill-title-info {
@@ -41,24 +41,25 @@ $infoUnderline: #e4e4e4;
       }
     }
 
-    .info {
+    .info-container {
       display: table;
-      width: 100%;
+    }
 
-      margin: 2px 10px 2px 10px;
+    .info {
+      display: table-cell;
+      vertical-align: middle;
+
+      padding: 2px 20px 2px 20px;
       border-bottom: 1px dashed $infoUnderline;
 
       font-size: 11px;
 
       .title {
-        display: table-cell;
-        width: 60px;
         font-weight: bold;
         color: $infoText;
       }
 
       .data {
-        display: table-cell;
         color: darken($infoText, 15%);
 
         li.sponsor {

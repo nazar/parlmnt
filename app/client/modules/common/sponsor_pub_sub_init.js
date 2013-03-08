@@ -38,5 +38,8 @@ define([
     });
 
     sponsors.loadSponsors();
+
+
+    sandbox.mvc.startHistory();
   }
 });

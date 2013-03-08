@@ -12,7 +12,6 @@ define([
       className: 'sponsor',
 
       events: {
-        "click a.sponsor_link": '_showSponsor',  //TODO BB route
         "click a.watch": '_watch'
       },
 
@@ -43,11 +42,6 @@ define([
         e.preventDefault();
       },
 
-      _showSponsor: function(e) {
-        e.preventDefault();
-
-        sandbox.publish('ShowSponsorPopup', {id: this.model.get('id')});
-      },
 
       /// PUBLIC
 
@@ -58,7 +52,8 @@ define([
 
         return Object.merge(json, {
           "sponsorUrl": 'http://www.parliament.uk' + json.url_details,
-          "sponsorPartyAsClasses": 's-' + this._sponsorPartyClass()
+          "sponsorPartyAsClasses": 's-' + this._sponsorPartyClass(),
+          "sponsorParty": this.model.sponsorParty()
         });
       },
 
@@ -84,7 +79,8 @@ define([
       },
 
       _setSponsorData: function() {
-        this.$el.data('name', this.model.get('name'));
+        this.$el.data('first_name', this.model.get('name'));
+        this.$el.data('last_name', this.model.lastName());
         this.$el.data('bills', this.model.get('count_bills'));
       }
 

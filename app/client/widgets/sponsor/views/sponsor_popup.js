@@ -8,8 +8,8 @@ define([
 
     var SponsorPopupView = sandbox.mvc.View({
 
-      events: {
-        'click a.bill_link': '_showBill'
+      initialize: function() {
+        sandbox.util.bindAll(this, '_closed');
       },
 
       render: function() {
@@ -25,6 +25,7 @@ define([
           that._renderVotable();
 
           that.$el.modal('show');
+          that.$el.on('hidden', that._closed)
         });
 
         return this;
@@ -33,12 +34,8 @@ define([
 
       /// EVENTS
 
-      _showBill: function(e) {
-        var $el = sandbox.dom.$(e.target);
-
-        e.preventDefault();
-
-        sandbox.publish('ShowBillPopup', {id: $el.data('id')});
+      _closed: function() {
+        sandbox.publish('SponsorPopupClosed', {id: this.model.get('id')});
       },
 
 
