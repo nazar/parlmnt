@@ -24,14 +24,14 @@ define([
 
     commentsPath = options.commentsPath;
 
-    sponsorsView = new SponsorsContainerView({
-      el: sandbox.dom.$(options.el),
-      sponsorType: options.sponsorType,
-      sponsorCollection: new SponsorCollection({url: options.collectionRootPath}),
-      votableBuilder: votableBuilder,
-      commentableBuilder: commentableBuilder
-    });
 
+    if (options.collectionRootPath) {
+      sponsorsView = new SponsorsContainerView({
+        el: sandbox.dom.$(options.el),
+        sponsorType: options.sponsorType,
+        sponsorCollection: new SponsorCollection({url: options.collectionRootPath})
+      });
+    }
 
     ///////// PUB SUBS
 
