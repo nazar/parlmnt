@@ -72,8 +72,8 @@ $infoUnderline: #e4e4e4;
             padding: 1px;
             border: 1px solid silver;
 
-            width: 53px;
-            height: 80px;
+            width: 53px !important;
+            height: 80px !important;
 
             &.s-labour{
               border: 1px solid #c41230;
