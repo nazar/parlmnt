@@ -159,7 +159,7 @@ define([
 
         },
 
-        "Filter Bill Titles": {
+        "Filter Visible Bills": {
           "type": 'search',
           "section": 'nameFilter',
           "items": {
