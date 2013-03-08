@@ -135,7 +135,7 @@ define([
 
         },
 
-        "Filter Act Titles": {
+        "Filter Visible Acts": {
           "type": 'search',
           "section": 'nameFilter',
           "items": {
