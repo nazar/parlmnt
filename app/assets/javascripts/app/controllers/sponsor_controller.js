@@ -7,6 +7,7 @@ function($scope,   $routeParams,   sponsor) {
   sponsor.getSponsor($routeParams.sponsorId)
     .success(function(data) {
       _setSponsor(data.sponsor);
+      $scope.setTitle('Viewing ' + $scope.sponsor.name);
       $scope.sponsorCommentsPath = Routes.comments_mp_path($scope.sponsor.id);
     });
 

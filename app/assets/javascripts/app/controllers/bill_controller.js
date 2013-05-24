@@ -7,6 +7,7 @@ function($scope,   $routeParams,   bill) {
   bill.getBill($routeParams.billId)
     .success(function(data) {
       _setBill(data.bill_detail);
+      $scope.setTitle('Viewing ' + $scope.bill.name);
       $scope.billCommentsPath = Routes.comments_bill_path($scope.bill.id);
     });
 

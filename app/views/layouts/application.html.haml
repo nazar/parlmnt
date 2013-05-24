@@ -1,8 +1,9 @@
 !!! 5
-%html{:lang => 'en', 'ng-app' => 'parlmnt'}
+%html{:lang => 'en', 'ng-app' => 'parlmnt', 'ng-controller' => 'applicationController'}
   %head
     %meta{:charset => "utf-8"}
     %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
+
 
     = csrf_meta_tags
 
@@ -19,9 +20,9 @@
     /[if lt IE 9]
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 
-    = yield(:head)
+    <title>{{appTitle}}</title>
 
-  %body{'ng-controller' => 'applicationController'}
+  %body
     #navbar
       =render 'layouts/navbar'
 

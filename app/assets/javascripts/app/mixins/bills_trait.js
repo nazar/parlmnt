@@ -11,7 +11,16 @@ function mixinBillsTrait($scope, $filter, bill) {
   $scope.textFilter = '';
 
 
+  $scope.dataSource('2013')
+    .success(function(data) {
+      _setBills(data[$scope.rootName]);
+      _updateMyVotes();
+      _loading(false);
+    });
+
+
   $scope.getYear = function(year) {
+    $scope.setTitle('Viewing {type} for {year}'.assign({type: $scope.rootName.capitalize(), year: year}));
     _loading(true);
     $scope.dataSource(year)
       .success(function(data) {
@@ -21,12 +30,6 @@ function mixinBillsTrait($scope, $filter, bill) {
       });
   };
 
-  $scope.dataSource('2013')
-    .success(function(data) {
-      _setBills(data[$scope.rootName]);
-      _updateMyVotes();
-      _loading(false);
-    });
 
 
 

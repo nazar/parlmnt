@@ -13,6 +13,7 @@ function mixinSponsorsTrait($scope, $filter, sponsor) {
 
 
   $scope.getSponsors = function() {
+    $scope.setTitle('Viewing {type}'.assign({type: $scope.rootName.capitalize()}));
     _loading(true);
     $scope.dataSource()
       .success(function(data) {
