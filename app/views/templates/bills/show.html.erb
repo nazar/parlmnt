@@ -29,7 +29,7 @@
       <div class="tab-content">
 
         <div id="summary" class="tab-pane active">
-          {{bill.bill_summary.body}}
+          <p ng-bind-html-unsafe="bill.bill_summary.body"></p>
         </div>
 
         <div id="comments" class="tab-pane" commentable="bill" commentable-type="Bill" src="billCommentsPath" logged-in="loggedIn()" ></div>

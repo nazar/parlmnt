@@ -1,4 +1,4 @@
-angular.module('parlmntDeps').directive('myVotable', [function() {
+angular.module('parlmntDeps').directive('myVotable', ['$rootScope', 'user', function($rootScope, user) {
 
   return {
     templateUrl: '/templates/common/votable.js',
@@ -20,13 +20,17 @@ angular.module('parlmntDeps').directive('myVotable', [function() {
       $scope.localDown = $scope.downVerb || 'down';
 
       $scope.voteUp = function() {
-        votable.vote($scope.localUp)
-          .success(_updateVotable)
+        _canVote(function() {
+          votable.vote($scope.localUp)
+            .success(_updateVotable)
+        });
       };
 
       $scope.voteDown = function() {
-        votable.vote($scope.localDown)
-          .success(_updateVotable)
+        _canVote(function() {
+          votable.vote($scope.localDown)
+            .success(_updateVotable)
+        });
       };
 
 
@@ -49,6 +53,14 @@ angular.module('parlmntDeps').directive('myVotable', [function() {
 
       function _updateVotable(res) {
         Object.merge($scope.myVotable, res);
+      }
+
+      function _canVote(fn) {
+        if (user.loggedIn()) {
+          fn();
+        } else {
+          $rootScope.$broadcast('displayMessage', 'Not logged in', '<div>please Register or Login to Vote and Comment.</div>');
+        }
       }
 
     }]

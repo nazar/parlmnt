@@ -8,7 +8,17 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
 
   $scope.setTitle = function(title) {
     $scope.appTitle = title;
-  }
+  };
+
+  $scope.$on('displayMessage', function(event, title, msg) {
+    $.gritter.add({
+      title: title,
+      text: msg,
+      sticky: true
+    });
+
+  });
+
 
 
 }]);
