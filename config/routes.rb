@@ -1,11 +1,10 @@
 Votes::Application.routes.draw do
 
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
   match '/auth/:provider/callback' => 'sessions#create'
-  match '/sessions/me' => 'sessions#token'    #TODO alias not necessary
+
+  match '/register' => 'sessions#register'
+  match '/login' => 'sessions#login'
+  match '/me' => 'sessions#token'
 
   match '/search' => 'search#index', :via => [:post]
 
@@ -17,6 +16,9 @@ Votes::Application.routes.draw do
     member do
       get 'comments'
     end
+    collection do
+      get 'my_votes'
+    end
   end
 
   resources :acts, :only => [:index, :show] do
@@ -25,7 +27,11 @@ Votes::Application.routes.draw do
     end
   end
 
-  resources :sponsors, :only => [:show]
+  resources :sponsors, :only => [:show] do
+    collection do
+      get 'my_votes'
+    end
+  end
 
   resources :mps, :only => [:index, :show] do
     member do
@@ -41,9 +47,15 @@ Votes::Application.routes.draw do
 
   resources :votes, :only => [:create]
 
-  resources :comments, :only => [:create, :update]
+  resources :comments, :only => [:create, :update, :destroy] do
+    member do
+      post 'reply'
+    end
+  end
 
-  match '/' => 'pages#landing'      #TODO teomprarily here until pages#landing is completed
+  match '/templates/:section/:view' => 'templates#show', :as => 'tpl'
+
+  match '/' => 'pages#landing'
   match '/api' => 'pages#api'
 
 end

@@ -1,0 +1,71 @@
+<div class="well sidebar bills-sidebar left">
+  <ul class="nav nav-list">
+    <li class="nav-header">
+      <div class="group_name">Year</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-small btn-info" title="Bills active in 2010" ng-click="getYear('2010')">10</button>
+        <button type="button" class="btn btn-small btn-info" title="Bills active in 2011" ng-click="getYear('2011')">11</button>
+        <button type="button" class="btn btn-small btn-info" title="Bills active in 2012" ng-click="getYear('2012')">12</button>
+        <button type="button" class="btn btn-small btn-info active" title="Bills active in 2013" ng-click="getYear('2013')">13</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Sort by</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-small btn-info active" title="Sort by Name" ng-click="setOrder('name')">
+          <img src="/assets/name.png" class="btn-icon" ></button>
+        <button  type="button" class="btn btn-small btn-info" title="Sort by Last Activity" ng-click="setOrder('-bill_updated_at')">
+          <img src="/assets/recent.png" class="btn-icon" ></button>
+        <button  type="button" class="btn btn-small btn-info" title="Sort by Popularity" ng-click="setOrder('-count_posts')">
+          <img src="/assets/popular.png" class="btn-icon" ></button>
+        <button  type="button" class="btn btn-small btn-info" title="Sort by Likes" ng-click="setOrder('-cached_votes_up')">
+          <img src="/assets/liked.png" class="btn-icon" ></button>
+        <button  type="button" class="btn btn-small btn-info" title="Sort by Dislikes" ng-click="setOrder('-cached_votes_down')">
+          <img src="/assets/disliked.png" class="btn-icon" ></button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Bill Type</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-small btn-info active" title="Show all Bill Types" ng-click="showBillType('all')">All</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Public Bills" ng-click="showBillType('1')">Pub</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Private Bills" ng-click="showBillType('2')">Pr</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Private Members Bills" ng-click="showBillType('3')">PM</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Hybrid Bills" ng-click="showBillType('4')">H</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Bill Origin</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-small btn-info active" title="Show all Houses" ng-click="showBillOrigin('all')">All</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills originated in House of Commons" ng-click="showBillOrigin('1')">Commons</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills originated in House of Lords" ng-click="showBillOrigin('2')">Lords</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Bill Stage</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-small btn-info active" title="Show all Stages" ng-click="showBillStage('all')">All</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills in Stage 1" ng-click="showBillStage('1')">1</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills in Stage 2" ng-click="showBillStage('2')">2</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills in Stage 3" ng-click="showBillStage('3')">3</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills in Committee Stage" ng-click="showBillStage('C')">C</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills in Ping Pong Stage" ng-click="showBillStage('P')">P</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Major Political Parties</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-small btn-info active" title="Show all Party Bills" ng-click="showBillParty('all')">All</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills proposed by the Conservative Party" ng-click="showBillParty('con')">Con</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills proposed by the Labour Party" ng-click="showBillParty('lab')">Lab</button>
+        <button type="button" class="btn btn-small btn-info" title="Show only Bills proposed by the Liberal Democrats" ng-click="showBillParty('ld')">LD</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Filter Visible Bills</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <input type="text" class="search-query input-medium" placeholder="Search Bill by Title" ng-model="textFilter"></div>
+    </li>
+  </ul>
+</div>

@@ -1,14 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.12'
 
 gem 'nokogiri', '1.5.5'
 gem 'haml', '3.1.7'
 gem 'mysql2', '0.3.11'
 
 #JSON and API support
-gem 'rabl', '0.7.10'
-gem 'oj', '2.0.4'
+gem 'active_model_serializers', '0.8.1'
 
 #commenting
 gem 'ancestry', '1.3.0'
@@ -19,24 +18,17 @@ gem 'acts_as_votable', '0.5.0'
 #javascript routes from rails
 gem 'js-routes', '0.8.7'
 
-#authentication using Google, Facebook and Twitter
-gem 'omniauth', '1.1.1'
-gem 'omniauth-google-oauth2', '0.1.13'
-gem 'omniauth-facebook', '1.4.1'
-gem 'omniauth-twitter', '0.0.13'
+#anti-spam registrations
+#gem 'validates_against_stopforumspam', '1.2'
 
-#admin
-gem 'activeadmin', '0.4.0'   #stick to 0.4 for now as 0.5 has several changes
-gem 'formtastic', '~> 2.1.1' # for AA
+gem 'virtus', '0.5.4'
 
 #cron jobs
 gem 'whenever', '0.8.2'
 
 
-gem 'rack', '1.4.1'    # session secret token error workaround bc I have a few old rails apps on my server. Passenger 4 here I come
-
 group :development do
-  gem 'mongrel', '>=1.2.0.pre2'
+  gem 'thin'
   gem 'capistrano', '2.14.2'
 end
 

@@ -1,0 +1,31 @@
+<%= content_for(:sidebar) do %>
+  <%= render '/templates/sponsors/sponsor_sidebar' %>
+<% end %>
+
+<%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
+  <div class="span12">
+    <div id="sponsor">
+      <div my-votable="sponsor" votable-type="Sponsor" vote-score="{{sponsor.cached_votes_score}}" vote-flag="{{sponsor.voted}}"></div>
+      <h1>{{sponsor.name}}</h1>
+
+      <dl class="dl-horizontal">
+        <dt>Constituency:</dt>
+        <dd>{{sponsor.constituency}}</dd>
+        <dt>Parliament Bio:</dt>
+        <dd><a href="http://www.parliament.uk{{sponsor.url_details}}" target="_blank">{{sponsor.name}}</a></dd>
+        <dt>Party:</dt>
+        <dd>{{sponsor.party_name}}</dd>
+      </dl>
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="" data-target="#comments" data-toggle="tab">Comments({{sponsor.count_posts || 0}})</a></li>
+        <li ng-show="sponsor.count_bills > 0"><a href="" data-target="#bills" data-toggle="tab">Bills({{sponsor.count_bills}})</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="comments" class="tab-pane active" commentable="sponsor" commentable-type="Sponsor" src="sponsorCommentsPath" logged-in="loggedIn()" ></div>
+        <div ng-show="sponsor.count_bills > 0" id="bills" class="tab-pane" ng-include=" '/templates/sponsors/bills' "></div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,5 @@
+<div class="alert alert-block alert-{{message.type}}" ng-model="message" ng-show="visible" ng-controller="messageController">
+  <button type="button" class="close" ng-click="dismiss()">&times;</button>
+  <h4>{{message.title}}</h4>
+  {{message.message}}
+</div>

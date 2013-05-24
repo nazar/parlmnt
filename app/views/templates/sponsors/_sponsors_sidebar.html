@@ -1,0 +1,40 @@
+<div class="well sidebar bill-sidebar left">
+  <ul class="nav nav-list">
+    <li class="nav-header">
+      <div class="group_name">Sort by</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button ng-click="setOrder('name')" type="button" class="btn btn-small btn-info active" title="Sort by Name">
+          <img src="/assets/name.png" class="btn-icon">
+        </button>
+        <button ng-click="setOrder('-count_bills')" type="button" class="btn btn-small btn-info" title="Sort by Bills Sponsored">
+          <img src="/assets/bill.png" class="btn-icon"></button>
+        <button ng-click="setOrder('-count_posts')" type="button" class="btn btn-small btn-info" title="Sort by Popularity">
+          <img src="/assets/popular.png" class="btn-icon"></button>
+        <button ng-click="setOrder('-cached_votes_score')" type="button" class="btn btn-small btn-info" title="Sort by Likes">
+          <img src="/assets/liked.png" class="btn-icon" ></button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Major Political Parties</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button ng-click="showByParty('all')" type="button" class="btn btn-small btn-info active" title="Show all Parties">All</button>
+        <button ng-click="showByParty('con')" type="button" class="btn btn-small btn-info conservative" title="Show only Conservatives">Con</button>
+        <button ng-click="showByParty('lab')" type="button" class="btn btn-small btn-info labour" title="Show only Labour">Lab</button>
+        <button ng-click="showByParty('ld')" type="button" class="btn btn-small btn-info ldm" title="Show only Liberal Democrats">Ldm</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">MPs Visibility</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button ng-click="showOnlySponsored('all')" type="button" class="btn btn-small btn-info active" >All</button>
+        <button ng-click="showOnlySponsored('true')" type="button" class="btn btn-small btn-info" title="Hide MPs that have not sponsored a Bill">Hide un-billed</button>
+      </div>
+    </li>
+    <li class="nav-header">
+      <div class="group_name">Filter By MP Name</div>
+      <div class="btn-group" data-toggle="buttons-radio">
+        <input type="text" class="search-query input-medium" placeholder="Search MPs by Name" ng-model="nameFilter">
+      </div>
+    </li>
+  </ul>
+</div>

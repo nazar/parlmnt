@@ -1,6 +1,6 @@
+
 # Vote class is defined in the acts_as_votable Gem. This class definition extends that Gem's Vote class
 class Vote
-
 
   # class methods
 
@@ -14,16 +14,25 @@ class Vote
           votable if votable.present?
         end
       end
-
-
     end
 
     def votable_class(klass)
-      if %w(Bill Comment Vote Sponsor).include?(klass.capitalize)
+      if %w(Bill Comment Sponsor).include?(klass.capitalize)
         klass.classify.safe_constantize
       end
     end
 
+    def to_direction(voted_for)
+      if voted_for.nil?
+        ''
+      elsif voted_for
+        'up'
+      else
+        'down'
+      end
+    end
+
   end
+
 
 end

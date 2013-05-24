@@ -1,6 +1,0 @@
-<span class="add">
-  <textarea name="" placeholder="Add Comment..." cols="20" rows="1"></textarea>
-  <div class="buttons">
-    <button class="save btn btn-primary">Save</button>
-  </div>
-</span>

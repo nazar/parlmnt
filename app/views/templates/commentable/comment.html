@@ -1,0 +1,24 @@
+<div class="comment-container clearfix">
+  <div class="votes"></div>
+  <div class="content-container">
+    <div ng-include=" '/templates/commentable/edit.html' " ng-show="comment.editing"></div>
+    <div class="comment" ng-hide="comment.editing">
+      <div class="stats" ng-hide="comment.editing">
+        <span class="user">{{comment.username}}</span>
+        <time class="timeago" datetime="{{comment.created_at}}">{{comment.created_at | date:'medium'}}</time>
+      </div>
+      <p class="body">{{comment.body}}</p>
+    </div>
+    <ul class="comment-actions unstyled clearfix">
+      <li ng-show="loggedIn() && !comment.editing && !comment.replying"><a href="" ng-click="commentReply(comment)">reply</a></li>
+      <li ng-show="comment.mine && !comment.editing  && !comment.replying"><a href="" ng-click="commentEdit(comment)">edit</a></li>
+      <li ng-show="comment.mine && !comment.editing  && !comment.replying"><span confirm-delete-comment></span></li>
+    </ul>
+    <div ng-include=" '/templates/commentable/reply.html' " ng-show="comment.replying"></div>
+  </div>
+
+  <div class="children">
+    <div ng-repeat="comment in comment.children" ng-include=" '/templates/commentable/comment' "></div>
+  </div>
+
+</div>

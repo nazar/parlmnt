@@ -1,5 +1,5 @@
 !!! 5
-%html{:lang => 'en'}
+%html{:lang => 'en', 'ng-app' => 'parlmnt'}
   %head
     %meta{:charset => "utf-8"}
     %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
@@ -14,21 +14,23 @@
     -#%link{:href => "../assets/ico/apple-touch-icon-114-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}
     -#%link{:href => "../assets/ico/apple-touch-icon-72-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}
     -#%link{:href => "../assets/ico/apple-touch-icon-57-precomposed.png", :rel => "apple-touch-icon-precomposed"}
-
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
     /[if lt IE 9]
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 
-    = javascript_include_tag 'application'
-
     = yield(:head)
 
-  %body
+  %body{'ng-controller' => 'applicationController'}
     #navbar
+      =render 'layouts/navbar'
 
-    =yield
+    %div{:id => 'application', 'ng-view' => '', 'ng-animate' => "'fadefull'"}
 
     #footer
       .container
         .row
           .span12
             parlmnt.com is registered to <a href="http://panthersoftware.com" target="_blank">Panther Software</a>. Contains Parliamentary information licensed under the Open <a href="http://www.parliament.uk/site-information/copyright/open-parliament-licence/" target="_blank">Parliament Licence v1.0</a>. Opinions expressed through comments are solely those of our members.
+
+    = javascript_include_tag 'application'

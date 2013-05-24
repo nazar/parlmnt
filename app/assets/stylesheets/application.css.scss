@@ -8,27 +8,31 @@
 @import 'mixins/css3';
 
 //misc third party stuff
-@import '3rdparty/animate';
-@import '3rdparty/isotope';
+//@import '3rdparty/animate';
+//@import '3rdparty/isotope';
 @import '3rdparty/bootstrap';
 @import '3rdparty/bootstrap-responsive';
-@import '3rdparty/bootstrap-modal';
+@import '3rdparty/reuze';
+//@import '3rdparty/bootstrap-modal';
 
 //client widgets
-@import 'widgets/bills';
+//@import 'widgets/bills';
 @import 'widgets/commentable';
-@import 'widgets/session';
-@import 'widgets/navbar';
-@import 'widgets/search';
+//@import 'widgets/session';
+//@import 'widgets/navbar';
+//@import 'widgets/search';
 @import 'widgets/side-bar';
-@import 'widgets/sponsors';
-@import 'widgets/summary';
+//@import 'widgets/sponsors';
+//@import 'widgets/summary';
 @import 'widgets/votable';
 
 //module/controller specific styling
 @import 'modules/bills';
 @import 'modules/sponsors';
 @import 'modules/pages';
+
+@import 'animations/fade';
+@import 'animations/fadefull';
 
 //screens specific app overrides
 @import 'global/application';

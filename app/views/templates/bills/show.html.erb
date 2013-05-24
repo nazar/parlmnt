@@ -1,0 +1,44 @@
+<%= content_for(:sidebar) do %>
+  <%= render '/templates/bills/bill_sidebar' %>
+<% end %>
+
+<%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
+  <div class="span12">
+    <div id="bill">
+      <div my-votable="bill" votable-type="Bill" vote-score="{{bill.cached_votes_score}}" vote-flag="{{bill.voted}}"></div>
+      <h1>{{bill.name}}</h1>
+
+      <dl class="dl-horizontal">
+        <dt>Last Updated:</dt>
+        <dd>{{bill.bill_updated_at | date:'mediumDate'}}</dd>
+        <dt>Started In:</dt>
+        <dd>{{billOrigin(bill.origin)}}</dd>
+        <dt>Bill Type:</dt>
+        <dd>{{billType(bill.bill_type)}}</dd>
+        <dt>Current Stage:</dt>
+        <dd>{{billStage(bill.current_stage)}}</dd>
+      </dl>
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="" data-target="#summary" data-toggle="tab">Summary</a></li>
+        <li><a href="" data-target="#comments" data-toggle="tab">Comments({{bill.count_posts || 0}})</a></li>
+        <li ng-show="bill.count_stages > 0"><a href="" data-target="#stages" data-toggle="tab">Stages({{bill.count_stages}})</a></li>
+        <li ng-show="bill.bill_documents.length > 0"><a href="" data-target="#documents" data-toggle="tab">Documents({{bill.bill_documents.length || 0}})</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <div id="summary" class="tab-pane active">
+          {{bill.bill_summary.body}}
+        </div>
+
+        <div id="comments" class="tab-pane" commentable="bill" commentable-type="Bill" src="billCommentsPath" logged-in="loggedIn()" ></div>
+
+        <div ng-show="bill.count_stages > 0" id="stages" class="tab-pane" ng-include=" '/templates/bill_stages/bill_stages' "></div>
+
+        <div ng-show="bill.bill_documents.length > 0" id="documents" class="tab-pane" ng-include=" '/templates/bill_documents/bill_documents' "></div>
+
+      </div>
+    </div>
+  </div>
+<% end %>

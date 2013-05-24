@@ -1,15 +1,42 @@
-#sponsors-summary {
+#sponsors {
 
-  padding: 10px;
+  position: relative;
+
+  .ac > article, .ac > div { padding-bottom: 0;  }
+
+}
+
+
+#sponsor {
+
+  position: relative;
 
   h1 {
-    margin: 0;
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 24px;
   }
 
-  small {
-    font-size: 14px;
+  .vote {
+    float: left;
+    margin: -5px 15px 10px 0;
+  }
+
+}
+
+.sponsor-info {
+
+  img {
+    padding: 1px;
+    border: 1px solid silver;
+
+    &.s-labour{
+      border: 1px solid #c41230;
+    }
+    &.s-conservative{
+      border: 1px solid #037fb2;
+    }
+    &.s-liberal-democrat{
+      border: 1px solid #fbb724;
+    }
   }
 
 }
