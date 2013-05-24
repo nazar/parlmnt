@@ -1,3 +1,3 @@
 <ul class="documents">
-  <li class="document" ng-repeat="document in billDocuments() | orderBy:document.name"><a ng-href="{{document.url_html}}" target="_blank">{{document.name}}</a></li>
+  <li class="document" ng-repeat="document in billDocuments() | orderBy:'name'"><a ng-href="{{document.url_html}}" target="_blank">{{document.name}}</a></li>
 </ul>

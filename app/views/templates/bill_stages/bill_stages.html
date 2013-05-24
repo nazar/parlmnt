@@ -1,3 +1,3 @@
 <ul class="stages">
-  <li class="stage" ng-repeat="stage in billStages() | orderBy:stage.stage_date"><a ng-href="{{stage.stage_url}}" target="_blank">{{stage.title}}</a></li>
+  <li class="stage" ng-repeat="stage in billStages() | orderBy:'stage_date'"><a ng-href="{{stage.stage_url}}" target="_blank">{{stage.title}}</a></li>
 </ul>
