@@ -12,6 +12,7 @@ angular.module('parlmntDeps').config(['$routeProvider', function($routeProvider)
       when('/lords',               {templateUrl: '/templates/sponsors/index.html',    controller: 'lordsController'}).
       when('/sponsors/:sponsorId', {templateUrl: '/templates/sponsors/show.html' ,    controller: 'sponsorController'}).
       when('/api',                 {templateUrl: '/templates/pages/api.html' ,        controller: 'applicationController'}).
+      when('/my/settings',         {templateUrl: '/templates/users/settings.html' ,   controller: 'userSettingsController'}).
 
       otherwise({redirectTo: '/'});
 }]);

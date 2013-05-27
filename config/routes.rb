@@ -4,9 +4,10 @@ Votes::Application.routes.draw do
 
   match '/register' => 'sessions#register'
   match '/login' => 'sessions#login'
+  match '/logout' => 'sessions#destroy', :via => :post
   match '/me' => 'sessions#token'
 
-  match '/search' => 'search#index', :via => [:post]
+  match '/search' => 'search#index', :via => :post
 
   #unRESTful routes
   post '/votes/vote' => 'votes#vote'

@@ -9,6 +9,8 @@
       <h1>{{bill.name}}</h1>
 
       <dl class="dl-horizontal">
+        <dt>First Started:</dt>
+        <dd>{{bill.first_stage.stage_date | date:'mediumDate'}} ({{daysAgo(bill.first_stage.stage_date)}})</dd>
         <dt>Last Updated:</dt>
         <dd>{{bill.bill_updated_at | date:'mediumDate'}}</dd>
         <dt>Started In:</dt>

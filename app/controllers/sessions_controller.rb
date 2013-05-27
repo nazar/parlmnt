@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
-  respond_to :json, :only => [:token, :register, :login]
+  respond_to :json
 
-  def register
+  def register #TODO move to registration controller
     signup = UserRegistrator.new(params[:user].merge(:ip => request.remote_ip))
 
     if signup.save
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     respond_with(signup, :location => nil)
   end
 
-  def login
+  def login #TODO rename to create
     user = User.find_by_username(params[:user][:username])
 
     if UserAuthenticator.new(user).authenticate(params[:user][:password])
@@ -27,6 +27,11 @@ class SessionsController < ApplicationController
     user = current_user.present? ? current_user : {}
 
     respond_with user
+  end
+
+  def destroy
+    self.current_user = nil
+    render :nothing => true
   end
 
 end

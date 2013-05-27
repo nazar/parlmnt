@@ -91,5 +91,9 @@ class Bill < ActiveRecord::Base
     bill_stages.find_by_title(title)
   end
 
+  def first_stage
+    bill_stages.started.first
+  end
+
 
 end

@@ -43,6 +43,10 @@ function($scope,   $routeParams,   bill) {
     }
   };
 
+  $scope.daysAgo = function(date) {
+    return Date.create(date).relative();
+  };
+
   // stages
 
   $scope.billStages = function() {

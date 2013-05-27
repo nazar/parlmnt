@@ -22,13 +22,21 @@ angular.module('parlmntDeps').factory('user', ['$http', function($http) {
   };
 
   userFactory.register = function(user) {
-    return $http.post('/register.json', {user: user})
+    return $http.post(Routes.register_path(), {user: user})
       .success(_loadSession);
   };
 
   userFactory.login = function(user) {
-    return $http.post('/login.json', {user: user})
+    return $http.post(Routes.login_path(), {user: user})
       .success(_loadSession);
+  };
+
+  userFactory.logout = function() {
+    return $http.post(Routes.logout_path())
+      .success(function() {
+        userObj.username = null;
+        userObj.loggedIn = false;
+      });
   };
 
 

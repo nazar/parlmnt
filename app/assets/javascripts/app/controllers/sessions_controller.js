@@ -3,7 +3,6 @@ angular.module('parlmntDeps').controller('sessionsController', ['$scope', 'user'
   $scope.formUser = {};
   $scope.errors = {};
 
-
   user.getUser();
 
 
@@ -33,6 +32,14 @@ angular.module('parlmntDeps').controller('sessionsController', ['$scope', 'user'
     _clearErrors();
     return user.login($scope.formUser)
       .error(_errored);
+  };
+
+  $scope.logout = function() {
+    return user.logout();
+  };
+
+  $scope.userName = function() {
+    return user.userName();
   };
 
   $scope.clear = function() {

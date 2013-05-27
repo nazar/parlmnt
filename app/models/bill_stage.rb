@@ -27,6 +27,10 @@ class BillStage < ActiveRecord::Base
       where(:title => title)
     end
 
+    def started
+      order('stage_date ASC').limit(1)
+    end
+
     def latest
       order('stage_date DESC')
     end
