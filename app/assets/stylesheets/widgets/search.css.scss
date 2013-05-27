@@ -9,8 +9,14 @@
   }
 
   .popover {
-    max-width: 350px;
-    left: 880px;
+    max-width: 400px;
+    max-height: 500px;
+    width: auto;
+    overflow-y: scroll;
+
+    .popover-title {
+      width: 350px;
+    }
   }
 
   ul {
