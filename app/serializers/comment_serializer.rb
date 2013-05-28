@@ -1,4 +1,4 @@
-class CommentSerializer < ActiveModel::Serializer
+class CommentSerializer < SafeSerializer
 
   attributes :id, :body, :score, :username, :children
 
