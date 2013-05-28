@@ -20,9 +20,10 @@ class Sponsor < ActiveRecord::Base
 
   after_create :update_party_counter
 
-  attr_accessible :name, :url_details, :constituency, :sponsor_type, :party, :import_status, :email
+  attr_accessible :name, :url_details, :constituency_name, :sponsor_type, :party, :import_status, :email, :constituency_id
 
   belongs_to :party
+  belongs_to :constituency
 
   has_many :bill_sponsors
   has_many :bills, :through => :bill_sponsors

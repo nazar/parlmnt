@@ -10,6 +10,10 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
     $scope.appTitle = title;
   };
 
+  $scope.userName = function() {
+    return user.userName();
+  };
+
   $scope.$on('displayMessage', function(event, title, msg) {
     $.gritter.add({
       title: title,

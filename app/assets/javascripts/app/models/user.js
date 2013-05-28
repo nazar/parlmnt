@@ -3,6 +3,8 @@ angular.module('parlmntDeps').factory('user', ['$http', function($http) {
   var userFactory = {};
 
   var userObj = {
+    name: null,
+    constituency_id: null,
     username: null,
     loggedIn: false
   };
@@ -19,6 +21,10 @@ angular.module('parlmntDeps').factory('user', ['$http', function($http) {
 
   userFactory.userName = function() {
     return userObj.username;
+  };
+
+  userFactory.constituencyId = function() {
+    return userObj.constituency_id;
   };
 
   userFactory.register = function(user) {
@@ -39,6 +45,10 @@ angular.module('parlmntDeps').factory('user', ['$http', function($http) {
       });
   };
 
+  userFactory.update = function(obj) {
+    return $http.put(Routes.user_path(), {user: obj});
+  };
+
 
   ///////////////
 
@@ -51,6 +61,9 @@ angular.module('parlmntDeps').factory('user', ['$http', function($http) {
     if (response.user && response.user.username) {
       userObj.loggedIn = true;
       userObj.username = response.user.username;
+      userObj.name = response.user.name;
+      userObj.email = response.user.email;
+      userObj.constituency_id = response.user.constituency_id;
     }
   }
 

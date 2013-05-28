@@ -20,7 +20,7 @@ class Bill < ActiveRecord::Base
 
   has_many :comments, :class_name => 'Comment', :as => :commentable
 
-  has_one :bill_summary
+  has_one :bill_summary, :dependent => :destroy
 
   belongs_to :current_stage, :foreign_key => :current_stage_id, :class_name => 'BillStage'
 

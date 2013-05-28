@@ -7,4 +7,7 @@ angular.module('parlmntDeps').controller('actsController', ['$scope', '$filter',
 
   mixinBillsTrait($scope, $filter, bill);   //TODO probably a better way of doing this
 
+  //TODO very naughty... remove to directive
+  $('li.bill-stage').hide();
+
 }]);

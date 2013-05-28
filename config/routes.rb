@@ -2,10 +2,10 @@ Votes::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'sessions#create'
 
-  match '/register' => 'sessions#register'
-  match '/login' => 'sessions#login'
+  match '/register' => 'registrations#create'
+  match '/login' => 'sessions#create'
   match '/logout' => 'sessions#destroy', :via => :post
-  match '/me' => 'sessions#token'
+  match '/me' => 'users#token'
 
   match '/search' => 'search#index', :via => :post
 
@@ -54,9 +54,13 @@ Votes::Application.routes.draw do
     end
   end
 
-  match '/templates/:section/:view' => 'templates#show', :as => 'tpl'
+  resource :user, :only => [:update] do
+    collection do
+      get 'token'
+    end
+  end
 
+  match '/templates/:section/:view' => 'templates#show', :as => 'tpl'
   match '/' => 'pages#landing'
-  match '/api' => 'pages#api'
 
 end

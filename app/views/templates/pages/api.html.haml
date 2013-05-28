@@ -1,7 +1,7 @@
 #pages
 
   .span12#content
-    %h1#overview Parlmnt JSON and XML APIs
+    %h1#overview Parlmnt JSON API
 
     %p
       %strong The API documentation is a work in progress. I'd be grateful if any issues, suggestions or errors are reported to <a href="https://github.com/nazar/parlmnt/issues/6" target="_blank">the API ticket</a> on GitHub.
@@ -19,37 +19,37 @@
         %tr
           %td Bills or Acts of Parliaments
           %td Array of Bill objects
-          %td <code>http://parlmnt.com/bills.(json|xml)[&year=2011]</code>
+          %td <code>http://parlmnt.com/bills.(json)[&year=2011]</code>
           %td year (optional))
         %tr
           %td Bills before Parliaments
           %td Array of Bill objects
-          %td <code>http://parlmnt.com/bills.(json|xml)[&year=2011]</code>
+          %td <code>http://parlmnt.com/bills.(json)[&year=2011]</code>
           %td year (optional))
         %tr
           %td Acts of Parliaments
           %td Array of Acts objects
-          %td <code>http://parlmnt.com/acts.(json|xml)[&year=2011]</code>
+          %td <code>http://parlmnt.com/acts.(json)[&year=2011]</code>
           %td year (optional))
         %tr
           %td Specific Bill or Act of Parliament
           %td Object
-          %td <code>http://parlmnt.com/bill/123.(json|xml)</code>
+          %td <code>http://parlmnt.com/bill/123.(json)</code>
           %td ID (required))
         %tr
           %td Members of Parliament
           %td Array of Sponsor objects
-          %td <code>http://parlmnt.com/mps.(json|xml)</code>
+          %td <code>http://parlmnt.com/mps.(json)</code>
           %td none
         %tr
           %td Members of of the House of Lords
           %td Array of Sponsor objects
-          %td <code>http://parlmnt.com/lords.(json|xml)</code>
+          %td <code>http://parlmnt.com/lords.(json)</code>
           %td none
         %tr
           %td A specific MP or Lord
           %td Sponsor object
-          %td <code>http://parlmnt.com/sponsors/123.(json|xml)</code>
+          %td <code>http://parlmnt.com/sponsors/123.(json)</code>
           %td ID (required))
 
 
@@ -57,12 +57,12 @@
 
     %h2#bills Bills and Acts of Parliament
 
-    %p Bills and Acts can be accessed as either JSON or XML via <code>http://parlmnt.com/bills.json</code> or <code>http://parlmnt.com/bills.xml</code> respectively. By default the current year's session Bills are returned.
-    %p To specify Bills active in <strong>2011</strong>, specify the <strong>Year</strong> parameter: <code>http://parlmnt.com/bills.json?year=2011</code>. The same applies to the XML end-point.
+    %p Bills and Acts can be accessed as JSON via <code>http://parlmnt.com/bills.json</code> . By default the current year's session Bills are returned.
+    %p To specify Bills active in <strong>2011</strong>, specify the <strong>Year</strong> parameter: <code>http://parlmnt.com/bills.json?year=2011</code>.
 
     %h3 To Return a List of Bills for a Particular Year
 
-    %p <code>http://parlmnt.com/bills.json?year=1234</code> or <code>http://parlmnt.com/bills.xml?year=1234</code>. Omitting the <strong>year</strong> parameters defaults it to <strong>#{DateTime.now.year}</strong>.
+    %p <code>http://parlmnt.com/bills.json?year=1234</code>. Omitting the <strong>year</strong> parameters defaults it to <strong>#{DateTime.now.year}</strong>.
     %p Bills are returned as an array of Bill objects. Each Bill object has the following sub-objects:
     =render '/templates/pages/bill_json_structure'
 
@@ -70,7 +70,7 @@
     =render '/templates/pages/bills_json_sample'
 
     %h3#bill To Query a Specific Bill or Act
-    %p A Bill's <strong>ID</strong> is required to lookup a specific Bill's or Act's details via <code>http://parlmnt/bills/123.json</code> or <code>http://parlmnt/bills/123.xml</code>.
+    %p A Bill's <strong>ID</strong> is required to lookup a specific Bill's or Act's details via <code>http://parlmnt/bills/123.json</code>.
     =render '/templates/pages/bill_json_sample'
 
     %h2#sponsors Members of Parliament and House of Lords
@@ -80,17 +80,17 @@
     %p
       Each of MPs or Lords are accessible via two separate endpoints:
       %ul.unstyled
-        %li <code>http://parlmnt.com/mps.(json|xml)</code> to access all members of Parliament
-        %li <code>http://parlmnt.com/lords.(json|xml)</code> to access all members of the House of Lords
+        %li <code>http://parlmnt.com/mps.(json)</code> to access all members of Parliament
+        %li <code>http://parlmnt.com/lords.(json)</code> to access all members of the House of Lords
 
     %p
-      A JSON sample output of <code>http://parlmnt.com/mps.(json|xml)</code>
+      A JSON sample output of <code>http://parlmnt.com/mps.(json)</code>
       =render '/templates/pages/sponsors_json_sample'
 
     %h3#sponsor To Query a Specific MP or Lord
     %p An MP's or Lord's ID (both are Sponsors) must first be know to query her details. This can be obtained by obtaining the list of sponsors from above.
     %p
-      Once a sponsor's ID is available <code>http://parlmnt.com/sponsors/1469.(json|xml)</code> be used to query details
+      Once a sponsor's ID is available <code>http://parlmnt.com/sponsors/1469.(json)</code> be used to query details
       =render '/templates/pages/sponsor_json_sample'
 
 

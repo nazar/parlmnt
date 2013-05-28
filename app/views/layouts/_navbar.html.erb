@@ -8,8 +8,8 @@
       <li ng-class="navClass('lords')"><a href="#/lords">Lords</a></li>
       <li ng-class="navClass('api')"><a href="#/api">API</a></li>
     </ul>
-    <div id="search" class="pull-right" ng-include=" '/templates/common/search' "></div>
-    <ul class="nav pull-right" ng-controller="sessionsController">
+    <div id="search" class="pull-right" search-box></div>
+    <ul ng-cloak class="nav pull-right" ng-controller="sessionsController">
 
       <li ng-show="loggedIn()">
         <div ng-include=" '/templates/users/menu' "></div>

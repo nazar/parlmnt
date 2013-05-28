@@ -38,10 +38,6 @@ angular.module('parlmntDeps').controller('sessionsController', ['$scope', 'user'
     return user.logout();
   };
 
-  $scope.userName = function() {
-    return user.userName();
-  };
-
   $scope.clear = function() {
     _clearUser();
     _clearErrors();

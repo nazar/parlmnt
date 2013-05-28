@@ -1,6 +1,6 @@
 # Bill related scraping && importing methods.
 # The purpose of this module is to separate out scraping && importing logic from the bill.rb model to separate out methods by domain and to reduce clutter.
-module BillImporter
+module BillImporter #TODO convert into a Service Module as opposed to a mixin
 
   require 'importer/utils'
 

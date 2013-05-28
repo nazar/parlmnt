@@ -209,10 +209,6 @@
   acts_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"acts",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
-// api => /api(.:format)
-  api_path: function(options) {
-  return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"api",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
-  },
 // bill => /bills/:id(.:format)
   bill_path: function(_id, options) {
   return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"bills",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
@@ -297,9 +293,17 @@
   sponsor_path: function(_id, options) {
   return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"sponsors",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// token_user => /user/token(.:format)
+  token_user_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"user",false]],[7,"/",false]],[6,"token",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // tpl => /templates/:section/:view(.:format)
   tpl_path: function(_section, _view, options) {
   return Utils.build_path(["section","view"], ["format"], [2,[2,[2,[2,[2,[2,[7,"/",false],[6,"templates",false]],[7,"/",false]],[3,"section",false]],[7,"/",false]],[3,"view",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// user => /user(.:format)
+  user_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"user",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
 // votes => /votes(.:format)
   votes_path: function(options) {

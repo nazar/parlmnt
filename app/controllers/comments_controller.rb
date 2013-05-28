@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
     if commentable.present? && current_user.present?
       replying_to = params[:comment][:parent_id].present? ? Comment.find_by_id(params[:comment][:parent_id]) : nil
       comment = Comment.build_from(commentable, current_user, params[:comment][:body], replying_to)
+      comment.ip = request.remote_ip
+
       if comment.save
         comment.vote(:voter => current_user, :vote => true)
         render :json => comment_to_hash(comment)
@@ -30,6 +32,7 @@ class CommentsController < ApplicationController
 
     if commentable.present? && current_user.present?
       comment = Comment.build_from(commentable, current_user, params[:comment][:body], parent_comment)
+      comment.ip = request.remote_ip
       if comment.save
         comment.vote(:voter => current_user, :vote => true)
       end

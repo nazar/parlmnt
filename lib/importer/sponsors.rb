@@ -1,4 +1,4 @@
-module SponsorImporter
+module SponsorImporter #TODO convert into a Service Module as opposed to a mixin
 
   require 'importer/utils'
 
@@ -59,7 +59,7 @@ module SponsorImporter
     def mps_extractor(doc)
       raise "Must be passed a block" unless block_given?
 
-      doc.css('#ctl00_ctl00_SiteSpecificPlaceholder_PageContent_ctlMemberFilter_upPanel table:last tr').each do |row|
+      doc.css('#pnlListing table tr').each do |row|
         columns = row.css('td')
 
         if columns.length == 2
@@ -70,7 +70,7 @@ module SponsorImporter
             h[:name] = details.text.squish.gsub(/\(.+\)/, '').split(',').reverse.join.strip
             h[:url_details] = details.at_css('a')[:href].squish
             h[:party_txt] = details.text.squish.match(/\((.+)\)/)[1]
-            h[:constituency] = constit.text.squish
+            h[:constituency_name] = constit.text.squish
             h[:sponsor_type] = 1
           end
 
@@ -82,7 +82,7 @@ module SponsorImporter
     def lords_extractor(doc)
       raise "Must be passed a block" unless block_given?
 
-      doc.css('#ctl00_ctl00_SiteSpecificPlaceholder_PageContent_ctlMemberFilter_upPanel table:last tr').each do |row|
+      doc.css('#pnlListing table tr').each do |row|
         columns = row.css('td')
 
 
@@ -128,10 +128,14 @@ module SponsorImporter
       raise "Must be passed a block" unless block_given?
 
       result = sponsor_hash.clone.tap do |h|
-         h[:party] = Party.find_party_for_mp(h.delete(:party_txt))
-       end
+        party_name = h.delete(:party_txt)
 
-       yield(result)
+        h[:party] = Party.where(:short => party_name).first_or_create(:name => party_name)
+        h[:constituency_name] = h.delete(:constituency_name)
+        h[:constituency_id] = Constituency.where(:name => h[:constituency_name]).first_or_create!.id
+      end
+
+      yield(result)
     end
 
     def lord_converter(sponsor_hash)
@@ -153,7 +157,7 @@ module SponsorImporter
       if [1,2].include?(sponsor_type)
 
         if doc.nil?
-          uri = 'http://www.parliament.uk' + url_details
+          uri = url_details
           doc = ImporterUtils.safe_fetcher(uri)
           return false unless doc
         end
@@ -190,21 +194,11 @@ module SponsorImporter
     end
 
     def img_css_selector
-      case sponsor_type
-        when 1;
-          '#biography-mp .photos img'
-        when 2;
-          '#biography-lord .photos img'
-      end
+      '#biography .member-photo img'
     end
 
     def email_css_selector
-      case sponsor_type
-        when 1;
-          '#biography-mp p a'
-        when 2;
-          '#biography-lord p a'
-      end
+      '#biography #member-addresses a[href^="mailto"]'
     end
 
   end
