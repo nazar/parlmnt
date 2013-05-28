@@ -1,4 +1,4 @@
-class BillDetailSerializer < ActiveModel::Serializer
+class BillDetailSerializer < SafeSerializer
   attributes :id, :name, :bill_type, :origin, :house, :year, :count_views, :count_posts, :count_stages,
              :url_details, :bill_updated_at, :cached_votes_up, :cached_votes_down, :cached_votes_score,
              :voted, :first_stage

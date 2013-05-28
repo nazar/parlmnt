@@ -1,3 +1,3 @@
-class BillSummarySerializer < ActiveModel::Serializer
+class BillSummarySerializer < SafeSerializer
   attributes :id, :rev, :body
 end
