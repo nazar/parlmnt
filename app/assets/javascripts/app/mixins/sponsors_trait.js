@@ -72,6 +72,10 @@ function mixinSponsorsTrait($scope, $filter, sponsor) {
   };
 
 
+  $scope.showOnlySponsored(true);
+
+
+
 
   //// TEH Private
 
