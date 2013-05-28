@@ -1,37 +1,56 @@
-.votes {
+.vote {
+
+  height: 50px;
+
   padding-left: 3px;
   padding-right: 3px;
-  padding-top: 3px;
 
-  .vote {
-    padding-left: 3px;
-    padding-right: 3px;
+  .actions {
 
-    .actions {
-
-      & > div{
-        height: 14px;
-      }
-
-      i {
-        display: block;
-        opacity: 0.25;
-        width: 14px;
-        height: 14px;
-        margin: auto;
-      }
-
-      i:hover {
-        cursor: pointer;
-        opacity: 1.0;
-      }
-      .count {
-        text-align: center;
-        font-weight: bold;
-        line-height: 14px;
-        width: auto;
-      }
+    & > div{
+      height: 18px;
     }
 
+    i {
+      display: block;
+      opacity: 0.55;
+      width: 14px;
+      margin: auto;
+    }
+
+    i:hover {
+      cursor: pointer;
+      opacity: 1.0;
+    }
+    .count {
+      padding-bottom: 1px;
+      text-align: center;
+      font-weight: bold;
+      line-height: 18px;
+    }
   }
+
+  &.voted {
+    .count {
+      opacity: 1.0;
+      color: orange;
+    }
+    &.voted_up {
+      .action_up {
+        color: darkorange;
+        i {
+          opacity: 1.0;
+        }
+      }
+    }
+    &.voted_down {
+      .action_down {
+        color: darkorange;
+        i {
+          opacity: 1.0;
+        }
+      }
+    }
+  }
+
 }

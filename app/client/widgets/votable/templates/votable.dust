@@ -1,9 +1,0 @@
-<div class="vote">
-
-  <div class="actions">
-    <div><i class="icon-arrow-up up"></i></div>
-    <div class="count">{votable_score}</div>
-    <div><i class="icon-arrow-down down"></i></div>
-  </div>
-
-</div>

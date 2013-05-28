@@ -1,0 +1,14 @@
+<%= content_for(:sidebar) do %>
+  <%= render '/templates/bills/bills_sidebar' %>
+<% end %>
+
+<%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
+  <div class="span12">
+    <div id="bills">
+      <div ng-animate="'fade'" class="loading" ng-show="loading">Loading</div>
+      <div class="ac image-left">
+        <div ng-repeat="bill in filteredBills()" ng-include="'/templates/bills/bill.js'" text-truncator trunc-max-length="250" trunc-selector="p.summary"></div>
+      </div>
+    </div>
+  </div>
+<% end  %>

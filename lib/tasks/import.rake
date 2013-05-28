@@ -1,17 +1,23 @@
 namespace :import do
 
-  desc 'Imports and populates all data sources'
-  task :all => [:parties, :sponsors, :bills] do
-
+  desc 'Resets and Imports and populates all data sources'
+  task :reset_all => :environment do
+    Party.destroy_all
+    Constituency.destroy_all
+    Sponsor.destroy_all
+    Bill.destroy_all
+    Comment.destroy_all
+    User.destroy_all
   end
 
-  desc 'Imports Parties'
-  task :parties => :environment do
-    load "#{Rails.root}/db/seeds.rb"
+
+  desc 'Imports and populates all data sources'
+  task :all => [:sponsors, :bills] do
+
   end
 
   desc 'Imports and populates Sponsors'
-  task :sponsors => [:parties] do
+  task :sponsors => :environment do
 
     #MP summaries
     i = 0

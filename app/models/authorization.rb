@@ -1,4 +1,4 @@
-class Authorization < ActiveRecord::Base
+class Authorization < ActiveRecord::Base    #TODO remove
 
   belongs_to :user
 

@@ -1,0 +1,3 @@
+<ul class="sponsor_bills">
+  <li class="bill" ng-repeat="bill in sponsorBills() | orderBy:'name'"><a ng-href="#/bills/{{bill.id}}">{{bill.name}}</a></li>
+</ul>

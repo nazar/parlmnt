@@ -52,15 +52,6 @@ class Party < ActiveRecord::Base
       where(:name => name)
     end
 
-    def find_party_for_mp(short_text)
-      short = short_text.downcase
-      find_by_short(short).first.tap do |party|
-        if party.blank?
-          raise "Party short name #{short} not recognised"
-        end
-      end
-    end
-
   end
 
   #class methods

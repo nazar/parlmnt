@@ -1,0 +1,13 @@
+<div class="well sidebar bill-sidebar left">
+  <ul class="nav nav-list">
+    <li class="nav-header" style="text-align: center;">
+      <div class="photo sponsor-info" ng-show="sponsor.url_photo">
+        <img ng-src="{{sponsor.url_photo}}" alt="{sponsor.name}" data-tooltip="{{sponsor.name}}" ng-class="sponsorToClass(sponsor)"/>
+      </div>
+      <div class="photo sponsor-info" ng-hide="sponsor.url_photo">
+        <a><img src="/assets/no_photo.png" alt="{name}" data-tooltip="{name}" height="80" width="53"/></a>
+      </div>
+    </li>
+    <li style="text-align: center; padding-top: 15px;"><div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60"></div></li>
+  </ul>
+</div>

@@ -1,0 +1,31 @@
+<fieldset>
+  <div class="control-group" ng-class="{error: formErrors.username}">
+    <label class="control-label" for="registerUsername">Username</label>
+    <div class="controls">
+      <input type="text" id="registerUsername" name="username" ng-model="formObject.username" placeholder="Desired username" required ngMaxlength="15"/>
+      <span class="help-inline" ng-show="formErrors.username">{{formErrors.username}}</span>
+    </div>
+  </div>
+
+  <div class="control-group" ng-class="{error: formErrors.password}">
+    <label class="control-label" for="registerPassword">Password</label>
+    <div class="controls">
+      <input type="password" id="registerPassword" name="password" ng-model="formObject.password" placeholder="Desired password" required/>
+      <span class="help-inline" ng-show="formErrors.password">{{formErrors.password}}</span>
+    </div>
+  </div>
+
+  <div class="control-group" ng-class="{error: formErrors.password_confirmation}">
+    <label class="control-label" for="registerConfirm">Password Confirmation</label>
+    <div class="controls">
+      <input class="warning" id="registerConfirm" name="password_confirmation" type="password" ng-model="formObject.password_confirmation" placeholder="Confirm password" required/>
+      <span class="help-inline" ng-show="formErrors.password_confirmation">{{formErrors.password_confirmation}}</span>
+    </div>
+  </div>
+
+  <div class="alert alert-error" ng-show="formErrors.extra">
+     <strong>{{formErrors.extra}}</strong>
+  </div>
+
+</fieldset>
+

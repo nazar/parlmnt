@@ -1,0 +1,11 @@
+<fieldset>
+  <label>Username</label>
+  <input type="text" ng-model="formObject.username" placeholder="Your Username" required/>
+
+  <label>Password</label>
+  <input type="password" ng-model="formObject.password" placeholder="Your Password" required/>
+
+  <div class="alert alert-error" ng-show="formErrors.extra">
+    <strong>{{formErrors.extra}}</strong>
+  </div>
+</fieldset>

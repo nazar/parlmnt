@@ -11,25 +11,17 @@ This data serves two purposes:
 
 ## Server
 
-Ruby on Rails 3.x is used as a mostly viewless API layer which presents relevant data in both JSON and XML formats.
+Ruby on Rails 3.x is used as a mostly viewers API layer which presents relevant data in both JSON and XML formats.
 
 ## Client
 
-All presentation is created by the [Backbone.js](http://backbonejs.org) based client.
-
-# Source Code
-
-## Backbone Client
-
-All client code is located at [/root/app/assets/client](https://github.com/nazar/parlmnt/tree/master/app/assets/client) and is effectively a self contained Backbone application with its own build process. Rail's Sprockets is not used to build application.js but merely points to a Require.js r.js optimised file in the build directory located in /root/app/assets/client/build.
-
-A widget based approach is employed to organise the application's views with each widget having exclusive responsibility for managing an application domain. Event messaging is employed to notify interested widgets of action or requests. This helps minimise widget dependencies (although not completely)
+All presentation is created by a [AngularJS](http://angularjs.org) based client.
 
 # Motivation
 
 ## Moar Interactivity
 
-Although the Parliament website is functional, it is somewhat lacking in interactivity; visitors are not able to voice opions on Bills nor use them as topics for discussion or discourse.
+Although the Parliament website is functional, it is somewhat lacking in interactivity; visitors are not able to voice opinions on Bills nor use them as topics for discussion or discourse.
 
 ## Better API
 
@@ -54,28 +46,13 @@ My nephew (and [parlmnt.com](http://parlmnt.com) co-founder) is a bright kid and
 ## 2. Install Dependencies
 
 
-**ActiveAdmin**
-
-```shell
-  bundle exec rails generate active_admin:install
-  bundle exec rake db:migrate
-```
-
 ## 3. Parlmt Configuration
 
 Start parlmnt:
 
 ```shell
-  bundle exec rails s mongrel
+  bundle exec rails s
 ```
-
-Navigate to localhost:[port]/admin and login using **username:** admin@example.com and **password:** password
-
-Click on the Administrators Menu item and add a new administrator by simply adding their email address. The new administrator will receive a password reset email to the previously given email address during which time she can set the password. **Please delete the default administrator user once past this stage**.
-
-Navigate to localhost:[port]/admin/setups/view_setup to configure omniauth and the Secret token for all oauth providers.
-
-Restart parlmnt at this stage.
 
 ## 4. Data Import
 
@@ -86,24 +63,6 @@ The newly created database will be empty. To populate parlmnt from parliament.uk
 ```
 
 The above should take about an hour to import but the end of the process all Bills, MPs and Lords should have been imported.
-
-# Contributing
-
-## Building the Client
-
-[/root/app/assets/client](https://github.com/nazar/parlmnt/tree/master/app/assets/client) contains the client root, which has it's own build process. To install required tools for building:
-
-```shell
-  npm install
-```
-
-Once installed, the client would have to be rebuilt every time a change is made via:
-
-```shell
-  make
-```
-
-The above concatenates all JS files in order and is output to the build directory, which Rails's Sprockets accesses.
 
 # Contributors
 

@@ -22,7 +22,7 @@
       .content-container {
         position: relative;
         min-height: 32px;
-        float: left;
+        //float: left;
 
         .body {
           font-size: 13px;
@@ -40,13 +40,17 @@
       }
     }
 
-    .child {
+    .children {
       margin-left: 15px;
     }
 
     .comment-actions {
       font-size: 10px;
       font-weight: bold;
+       li {
+         float: left;
+         padding-right: 10px;
+       }
     }
 
   }

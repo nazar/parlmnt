@@ -1,11 +1,10 @@
 class SponsorsController < ApplicationController
 
-  respond_to :json, :xml, :only => [:show]
+#  respond_to :json, :xml, :only => [:show]
 
   def show
-    @sponsor = Sponsor.where(:id => params[:id]).includes([:bills])
-
-    respond_with @sponsor
+    sponsor = Sponsor.find_by_id(params[:id])
+    json_responder(sponsor)
   end
 
 
@@ -13,13 +12,16 @@ class SponsorsController < ApplicationController
     commentable_comments('Sponsor', params[:id])
   end
 
+  def my_votes
+    votes = current_user ? current_user.find_votes_for_class(Sponsor) : []
+    json_responder(votes, :each_serializer => VoteSerializer, :root => 'votes')
+  end
+
   protected
 
   def sponsors_responder(sponsors)
     respond_to do |format|
-      format.html
       format.json {render :json => sponsors_to_hash(sponsors)}
-      format.xml {render :xml => sponsors_to_hash(sponsors)}
     end
   end
 
@@ -32,8 +34,7 @@ class SponsorsController < ApplicationController
   end
 
   def sponsor_short_to_hash(sponsor)
-    sponsor_att = [:id, :name, :url_details, :url_photo, :email, :sponsor_type, :count_bills, :count_posts,
-                   :cached_votes_score, :cached_votes_up,  :cached_votes_down, :sponsor_type_to_s, :party_short_name, :party_name, :updated_at]
+    sponsor_att = [:id, :name, :constituency, :count_bills, :count_posts, :cached_votes_score, :cached_votes_up,  :cached_votes_down, :party_name]
     sponsor_att.inject({}){|r,a| r.merge(a => sponsor.send(a)) }
   end
 

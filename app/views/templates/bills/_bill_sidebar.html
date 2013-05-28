@@ -1,0 +1,22 @@
+<div class="well sidebar bill-sidebar left">
+  <ul class="nav nav-list">
+    <li class="nav-header">
+      <div class="group_name"><h4>Bill Sponsors</h4></div>
+      <ul class="sponsors unstyled">
+        <li class="sponsor" ng-repeat="sponsor in bill.sponsors">
+          <div class="photo" ng-show="sponsor.url_photo">
+            <img ng-src="{{sponsor.url_photo}}" alt="{sponsor.name}" data-tooltip="{{sponsor.name}}" ng-class="sponsorToClass(sponsor)"/>
+            <div><a ng-href="#/sponsors/{{sponsor.id}}" target="_blank">{{sponsor.name}}</a></div>
+            <div class="party-name">{{sponsor.party.name}}</div>
+          </div>
+          <div class="photo" ng-hide="sponsor.url_photo">
+            <a><img src="/assets/no_photo.png" alt="{name}" data-tooltip="{name}" height="80" width="53"/></a>
+            <div><a ng-href="#/sponsors/{{sponsor.id}}">{{sponsor.name}}</a></div>
+            <div>{{sponsor.party.name}}</div>
+          </div>
+        </li>
+        <li class="sponsor"><div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60"></div></li>
+      </ul>
+    </li>
+  </ul>
+</div>

@@ -4,19 +4,24 @@ class BillsController < ApplicationController
 
   def index
     year = params[:year] || DateTime.now.year
-    @bills = Bill.find_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage])
+    @bills = Bill.find_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage, :bill_summary])
 
     bills_responder
   end
 
   def show
-    @bill = Bill.where(:id => params[:id]).includes([{:sponsors => [:party]}, :current_stage, :bill_stages])
+    bill = Bill.find_by_id(params[:id])
 
-    respond_with @bill
+    json_responder(bill, :serializer => BillDetailSerializer)
   end
 
   def comments
     commentable_comments('Bill', params[:id])
+  end
+
+  def my_votes
+    votes = current_user ? current_user.find_votes_for_class(Bill) : []
+    json_responder(votes, :each_serializer => VoteSerializer, :root => 'votes')
   end
 
 
@@ -50,17 +55,18 @@ class BillsController < ApplicationController
         end
       end
 
+      result[:summary] = view_context.sanitize(bill.bill_summary.body, :tags=>[])
+
       if bill.current_stage.present?
         result[:current_stage] = stage_atts.inject({}){|r,a| r.merge(a => bill.current_stage.send(a)) }
+        result[:current_stage_code] = bill.current_stage.stage_to_code
       end
     end
   end
 
   def bills_responder
     respond_to do |format|
-      format.html
       format.json {render :json => bills_to_hash(@bills)}
-      format.xml {render :xml => bills_to_hash(@bills)}
     end
   end
 

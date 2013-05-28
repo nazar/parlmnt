@@ -1,0 +1,14 @@
+<%= content_for(:sidebar) do %>
+  <%= render '/templates/sponsors/sponsors_sidebar' %>
+<% end %>
+
+<%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
+  <div class="span12">
+    <div id="sponsors" class="clearfix">
+      <div class="loading" ng-show="loading" ng-animate="'fade'">Loading</div>
+      <div class="ac image-left">
+        <div ng-repeat="sponsor in filteredSponsors()" ng-include="'/templates/sponsors/sponsor.js'"></div>
+      </div>
+    </div>
+  </div>
+<% end  %>

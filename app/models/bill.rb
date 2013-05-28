@@ -20,7 +20,7 @@ class Bill < ActiveRecord::Base
 
   has_many :comments, :class_name => 'Comment', :as => :commentable
 
-  has_one :bill_summary
+  has_one :bill_summary, :dependent => :destroy
 
   belongs_to :current_stage, :foreign_key => :current_stage_id, :class_name => 'BillStage'
 
@@ -89,6 +89,10 @@ class Bill < ActiveRecord::Base
 
   def find_stage_by_title(title)
     bill_stages.find_by_title(title)
+  end
+
+  def first_stage
+    bill_stages.started.first
   end
 
 

@@ -13,3 +13,56 @@
   }
 
 }
+
+#bills {
+  position: relative;
+}
+
+#bill {
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .vote {
+    float: left;
+    margin: -5px 15px 10px 0;
+  }
+
+}
+
+.bill-sidebar {
+  li.sponsor {
+    text-align: center;
+    padding-top: 10px;
+
+    .photo {
+      img {
+        padding: 1px;
+        border: 1px solid silver;
+
+        &.s-labour{
+          border: 2px solid #c41230;
+        }
+        &.s-conservative{
+          border: 2px solid #037fb2;
+        }
+        &.s-liberal-democrat{
+          border: 2px solid #fbb724;
+        }
+      }
+
+      a {
+        display: inline-block;
+        line-height: 11px;
+        padding: 2px 0 3px 0;
+        width: 120px;
+        font-size: 12px;
+      }
+
+      .party-name {
+        font-size: 10px;
+      }
+    }
+  }
+}

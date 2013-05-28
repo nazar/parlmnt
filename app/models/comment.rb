@@ -83,6 +83,10 @@ class Comment < ActiveRecord::Base
 
   #instance methods
 
+  def belongs_to_user?(u)
+    u && (u.id == user_id)
+  end
+
   #helper method to check if a comment has children
   def has_children?
     self.children.size > 0

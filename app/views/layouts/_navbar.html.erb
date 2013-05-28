@@ -1,0 +1,26 @@
+<div class="navbar" ng-controller="navbarController">
+  <div class="navbar-inner">
+    <a class="brand logo" href="#">PARLMNT</a>
+    <ul class="nav">
+      <li ng-class="navClass('bills')"><a href="#/bills">Bills</a></li>
+      <li ng-class="navClass('acts')"><a href="#/acts">Acts</a></li>
+      <li ng-class="navClass('mps')"><a href="#/mps">MPs</a></li>
+      <li ng-class="navClass('lords')"><a href="#/lords">Lords</a></li>
+      <li ng-class="navClass('api')"><a href="#/api">API</a></li>
+    </ul>
+    <div id="search" class="pull-right" search-box></div>
+    <ul ng-cloak class="nav pull-right" ng-controller="sessionsController">
+
+      <li ng-show="loggedIn()">
+        <div ng-include=" '/templates/users/menu' "></div>
+      </li>
+
+      <li ng-hide="loggedIn()">
+        <ul class="nav">
+          <li><span register-link></span></li>
+          <li><span login-link></span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

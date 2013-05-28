@@ -1,38 +1,21 @@
 class User < ActiveRecord::Base
 
+  attr_accessible :name, :email, :avatar, :username, :password, :password_confirmation, :salt, :encrypted_password, :ip, :constituency_id
+
   acts_as_voter
 
-  has_many :authorizations
+  has_many :comments
 
-  validates_uniqueness_of :email
+  belongs_to :constituency, :counter_cache => 'count_users'
 
-  attr_accessible :name, :email, :avatar
+  validates :username, :uniqueness => true
+  validates :email, :uniqueness => true, :if => Proc.new{|u| u.email.present? }
 
   #scopes
 
-  class << self
-
-    def find_by_email(email)
-      where(:email => email)
-    end
-
-  end
-
   #class methods
-
-  class << self
-
-    def find_or_create_from_hash!(hash)
-      info = hash['info']
-      find_by_email(info['email']).first_or_create!(:name => info['name'], :avatar => info['image'])
-    end
-
-  end
 
   #instance methods
 
-  def as_json(options = {})
-    super( options.merge(:only => [:name, :avatar]) )
-  end
 
 end

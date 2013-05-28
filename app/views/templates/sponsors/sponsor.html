@@ -1,0 +1,20 @@
+<article typeof="Article">
+
+  <header>
+    <a ng-href="#/sponsors/{{sponsor.id}}"><h5 class="title">{{sponsor.name}}</h5></a>
+  </header>
+
+  <div class="content" property="articleBody">
+    <p class="summary">
+      {{sponsor.constituency_name}}
+    </p>
+  </div>
+
+  <footer>
+    <ul class="meta">
+      <li property="party">Party: {{sponsor.party_name}}</li>
+      <li property="bills">Bills Sponsored: {{sponsor.count_bills}}</li>
+      <li property="comments">Comments: {{sponsor.count_posts}}</li>
+    </ul>
+  </footer>
+</article>

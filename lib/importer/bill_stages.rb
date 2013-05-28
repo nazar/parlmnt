@@ -1,4 +1,4 @@
-module BillStagesImporter
+module BillStagesImporter #TODO convert into a Service Module as opposed to a mixin
 
   require 'importer/utils'
 

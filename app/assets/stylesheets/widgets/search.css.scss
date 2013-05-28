@@ -1,12 +1,22 @@
 #search {
 
+  height: 20px;
+  padding-top: 5px;
+  padding-left: 10px;
+
   .popover-content {
     padding: 0;
   }
 
   .popover {
-    max-width: 350px;
-    left: 880px;
+    max-width: 400px;
+    max-height: 500px;
+    width: auto;
+    overflow-y: scroll;
+
+    .popover-title {
+      width: 350px;
+    }
   }
 
   ul {

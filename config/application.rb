@@ -22,7 +22,8 @@ module Votes
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/app/patterns)
+    config.autoload_paths += Dir["#{config.root}/app/patterns/**/"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -61,8 +62,8 @@ module Votes
 
     config.assets.enabled = true
 
-    config.assets.paths << "#{Rails.root}/app/client/build"
-    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    #config.assets.paths << "#{Rails.root}/app/client/build"
+    #config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
     #disable JS generators
     config.generators.javascripts = false

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305152621) do
+ActiveRecord::Schema.define(:version => 20130528091713) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -136,11 +137,19 @@ ActiveRecord::Schema.define(:version => 20130305152621) do
     t.integer  "cached_votes_score",                                                 :default => 0
     t.decimal  "score",                              :precision => 16, :scale => 16, :default => 0.0
     t.string   "ancestry",           :limit => 512
+    t.string   "ip"
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "constituencies", :force => true do |t|
+    t.string   "name"
+    t.integer  "count_users", :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "logs", :force => true do |t|
     t.integer  "severity",   :limit => 2
@@ -180,7 +189,7 @@ ActiveRecord::Schema.define(:version => 20130305152621) do
     t.string   "url_details"
     t.string   "url_photo"
     t.string   "email"
-    t.string   "constituency"
+    t.string   "constituency_name"
     t.integer  "sponsor_type",       :limit => 2
     t.integer  "import_status",      :limit => 2
     t.integer  "party_id"
@@ -193,8 +202,10 @@ ActiveRecord::Schema.define(:version => 20130305152621) do
     t.integer  "cached_votes_score",              :default => 0
     t.integer  "cached_votes_up",                 :default => 0
     t.integer  "cached_votes_down",               :default => 0
+    t.integer  "constituency_id"
   end
 
+  add_index "sponsors", ["constituency_id"], :name => "index_sponsors_on_constituency_id"
   add_index "sponsors", ["name"], :name => "index_sponsors_on_name"
   add_index "sponsors", ["party_id"], :name => "index_sponsors_on_party_id"
 
@@ -203,12 +214,18 @@ ActiveRecord::Schema.define(:version => 20130305152621) do
     t.string   "email"
     t.string   "token"
     t.string   "avatar"
-    t.integer  "count_posts", :default => 0
-    t.integer  "count_votes", :default => 0
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "count_posts",        :default => 0
+    t.integer  "count_votes",        :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "username"
+    t.string   "ip"
+    t.string   "salt"
+    t.string   "encrypted_password"
+    t.integer  "constituency_id"
   end
 
+  add_index "users", ["constituency_id"], :name => "index_users_on_constituency_id"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["token"], :name => "index_users_on_token"
 

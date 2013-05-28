@@ -1,0 +1,26 @@
+<article typeof="Article">
+  <div class="image-feat">
+    <div my-votable="bill" votable-type="Bill" vote-score="{{bill.cached_votes_score}}" vote-flag="{{bill.voted}}"></div>
+  </div>
+
+  <header>
+    <a ng-href="#/bills/{{bill.id}}"><h4 class="title">{{bill.name}}</h4></a>
+  </header>
+
+  <div class="content" property="articleBody">
+    <p class="summary">
+      {{bill.summary}}
+    </p>
+  </div>
+
+  <footer style="margin-left:35px;">
+    <ul class="meta">
+      <li property="datePublished">Updated: {{bill.bill_updated_at | date:'mediumDate'}}</li>
+      <li property="stage">Stage: {{billStage(bill.current_stage)}}</li>
+      <li property="type">Type: {{billType(bill.bill_type)}}</li>
+      <li property="origin">Origin: {{billOrigin(bill.origin)}}</li>
+      <li property="userInteraction">{{countComments(bill.count_posts)}}</li>
+      <li sponsor-links sponsors="bill.sponsors"></li>
+    </ul>
+  </footer>
+</article>

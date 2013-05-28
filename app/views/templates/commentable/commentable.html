@@ -1,0 +1,15 @@
+<div class="commentable">
+  <div ng-hide="loggedIn()">
+    Please <span login-link></span> or <span register-link></span> to comment on this bill
+  </div>
+  <div ng-show="loggedIn()">
+    <div class="add-comment">
+      <textarea ng-model="formComment.body" placeholder="Add Comment..." cols="20" rows="2"></textarea>
+      <div class="buttons">
+        <button class="save btn btn-primary" ng-click="createComment()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment clearfix" ng-repeat="comment in comments" ng-include=" '/templates/commentable/comment' " timeago time-selector="time.timeago"></div>
+</div>

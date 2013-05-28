@@ -27,6 +27,10 @@ class BillStage < ActiveRecord::Base
       where(:title => title)
     end
 
+    def started
+      order('stage_date ASC').limit(1)
+    end
+
     def latest
       order('stage_date DESC')
     end
@@ -46,7 +50,27 @@ class BillStage < ActiveRecord::Base
 
   #instance methods
 
+  def stage_to_code
+    result = ''
+    matchers = {
+      '1' => /^1st/,
+      '2' => /^2nd/,
+      '3' => /^3rd/,
+      'C' => /^Committee/,
+      'A' => /^Royal/,
+      'P' => /^Ping/
+    }
 
+    if stage
+      matchers.each{|(code, matcher)|
+        if stage =~ matcher
+          result = code
+          break
+        end
+      }
+    end
+    result
+  end
 
   protected
 

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <h3>My Settings</h3>
+      <form>
+        <fieldset>
+          <legend>Personal Details</legend>
+
+          <label>Username</label>
+          <input class="span2 uneditable-input" type="text" placeholder="" value="{{userName()}}">
+
+          <label>Name (<em>optional</em>)</label>
+          <input ng-model="userForm.name" name="name" class="span3" type="text" placeholder="Real Name">
+
+          <label>Email (<em>optional</em>)</label>
+          <input type="email" ng-model="userForm.email" name="email" class="span4" type="text" placeholder="Real Name">
+
+          <label>Constituency (<em>optional</em>)</label>
+          <select ng-model="userForm.constituency_id" select2 name="constituency_id" id="constituency">
+            <%= options_for_select(Constituency.order('name').collect{|c| [c.name, c.id]}) %>
+          </select>
+        </fieldset>
+
+        <p>
+          <div class="buttons">
+            <button class="save btn btn-primary" ng-click="save()">Update</button>
+          </div>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

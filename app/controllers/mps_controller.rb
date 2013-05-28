@@ -2,7 +2,7 @@ class MpsController < SponsorsController
 
   def index
     mps = Sponsor.mps.order('name').includes([:party])
-    sponsors_responder(mps)
+    json_responder(mps, :each_serializer => SponsorIndexSerializer)
   end
 
 

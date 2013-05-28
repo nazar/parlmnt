@@ -6,16 +6,13 @@ class VotesController < ApplicationController
 
     if votable.present?
       #cater for unvotes, which is triggered by the same vote being cast twice
-      if current_user.voted_as_when_voted_for(votable) == (params[:vote][:vote_flag] == 'true' ? true : false)
+      if current_user.voted_as_when_voted_for(votable) == (params[:vote][:vote_flag] == 'up' ? true : false)
         votable.unvote(vote)
       else
         votable.vote(vote)
       end
 
-      #columns = %w(cached_votes_up cached_votes_down) #only send back these attributes
-      #result = votable.attributes.reduce({}){|r,(k,v)| columns.include?(k) ? r[k] = v: r; r }
-
-      render :text => vote_to_hash(votable).to_json
+      render :json => vote_to_hash(votable)
     else
       render :nothing => true, :status => 404
     end
@@ -27,9 +24,10 @@ class VotesController < ApplicationController
 
   def vote_to_hash(votable)
     {
-      :votes_up => votable.cached_votes_up,
-      :votes_down => votable.cached_votes_down,
-      :votable_score => votable.cached_votes_score,
+      :cached_votes_up => votable.cached_votes_up,
+      :cached_votes_down => votable.cached_votes_down,
+      :cached_votes_score => votable.cached_votes_score,
+      :voted => Vote.to_direction(current_user.voted_as_when_voted_for(votable))
     }
   end
 

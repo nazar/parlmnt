@@ -1,28 +1,21 @@
 class SessionsController < ApplicationController
 
-  respond_to :json, :xml, :only => [:token]
+  respond_to :json
 
   def create
-    auth = request.env['omniauth.auth']
+    user = User.find_by_username(params[:user][:username])
 
-    @auth = Authorization.find_from_hash(auth).first
-
-    unless @auth.present?
-      User.transaction do
-        @auth = Authorization.create_from_hash(auth, current_user)
-      end
+    if UserAuthenticator.new(user).authenticate(params[:user][:password])
+      self.current_user = user
+      respond_with(user, :location => nil)
+    else
+      respond_with({:errors => {:base => 'Invalid username or password'}}, :status => 422, :location => nil)
     end
-
-    # Log the authorizing user in.
-    self.current_user = @auth.user
-
-    render :text => '<script>window.close()</script>'
   end
 
-  def token
-    @user = current_user.present? ? current_user : User.new
-
-    respond_with @user
+  def destroy
+    self.current_user = nil
+    render :nothing => true
   end
 
 end
