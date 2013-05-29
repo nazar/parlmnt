@@ -16,7 +16,8 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
     $.gritter.add({
       title: title,
       text: msg,
-      sticky: true
+      sticky: false,
+      time: 2500
     });
 
   });
