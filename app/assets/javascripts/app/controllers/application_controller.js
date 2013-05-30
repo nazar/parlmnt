@@ -5,7 +5,8 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
   };
 
   $scope.setTitle = function(title) {
-    $('html title').text(title); //TODO baaaaad... better way of doing this?
+    $('html title').text(title);
+    piwikTracker.trackPageView(title);
   };
 
   $scope.userName = function() {
