@@ -8,8 +8,7 @@ angular.module('parlmntDeps').directive('commentable', [function() {
       src: '=',
       commentable: '=',
       commentableType: '@',
-      loggedIn: '&',
-      formClear: '&'
+      loggedIn: '&'
     },
 
     controller: ['$scope', '$http', function($scope, $http) {
