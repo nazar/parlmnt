@@ -6,7 +6,7 @@
   <div class="span12">
     <div id="bill">
       <div my-votable="bill" votable-type="Bill" vote-score="{{bill.cached_votes_score}}" vote-flag="{{bill.voted}}"></div>
-      <h1>{{bill.name}}</h1>
+      <h1><a href="http://services.parliament.uk{{bill.url_details}}" target="_blank">{{bill.name}}</a></h1>
 
       <dl class="dl-horizontal">
         <dt>First Started:</dt>
