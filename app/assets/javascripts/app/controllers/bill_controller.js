@@ -3,7 +3,7 @@ angular.module('parlmntDeps').controller('billController',
 function($scope,   $routeParams,   bill) {
 
   $scope.bill = {};
-  scope.billCommentsPath = '';
+  $scope.billCommentsPath = '';
 
   bill.getBill($routeParams.billId)
     .success(function(data) {
