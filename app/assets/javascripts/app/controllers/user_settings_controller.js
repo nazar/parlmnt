@@ -1,4 +1,4 @@
-angular.module('parlmntDeps').controller('userSettingsController', ['$scope', 'user', function($scope, user) {
+angular.module('parlmntDeps').controller('userSettingsController', ['$scope', '$rootScope', 'user', function($scope, $rootScope, user) {
 
   $scope.userForm = {};
 
@@ -12,7 +12,9 @@ angular.module('parlmntDeps').controller('userSettingsController', ['$scope', 'u
       name: $scope.userForm.name,
       email: $scope.userForm.email,
       constituency_id: $scope.userForm.constituency_id
-    });
+    }).success(function(){
+      $rootScope.$broadcast('displayMessage', 'Success', '<div>User Settings Saved</div>');
+    })
   };
 
 }]);
