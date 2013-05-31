@@ -6,7 +6,10 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
 
   $scope.setTitle = function(title) {
     $('html title').text(title);
-    piwikTracker.trackPageView(title);
+
+    if(typeof(piwikTracker) != 'undefined') {
+      piwikTracker.trackPageView(title);
+    }
   };
 
   $scope.userName = function() {
