@@ -1,12 +1,14 @@
 module ImporterUtils
 
+  require 'open-uri'
+
   class << self
 
     def safe_fetcher(uri)
       tries = 1
       begin
         p "Opening #{uri}"
-        Nokogiri::HTML(open(URI.encode(uri)))
+        Nokogiri::HTML(open(uri))
       rescue OpenURI::HTTPError => ex
         tries = tries + 1
         p "Error fetching from #{uri}. Retry #{tries}. #{ex}"

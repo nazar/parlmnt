@@ -4,7 +4,7 @@ class BillsController < ApplicationController
 
   def index
     year = params[:year] || DateTime.now.year
-    @bills = Bill.find_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage, :bill_summary])
+    @bills = Bill.search_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage, :bill_summary])
 
     bills_responder
   end
@@ -55,7 +55,7 @@ class BillsController < ApplicationController
         end
       end
 
-      result[:summary] = view_context.sanitize(bill.bill_summary.body, :tags=>[])
+      result[:summary] = view_context.sanitize(bill.bill_summary_body, :tags=>[])
 
       if bill.current_stage.present?
         result[:current_stage] = stage_atts.inject({}){|r,a| r.merge(a => bill.current_stage.send(a)) }
