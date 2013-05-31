@@ -1,15 +1,9 @@
 class BillStage < ActiveRecord::Base
 
-  require 'open-uri'
-  require 'importer/bill_stages'
-
-  include BillStagesImporter
-
   STAGES = {
     '1' => 'commons',
     '2' => 'lords'
   }
-
 
   belongs_to :bill
 

@@ -1,10 +1,5 @@
 class Sponsor < ActiveRecord::Base
 
-  require 'open-uri'
-  require 'importer/sponsors'
-
-  include SponsorImporter
-
   acts_as_votable
 
   SPONSOR_TYPES = {
@@ -92,14 +87,6 @@ class Sponsor < ActiveRecord::Base
   ###############
 
   class << self
-
-    def save_converted_sponsor(sponsor_hash, scope)
-      sponsor = scope.find_by_name(sponsor_hash[:name]).first_or_initialize(sponsor_hash)
-      if sponsor.new_record?
-        sponsor.import_status = 1
-        sponsor.save!
-      end
-    end
 
     def create_sponsor_placeholder(name)
       Sponsor.create(:name => name, :sponsor_type => 4, :import_status => 2)

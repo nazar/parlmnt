@@ -1,58 +1,69 @@
-module SponsorImporter #TODO convert into a Service Module as opposed to a mixin
+module UkSponsorImporter
 
   require 'importer/utils'
 
+  URI_MPS = 'http://www.parliament.uk/mps-lords-and-offices/mps/'
+  URI_LORDS = 'http://www.parliament.uk/mps-lords-and-offices/lords/'
+  URI_AGENTS = 'http://www.publications.parliament.uk/pa/pbagents.htm'
 
+  class SponsorImporter
 
-  def self.included(base)
-    base.extend(SponsorImporter::ClassMethods)
-    base.send :include, SponsorImporter::InstanceMethods
+    def import
+      summary = SponsorSummariesImporter.new
+      summary.import
+
+      #Sponsor details
+      Sponsor.stage_1.not_agents.each do |sponsor|
+
+        detail = SponsorDetailImporter.new(sponsor)
+        detail.import
+        #Don't spam the website... pace
+        sleep(2)
+      end
+      Setup.last_sponsors_import = Time.now
+    end
+
   end
 
+  class SponsorSummariesImporter
 
-  module ClassMethods
-    def import_mps_summaries(source = nil)
-      doc = source || Nokogiri::HTML(open('http://www.parliament.uk/mps-lords-and-offices/mps/'))
+    def import
+      import_mps_summaries
+      sleep(2)
+      import_lords_summaries
+      sleep(2)
+      import_agents
+      sleep(2)
+    end
+
+
+    private
+
+
+    def import_mps_summaries
+      doc = ImporterUtils.safe_fetcher(URI_MPS)
 
       mps_extractor(doc) do |mp_hash|
         mp_converter(mp_hash) do |converted|
-          yield(converted) if block_given?
-          save_converted_sponsor(converted, mps)
+          save_converted_sponsor(converted, Sponsor.mps)
         end
       end
     end
 
-    def import_lords_summaries(source = nil)
-      doc = source || Nokogiri::HTML(open('http://www.parliament.uk/mps-lords-and-offices/lords/'))
+    def import_lords_summaries
+      doc = ImporterUtils.safe_fetcher(URI_LORDS)
 
       lords_extractor(doc) do |lords_hash|
         lord_converter(lords_hash) do |converted|
-          yield(converted) if block_given?
-          save_converted_sponsor(converted, lords)
+          save_converted_sponsor(converted, Sponsor.lords)
         end
       end
     end
 
-    def import_agents(source = nil)
-      doc = source || Nokogiri::HTML(open('http://www.publications.parliament.uk/pa/pbagents.htm'))
+    def import_agents
+      doc = ImporterUtils.safe_fetcher(URI_AGENTS)
       agents_extractor(doc) do |agent_hash|
-        yield(agent_hash) if block_given?
-        agents.find_by_name(agent_hash[:name]).first_or_create(agent_hash)
-      end
-    end
-
-    def import_sponsor_details
-      total = 1
-      stage_1.each do |sponsor|
-        # don't DOS their site!!
-        sleep(2)
-        sponsor.import_details!
-
-        #pause longer every 10 imports
-        total += 1
-        if total % 10 == 0
-          sleep(10)
-        end
+        Sponsor.agents.find_by_name(agent_hash[:name]).first_or_create(agent_hash)
       end
     end
 
@@ -142,54 +153,67 @@ module SponsorImporter #TODO convert into a Service Module as opposed to a mixin
       raise "Must be passed a block" unless block_given?
 
       result = sponsor_hash.clone.tap do |h|
-         h[:party] = Party.find_by_name(h.delete(:party_txt)).first
-       end
+        h[:party] = Party.find_by_name(h.delete(:party_txt)).first
+      end
 
-       yield(result)
+      yield(result)
+    end
+
+    def save_converted_sponsor(sponsor_hash, scope)
+      sponsor = scope.find_by_name(sponsor_hash[:name]).first_or_initialize(sponsor_hash)
+      if sponsor.new_record?
+        sponsor.import_status = 1
+        sponsor.save!
+      end
     end
 
   end
 
-  module InstanceMethods
 
-    def import_details(doc = nil)
-      #detail import applies to MPs and Lords only. Agents have no details
-      if [1,2].include?(sponsor_type)
 
-        if doc.nil?
-          uri = url_details
-          doc = ImporterUtils.safe_fetcher(uri)
-          return false unless doc
-        end
 
-        begin
-          self.url_photo = doc.at_css(img_css_selector)[:src].squish
+  class SponsorDetailImporter
 
-          #email is not always present
-          doc.at_css(email_css_selector).tap do |email|
-            self.email = email.text unless email.nil?
-          end
+    def initialize(sponsor)
+      @sponsor = sponsor
+    end
 
-          if self.url_photo.present?
-            self.import_status = 2
-            true
-          else
-            logger.fatal "Error IMG parse #{url_details} #{img_css_selector} from #{url_details}.\n" << doc.inner_html
-            Log.fatal("url_photo was blank for #{name} ar #{url_details}. Skipping")
-            false
-          end
-        rescue Exception => e
-          logger.fatal "Exception parsing #{url_details} #{img_css_selector} or #{email_css_selector} from #{url_details}.\n" << doc.inner_html << "#{e.message}\n" << e.backtrace.join("\n")
-          Log.fatal("Scrape error. url_photo or email was blank for #{name} at #{url_details}. Skipping", e)
-          false
-        end
+    def import
+      if import_details
+        @sponsor.import_updated_at = Time.now
+        @sponsor.save!
       end
     end
 
-    def import_details!
-      if import_details
-        self.import_updated_at = Time.now
-        save!
+
+    private
+
+
+    def import_details
+      #detail import applies to MPs and Lords only. Agents have no details
+      if [1,2].include?(@sponsor.sponsor_type)
+        doc = ImporterUtils.safe_fetcher(@sponsor.url_details)
+        begin
+          @sponsor.url_photo = doc.at_css(img_css_selector)[:src].squish
+
+          #email is not always present
+          doc.at_css(email_css_selector).tap do |email|
+            @sponsor.email = email.text unless email.nil?
+          end
+
+          if @sponsor.url_photo.present?
+            @sponsor.import_status = 2
+            true
+          else
+            Rails.logger.fatal "Error IMG parse #{@sponsor.url_details} #{img_css_selector} from #{@sponsor.url_details}.\n"
+            Rails.logger.fatal("url_photo was blank for #{@sponsor.name} or #{@sponsor.url_details}. Skipping")
+            false
+          end
+        rescue Exception => e
+          Rails.logger.fatal "Exception parsing #{@sponsor.url_details} #{img_css_selector} or #{email_css_selector} from #{@sponsor.url_details}.\n" << "#{e.message}\n" << e.backtrace.join("\n")
+          Rails.logger.fatal("Scrape error. url_photo or email was blank for #{@sponsor.name} at #{@sponsor.url_details}. Skipping")
+          false
+        end
       end
     end
 
@@ -202,5 +226,6 @@ module SponsorImporter #TODO convert into a Service Module as opposed to a mixin
     end
 
   end
+
 
 end

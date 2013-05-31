@@ -1,10 +1,5 @@
 class Bill < ActiveRecord::Base
 
-  require 'open-uri'
-  require 'importer/bills'
-
-  include BillImporter
-
   acts_as_votable
 
   attr_accessible :name, :url_details, :bill_updated_at, :house, :import_status, :summary, :bill_type, :origin, :bill_sponsors, :year, :bill_summary, :bill_documents
@@ -31,15 +26,11 @@ class Bill < ActiveRecord::Base
 
   class << self
 
-    def find_by_name(name)
-      where(:name => name)
-    end
-
     def search_by_term(term)
       where('name like ?', "%#{term}%")
     end
 
-    def find_by_year(year)
+    def search_by_year(year)
       where(:year => year)
     end
 
@@ -69,15 +60,6 @@ class Bill < ActiveRecord::Base
 
   end
 
-  ###############
-  # class methods
-  ###############
-
-  class << self
-
-  end
-
-
   ##################
   # instance methods
   ##################
@@ -93,6 +75,18 @@ class Bill < ActiveRecord::Base
 
   def first_stage
     bill_stages.started.first
+  end
+
+  def bill_summary_body
+    bill_summary.body if bill_summary
+  end
+
+  def summary_changed?(summary)
+    bill_summary.present? and bill_summary.body != summary
+  end
+
+  def update_summary(summary)
+    bill_summary.update_body!(summary)
   end
 
 
