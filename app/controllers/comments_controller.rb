@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
       if comment.save
         comment.vote(:voter => current_user, :vote => true)
-        render :json => comment_to_hash(comment)
+        render :json => comment
       else
         render :nothing, :status => 401
       end

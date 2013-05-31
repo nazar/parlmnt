@@ -47,7 +47,7 @@ angular.module('parlmntDeps').directive('commentable', [function() {
           commentable.createComment($scope.commentableType, $scope.commentable, $scope.formComment.body)
             .success(function(reponse) {
               _resetFormComment();
-              $scope.comments.push(reponse)
+              $scope.comments.push(reponse.comment)
             })
         }
       };
