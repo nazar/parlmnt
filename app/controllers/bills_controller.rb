@@ -14,7 +14,7 @@ class BillsController < ApplicationController
   end
 
   def comments
-    commentable_comments('Bill', params[:id])
+    json_responder( CommentsPresenter.new('Bill', params[:id], current_user) )
   end
 
   def my_votes

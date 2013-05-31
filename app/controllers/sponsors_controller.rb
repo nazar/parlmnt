@@ -9,7 +9,7 @@ class SponsorsController < ApplicationController
 
 
   def comments
-    commentable_comments('Sponsor', params[:id])
+    json_responder( CommentsPresenter.new('Sponsor', params[:id], current_user) )
   end
 
   def my_votes
