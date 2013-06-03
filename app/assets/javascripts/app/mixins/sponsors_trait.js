@@ -8,7 +8,6 @@ function mixinSponsorsTrait($scope, $filter, sponsor) {
   $scope.orderByFilter = 'name';
   $scope.filters = {};
   $scope.customFilters = {};
-  $scope.nameFilter = '';
   $scope.constituencyFilter = '';
 
 
@@ -37,16 +36,8 @@ function mixinSponsorsTrait($scope, $filter, sponsor) {
   $scope.filteredSponsors = function() {
     var filteredSponsors;
 
-    function nameMatcher(sponsor) {
-      return sponsor.name.toLowerCase().has($scope.nameFilter) || sponsor.constituency.toLowerCase().has($scope.nameFilter);
-    }
-
     filteredSponsors = Object.keys($scope.filters).length > 0 ? $filter('filter')($scope.sponsors, $scope.filters) : $scope.sponsors;
 
-    //name search
-    if ($scope.nameFilter) {
-      filteredSponsors = $filter('filter')(filteredSponsors, nameMatcher)
-    }
     //custom function filters
     Object.each($scope.customFilters, function(filter, fn) {
       filteredSponsors = fn.call(filteredSponsors);
