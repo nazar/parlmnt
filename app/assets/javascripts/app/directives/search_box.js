@@ -26,29 +26,35 @@ angular.module('parlmntDeps').directive('searchBox', [function() {
         groupToName = {
           mps: 'MPs',
           lords: 'Lords',
-          bills: 'Bills and Acts'
+          bills: 'Bills and Acts',
+          constituencies: 'Constituencies'
         };
 
         groupToPath = {
           mps: '#/sponsors/{id}',
           lords: '#/sponsors/{id}',
-          bills: '#/bills/{id}'
+          bills: '#/bills/{id}',
+          constituencies: '#/sponsors/{id}'
         };
 
         $search = $('<div></div>');
 
         Object.each(res, function(searchGroup, results) {
-          var $result = $('<ul><li class="header">{heading}</li></ul>'.assign({heading: groupToName[searchGroup]}));
+          var $result;
 
-          results.each(function(search) {
-            var li = '<li class="search-result"><a href="{path}">{name}</a></li>'.assign({
-              path: groupToPath[searchGroup].assign({id: search.id}),
-              name: search.name
+          if (results.length > 0) {
+            $result = $('<ul><li class="header">{heading}</li></ul>'.assign({heading: groupToName[searchGroup]}));
+
+            results.each(function(search) {
+              var li = '<li class="search-result"><a href="{path}">{name}</a></li>'.assign({
+                path: groupToPath[searchGroup].assign({id: search.id}),
+                name: search.name
+              });
+              $result.append(li)
             });
-            $result.append(li)
-          });
 
-          $search.append($result);
+            $search.append($result);
+          }
         });
 
         $element.popover({
@@ -66,6 +72,7 @@ angular.module('parlmntDeps').directive('searchBox', [function() {
         $('html').one('click', function(e) {
           e.preventDefault();
           $element.popover('destroy');
+          $scope.searchBox = '';
         });
 
       }

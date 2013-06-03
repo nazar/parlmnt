@@ -8,7 +8,6 @@ function mixinBillsTrait($scope, $filter, bill) {
   $scope.orderByFilter = 'name';
   $scope.filters = {};
   $scope.customFilters = {};
-  $scope.textFilter = '';
 
 
   $scope.dataSource('2013')
@@ -40,10 +39,6 @@ function mixinBillsTrait($scope, $filter, bill) {
     var filteredBills;
 
     filteredBills = Object.keys($scope.filters).length > 0 ? $filter('filter')($scope.bills, $scope.filters) : $scope.bills;
-    //name search
-    if ($scope.textFilter) {
-      filteredBills = $filter('filter')(filteredBills, {name: $scope.textFilter})
-    }
     //custom function filters
     Object.each($scope.customFilters, function(filter, fn) {
       filteredBills = fn.call(filteredBills);
