@@ -10,9 +10,9 @@ class ConstituencySponsorSearchPresenter
 
   def to_hash
     r = [].tap do |result|
-      Constituency.where('constituencies.name like ?', "%#{@term}%")
-                  .order('constituencies.name ASC')
-                  .includes(:sponsor).each do |constituency|
+      Constituency.where('constituencies.name like ?', "%#{@term}%").
+                  order('constituencies.name ASC').
+                  includes(:sponsor).each do |constituency|
         if constituency.sponsor.present?
           result << {
               :name => constituency.name,
