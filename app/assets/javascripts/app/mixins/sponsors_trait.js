@@ -47,14 +47,17 @@ function mixinSponsorsTrait($scope, $filter, sponsor) {
   };
 
   $scope.setOrder = function(order){
+    $scope.trackFilterAction('setOrder', order);
     $scope.orderByFilter = order;
   };
 
   $scope.showByParty = function(party) {
+    $scope.trackFilterAction('showByParty', party);
     _setFilter('party_short_name', party);
   };
 
   $scope.showOnlySponsored = function(fact) {
+    $scope.trackFilterAction('showOnlySponsored', fact);
     _setCustomFilter('count_bills', fact, function() {
       return this.filter(function(sponsor) {
         return sponsor.count_bills > 0;

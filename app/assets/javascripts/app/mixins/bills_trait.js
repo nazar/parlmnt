@@ -49,21 +49,26 @@ function mixinBillsTrait($scope, $filter, bill) {
 
   $scope.setOrder = function(order){
     $scope.orderByFilter = order;
+    $scope.trackFilterAction('setOrder', order);
   };
 
   $scope.showBillType = function(type) {
     _setFilter('bill_type', type);
+    $scope.trackFilterAction('showBillType', type);
   };
 
   $scope.showBillOrigin = function(origin) {
     _setFilter('origin', origin);
+    $scope.trackFilterAction('showBillOrigin', origin);
   };
 
   $scope.showBillStage = function(stage) {
     _setFilter('current_stage_code', stage);
+    $scope.trackFilterAction('showBillStage', stage);
   };
 
   $scope.showBillParty = function(partyShort) {
+    $scope.trackFilterAction('showBillParty', partyShort);
     _setCustomFilter('billParty', partyShort, function() {
       return this.filter(function(b) {
         return b.sponsors.find(function(s) {
