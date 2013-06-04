@@ -7,9 +7,7 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
   $scope.setTitle = function(title) {
     $('html title').text(title);
 
-    if(typeof(piwikTracker) != 'undefined') {
-      piwikTracker.trackPageView(title);
-    }
+    _trackAction(title);
   };
 
   $scope.userName = function() {
@@ -27,6 +25,21 @@ angular.module('parlmntDeps').controller('applicationController', ['$scope', 'us
   });
 
   $scope.setTitle('Debate Bills and Acts of Parliament');
+
+
+
+  /////////// PRIVATE
+
+
+  function _trackAction(title){
+    try {
+      if ( typeof window._paq !== 'undefined' ){
+        window._paq.push(['setDocumentTitle', title]);
+        window._paq.push(['setCustomUrl', window.location.href ]);
+        window._paq.push(['trackPageView']);
+      }
+    } catch(e) {}
+  }
 
 
 
