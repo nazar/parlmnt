@@ -273,6 +273,10 @@
   my_votes_bills_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"bills",false]],[7,"/",false]],[6,"my_votes",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// my_votes_comments => /comments/my_votes(.:format)
+  my_votes_comments_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"comments",false]],[7,"/",false]],[6,"my_votes",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // my_votes_sponsors => /sponsors/my_votes(.:format)
   my_votes_sponsors_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"sponsors",false]],[7,"/",false]],[6,"my_votes",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);

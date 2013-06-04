@@ -8,9 +8,9 @@ class Vote
 
     def find_votable_for_user(params, user)
       if user.present?
-        klass = votable_class(params[:vote][:votable_type])
+        klass = votable_class(params[:vote][:voteable_type])
         if klass.present?
-          votable = klass.find_by_id(params[:vote][:votable_id])
+          votable = klass.find_by_id(params[:vote][:voteable_id])
           votable if votable.present?
         end
       end

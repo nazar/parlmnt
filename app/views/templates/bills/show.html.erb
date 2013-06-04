@@ -4,8 +4,14 @@
 
 <%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
   <div class="span12">
-    <div id="bill">
-      <div my-votable="bill" votable-type="Bill" vote-score="{{bill.cached_votes_score}}" vote-flag="{{bill.voted}}"></div>
+    <div id="bill" voteable voteable-type="Bill">
+      <div class="vote" ng-class="{voted: bill.voted,  voted_up: bill.voted == 'up', voted_down: bill.voted == 'down'}">
+        <div class="actions">
+          <div class="action_up"><i ng-click="voteUp(bill)" class="icon-circle-arrow-up icon-large"></i></div>
+          <div ng-bind="bill.cached_votes_score" class="count"></div>
+          <div class="action_down"><i ng-click="voteDown(bill)" class="icon-circle-arrow-down icon-large"></i></div>
+        </div>
+      </div>
       <h1><a href="http://services.parliament.uk{{bill.url_details}}" target="_blank">{{bill.name}}</a></h1>
 
       <dl class="dl-horizontal">
@@ -34,7 +40,7 @@
           <p ng-bind-html-unsafe="bill.bill_summary.body"></p>
         </div>
 
-        <div id="comments" class="tab-pane" commentable="bill" commentable-type="Bill" src="billCommentsPath" logged-in="loggedIn()" ></div>
+        <div id="comments" class="tab-pane" commentable="bill" commentable-type="Bill" src="billCommentsPath" logged-in="loggedIn()"></div>
 
         <div ng-show="bill.count_stages > 0" id="stages" class="tab-pane" ng-include=" '/templates/bill_stages/bill_stages' "></div>
 

@@ -1,4 +1,4 @@
-<div class="commentable">
+<div class="commentable" voteable voteable-type="Comment">
   <div ng-hide="loggedIn()">
     Please <span login-link></span> or <span register-link></span> to comment on this bill
   </div>
@@ -11,5 +11,5 @@
     </div>
   </div>
 
-  <div class="comment clearfix" ng-repeat="comment in comments" ng-include=" '/templates/commentable/comment' " timeago time-selector="time.timeago"></div>
+  <div class="comment clearfix" ng-repeat="comment in comments | orderBy:score " ng-include=" '/templates/commentable/comment' " timeago time-selector="time.timeago"></div>
 </div>

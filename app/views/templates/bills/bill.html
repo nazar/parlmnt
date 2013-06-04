@@ -1,6 +1,12 @@
 <article typeof="Article">
   <div class="image-feat">
-    <div my-votable="bill" votable-type="Bill" vote-score="{{bill.cached_votes_score}}" vote-flag="{{bill.voted}}"></div>
+    <div class="vote" ng-class="{voted: bill.voted,  voted_up: bill.voted == 'up', voted_down: bill.voted == 'down'}">
+      <div class="actions">
+        <div class="action_up"><i ng-click="voteUp(bill)" class="icon-circle-arrow-up icon-large"></i></div>
+        <div ng-bind="bill.cached_votes_score" class="count"></div>
+        <div class="action_down"><i ng-click="voteDown(bill)" class="icon-circle-arrow-down icon-large"></i></div>
+      </div>
+    </div>
   </div>
 
   <header>
@@ -9,7 +15,7 @@
 
   <div class="content" property="articleBody">
     <p class="summary">
-      {{bill.summary}}
+      {{strippedSummary(bill)}}
     </p>
   </div>
 

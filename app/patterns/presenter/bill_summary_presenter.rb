@@ -1,9 +1,8 @@
 class BillSummaryPresenter
 
-  def initialize(bills_relation, root_name, context)
+  def initialize(bills_relation, root_name)
     @bills = bills_relation
     @root_name = root_name
-    @context = context
   end
 
   def to_json(options)
@@ -42,7 +41,7 @@ class BillSummaryPresenter
         end
       end
 
-      result[:summary] = @context.sanitize(bill.bill_summary_body, :tags=>[])
+      result[:summary] = bill.bill_summary_body
 
       if bill.current_stage.present?
         result[:current_stage] = stage_atts.inject({}){|r,a| r.merge(a => bill.current_stage.send(a)) }

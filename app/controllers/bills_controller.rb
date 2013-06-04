@@ -4,7 +4,7 @@ class BillsController < ApplicationController
     year = params[:year] || DateTime.now.year
     @bills = Bill.search_by_year(year).bills.includes([{:sponsors => [:party]}, :current_stage, :bill_summary])
 
-    json_responder( BillSummaryPresenter.new(@bills, 'bills', view_context) )
+    json_responder( BillSummaryPresenter.new(@bills, 'bills') )
   end
 
   def show
