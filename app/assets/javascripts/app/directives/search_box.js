@@ -10,6 +10,7 @@ angular.module('parlmntDeps').directive('searchBox', [function() {
 
       $scope.search = function() {
         if ($scope.searchBox) {
+          $scope.trackFilterAction('search', $scope.searchBox);
           $http.post(Routes.search_path(), {term: $scope.searchBox})
             .success(_showSearchResult)
         }
