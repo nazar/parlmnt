@@ -96,6 +96,14 @@ function mixinBillsTrait($scope, $filter, bill) {
     }
   };
 
+  $scope.strippedSummary = function(bill){
+    if (bill.summary) {
+      return bill.summary.stripTags();
+    } else {
+      return '';
+    }
+  };
+
 
   //// TEH Private
 

@@ -1,10 +1,16 @@
 <div class="comment-container clearfix">
-  <div class="votes"></div>
+  <div class="vote" ng-class="{voted: comment.voted,  voted_up: comment.voted == 'up', voted_down: comment.voted == 'down'}">
+    <div class="actions">
+      <div class="action_up"><i ng-click="voteUp(comment)" class="icon-circle-arrow-up icon-large"></i></div>
+      <div class="action_down"><i ng-click="voteDown(comment)" class="icon-circle-arrow-down icon-large"></i></div>
+    </div>
+  </div>
   <div class="content-container">
     <div ng-include=" '/templates/commentable/edit.html' " ng-show="comment.editing"></div>
     <div class="comment" ng-hide="comment.editing">
       <div class="stats" ng-hide="comment.editing">
         <span class="user">{{comment.username}}</span>
+        <span class="point">{{comment.cached_votes_score}} {{comment.cached_votes_score == 1 ? 'point' : 'points'}}</span>
         <time class="timeago" datetime="{{comment.created_at}}">{{comment.created_at | date:'medium'}}</time>
       </div>
       <p class="body">{{comment.body}}</p>

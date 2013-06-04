@@ -43,5 +43,10 @@ class CommentsController < ApplicationController
     end
   end
 
+  def my_votes
+    my_votes = MyCommentVotesPresenter.new(params[:commentable_type], params[:commentable_id], current_user)
+    json_responder(my_votes)
+  end
+
 
 end

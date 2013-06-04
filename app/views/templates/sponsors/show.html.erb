@@ -4,8 +4,14 @@
 
 <%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
   <div class="span12">
-    <div id="sponsor">
-      <div my-votable="sponsor" votable-type="Sponsor" vote-score="{{sponsor.cached_votes_score}}" vote-flag="{{sponsor.voted}}"></div>
+    <div id="sponsor" voteable voteable-type="Sponsor">
+      <div class="vote" ng-class="{voted: sponsor.voted,  voted_up: sponsor.voted == 'up', voted_down: sponsor.voted == 'down'}">
+        <div class="actions">
+          <div class="action_up"><i ng-click="voteUp(sponsor)" class="icon-circle-arrow-up icon-large"></i></div>
+          <div ng-bind="sponsor.cached_votes_score" class="count"></div>
+          <div class="action_down"><i ng-click="voteDown(sponsor)" class="icon-circle-arrow-down icon-large"></i></div>
+        </div>
+      </div>
       <h1>{{sponsor.name}}</h1>
 
       <dl class="dl-horizontal">

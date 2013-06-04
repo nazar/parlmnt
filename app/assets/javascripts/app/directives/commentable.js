@@ -16,12 +16,14 @@ angular.module('parlmntDeps').directive('commentable', [function() {
 
       $scope.comments = [];
       $scope.formComment = {};
+      $scope.commentMap = {};
 
       $scope.$watch('src', function(path) {
         if (path) {
           commentable.getComments($scope.src)
-            .success(function(res) {
-              $scope.comments = res.comments;
+            .success(function(res){
+              _setComments(res);
+              _updateMyVotes();
             });
         }
       });
@@ -47,7 +49,7 @@ angular.module('parlmntDeps').directive('commentable', [function() {
           commentable.createComment($scope.commentableType, $scope.commentable, $scope.formComment.body)
             .success(function(reponse) {
               _resetFormComment();
-              $scope.comments.push(reponse.comment)
+              $scope.comments.push(Object.merge(reponse.comment, {voted: 'up'}))
             })
         }
       };
@@ -64,7 +66,7 @@ angular.module('parlmntDeps').directive('commentable', [function() {
         commentable.replyComment(comment.id, comment.interact)
           .success(function(response) {
             _commentResetState(comment);
-            comment.children.push(Object.merge({replying: false, editing: false, interact: ''}, response.comment));
+            comment.children.push(Object.merge({replying: false, editing: false, interact: '', voted: 'up'}, response.comment));
           });
       };
 
@@ -74,6 +76,10 @@ angular.module('parlmntDeps').directive('commentable', [function() {
             _commentResetState(comment);
             $scope.comments.remove(comment);
           });
+      };
+
+      $scope.score = function(comment){
+        return parseFloat(comment.score) * -1;
       };
 
       //inline Commentable service
@@ -118,6 +124,10 @@ angular.module('parlmntDeps').directive('commentable', [function() {
       commentable.deleteComment = function(commentId) {
         return $http.delete(Routes.comment_path(commentId, {method: 'delete'}));
       };
+      
+      commentable.getMyVotes = function(commentableId, commentableType){
+        return $http.get(Routes.my_votes_comments_path({commentable_id: commentableId, commentable_type: commentableType}))
+      };
 
 
       /// PRIVATE
@@ -131,6 +141,37 @@ angular.module('parlmntDeps').directive('commentable', [function() {
       function _commentResetState(comment) {
         comment.replying = false;
         comment.editing = false;
+      }
+
+      function _setComments(res) {
+        $scope.comments = null;
+        $scope.commentMap = null;
+        $scope.commentMap = {};
+
+        $scope.comments = res.comments;
+        _mapComments($scope.comments);
+
+      }
+
+      function _updateMyVotes() {
+        commentable.getMyVotes($scope.commentable.id, $scope.commentableType)
+          .success(function(response) {
+            response.votes.each(function(vote) {
+              if ($scope.commentMap[vote.votable_id]) {
+                $scope.commentMap[vote.votable_id].voted = vote.vote_flag_to_s;
+              }
+            });
+          });
+      }
+
+      function _mapComments(comments) {
+        comments.each(function(comment){
+          $scope.commentMap[comment.id] = comment;
+          if (comment.children.length > 0) {
+            _mapComments(comment.children)
+          }
+        });
+
       }
 
     }]

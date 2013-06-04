@@ -52,6 +52,9 @@ Votes::Application.routes.draw do
     member do
       post 'reply'
     end
+    collection do
+      get 'my_votes'
+    end
   end
 
   resource :user, :only => [:update] do
