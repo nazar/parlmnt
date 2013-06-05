@@ -1,0 +1,5 @@
+<ul class="parties-selector" >
+  <li ng-repeat="party in parties | orderBy:'-count' | filter:largeParties " ng-class="partyToClass(party)" ng-style="styles(party)" ng-click="setToSelection(party)" title="{{party.name}}({{party.count}})">
+    {{party.name}}({{party.count}})
+  </li>
+</ul>

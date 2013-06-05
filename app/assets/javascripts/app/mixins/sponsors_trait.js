@@ -52,8 +52,10 @@ function mixinSponsorsTrait($scope, $filter, sponsor) {
   };
 
   $scope.showByParty = function(party) {
-    $scope.trackFilterAction('showByParty', party);
-    _setFilter('party_short_name', party);
+    var name = party ? party.name : 'all';
+
+    $scope.trackFilterAction('showByParty', name);
+    _setFilter('party_name', name);
   };
 
   $scope.showOnlySponsored = function(fact) {
