@@ -1,4 +1,4 @@
-angular.module('parlmntDeps').directive('commentable', [function() {
+angular.module('parlmntDeps').directive('commentable', ['comment', function(comment) {
 
   return {
 
@@ -12,7 +12,6 @@ angular.module('parlmntDeps').directive('commentable', [function() {
     },
 
     controller: ['$scope', '$http', function($scope, $http) {
-      var commentable = {};
 
       $scope.comments = [];
       $scope.formComment = {};
@@ -20,7 +19,7 @@ angular.module('parlmntDeps').directive('commentable', [function() {
 
       $scope.$watch('src', function(path) {
         if (path) {
-          commentable.getComments($scope.src)
+          comment.getComments($scope.src)
             .success(function(res){
               _setComments(res);
               _updateMyVotes();
@@ -28,25 +27,25 @@ angular.module('parlmntDeps').directive('commentable', [function() {
         }
       });
 
-      $scope.commentEdit = function(comment) {
-        comment.interact = comment.body;
-        comment.editing = true;
-        comment.replying = false;
+      $scope.commentEdit = function(commentObj) {
+        commentObj.interact = commentObj.body;
+        commentObj.editing = true;
+        commentObj.replying = false;
       };
 
-      $scope.commentReply = function(comment) {
-        comment.interact = '';
-        comment.replying = true;
-        comment.editing = false;
+      $scope.commentReply = function(commentObj) {
+        commentObj.interact = '';
+        commentObj.replying = true;
+        commentObj.editing = false;
       };
 
-      $scope.cancelComment = function(comment) {
-        _commentResetState(comment);
+      $scope.cancelComment = function(commentObj) {
+        _commentResetState(commentObj);
       };
 
       $scope.createComment = function() {
         if ($scope.formComment.body) {
-          commentable.createComment($scope.commentableType, $scope.commentable, $scope.formComment.body)
+          comment.createComment($scope.commentableType, $scope.commentable, $scope.formComment.body)
             .success(function(reponse) {
               _resetFormComment();
               $scope.comments.push(Object.merge(reponse.comment, {voted: 'up'}))
@@ -54,79 +53,31 @@ angular.module('parlmntDeps').directive('commentable', [function() {
         }
       };
 
-      $scope.updateComment = function(comment) {
-        commentable.updateComment(comment.id, comment.interact)
+      $scope.updateComment = function(commentObj) {
+        comment.updateComment(commentObj.id, commentObj.interact)
           .success(function(response) {
-            _commentResetState(comment);
-            Object.merge(comment, response.comment);
+            _commentResetState(commentObj);
+            Object.merge(commentObj, response.comment);
           });
       };
 
-      $scope.replyComment = function(comment) {
-        commentable.replyComment(comment.id, comment.interact)
+      $scope.replyComment = function(commentObj) {
+        comment.replyComment(commentObj.id, commentObj.interact)
           .success(function(response) {
-            _commentResetState(comment);
-            comment.children.push(Object.merge({replying: false, editing: false, interact: '', voted: 'up'}, response.comment));
+            _commentResetState(commentObj);
+            commentObj.children.push(Object.merge({replying: false, editing: false, interact: '', voted: 'up'}, response.comment));
           });
       };
 
-      $scope.deleteComment = function(comment) {
-        commentable.deleteComment(comment.id)
+      $scope.deleteComment = function(commentObj) {
+        comment.deleteComment(commentObj.id)
           .success(function() {
-            _commentResetState(comment);
-            $scope.comments.remove(comment);
+            $scope.comments.remove(commentObj);
           });
       };
 
-      $scope.score = function(comment){
-        return parseFloat(comment.score) * -1;
-      };
-
-      //inline Commentable service
-
-      commentable.getComments = function(path) {
-        return $http.get(path);
-      };
-
-      commentable.createComment = function(commentableType, commentableObj, comment, replyingToId) {
-        var data = {
-          comment: {
-            commentable_type: commentableType,
-            commentable_id: commentableObj.id,
-            parent_id: replyingToId,
-            body: comment
-          }
-        };
-
-        return $http.post(Routes.comments_path(), data);
-      };
-
-      commentable.updateComment = function(commentId, commentBody) {
-        var data = {
-          comment: {
-            body: commentBody
-          }
-        };
-
-        return $http.put(Routes.comment_path(commentId), data);
-      };
-
-      commentable.replyComment = function(parentCommentId, commentBody) {
-        var data = {
-          comment: {
-            body: commentBody
-          }
-        };
-
-        return $http.post(Routes.reply_comment_path(parentCommentId), data);
-      };
-
-      commentable.deleteComment = function(commentId) {
-        return $http.delete(Routes.comment_path(commentId, {method: 'delete'}));
-      };
-      
-      commentable.getMyVotes = function(commentableId, commentableType){
-        return $http.get(Routes.my_votes_comments_path({commentable_id: commentableId, commentable_type: commentableType}))
+      $scope.score = function(commentObj){
+        return parseFloat(commentObj.score) * -1;
       };
 
 
@@ -138,9 +89,9 @@ angular.module('parlmntDeps').directive('commentable', [function() {
         $scope.formComment = {};
       }
 
-      function _commentResetState(comment) {
-        comment.replying = false;
-        comment.editing = false;
+      function _commentResetState(commentObj) {
+        commentObj.replying = false;
+        commentObj.editing = false;
       }
 
       function _setComments(res) {
@@ -154,7 +105,7 @@ angular.module('parlmntDeps').directive('commentable', [function() {
       }
 
       function _updateMyVotes() {
-        commentable.getMyVotes($scope.commentable.id, $scope.commentableType)
+        comment.getMyVotes($scope.commentable.id, $scope.commentableType)
           .success(function(response) {
             response.votes.each(function(vote) {
               if ($scope.commentMap[vote.votable_id]) {
