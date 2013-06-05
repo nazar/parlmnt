@@ -3,11 +3,11 @@ angular.module('parlmntDeps').factory('party', ['$http', function($http) {
   var party = {};
 
   var partyColours = {
-    "conservative": 'blue',
-    "labour": 'red',
-    "liberal-democrat": 'yellow',
+    "conservative": '#0000ff',
+    "labour": '#ff0000',
+    "liberal-democrat": '#ffff00',
     "labour-(co-op)": '#ff6352',
-    "speaker": 'white',
+    "speaker": '#ffffff',
     "democratic-unionist": '#c1c1ca',
     "scottish-national": '#cdcdd6',
     "sinn-fein": '#d8d8e1',
