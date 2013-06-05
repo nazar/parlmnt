@@ -1,13 +1,12 @@
-angular.module('parlmntDeps').directive('voteable', ['$rootScope', 'user', function($rootScope, user) {
+angular.module('parlmntDeps').directive('voteable', ['$rootScope', 'user', 'vote', function($rootScope, user, vote) {
 
   return {
 
     controller:  ['$scope', '$attrs', '$http', function($scope, $attrs, $http) {
-      var voteable = {};
 
       $scope.voteUp = function(voteObj) {
         _canVote(function() {
-          voteable.vote($attrs.voteableType, voteObj.id, 'up')
+          vote.vote($attrs.voteableType, voteObj.id, 'up')
             .success(function(res){
               Object.merge(voteObj, res);
             });
@@ -16,7 +15,7 @@ angular.module('parlmntDeps').directive('voteable', ['$rootScope', 'user', funct
 
       $scope.voteDown = function(voteObj) {
         _canVote(function() {
-          voteable.vote($attrs.voteableType, voteObj.id, 'down')
+          vote.vote($attrs.voteableType, voteObj.id, 'down')
             .success(function(res){
               Object.merge(voteObj, res);
             });
@@ -25,19 +24,6 @@ angular.module('parlmntDeps').directive('voteable', ['$rootScope', 'user', funct
 
 
       /// private
-
-
-      voteable.vote = function(voteableType, voteableId, direction) {
-        var data = {
-          vote: {
-            voteable_type: voteableType,
-            voteable_id: voteableId,
-            vote_flag: direction
-          }
-        };
-
-        return $http.post(Routes.votes_path(), data);
-      };
 
 
       function _canVote(fn) {

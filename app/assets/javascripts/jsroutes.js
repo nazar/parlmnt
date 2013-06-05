@@ -257,6 +257,10 @@
   lords_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"lords",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// lords_parties => /parties/lords(.:format)
+  lords_parties_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"parties",false]],[7,"/",false]],[6,"lords",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // me => /me(.:format)
   me_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"me",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
@@ -268,6 +272,10 @@
 // mps => /mps(.:format)
   mps_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"mps",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// mps_parties => /parties/mps(.:format)
+  mps_parties_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"parties",false]],[7,"/",false]],[6,"mps",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
 // my_votes_bills => /bills/my_votes(.:format)
   my_votes_bills_path: function(options) {

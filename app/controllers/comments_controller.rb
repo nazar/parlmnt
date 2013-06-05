@@ -26,6 +26,13 @@ class CommentsController < ApplicationController
     json_responder(comment)
   end
 
+  def destroy #TODO don't destroy - mark as deleted instead
+    comment = current_user.comments.find_by_id(params[:id])
+    comment.destroy
+
+    json_responder(comment)
+  end
+
   def reply
     parent_comment = Comment.find_by_id(params[:id])
     commentable = parent_comment.commentable

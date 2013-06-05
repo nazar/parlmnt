@@ -57,6 +57,13 @@ Votes::Application.routes.draw do
     end
   end
 
+  resources :parties, :only => [] do
+    collection do
+      get 'mps'
+      get 'lords'
+    end
+  end
+
   resource :user, :only => [:update] do
     collection do
       get 'token'
