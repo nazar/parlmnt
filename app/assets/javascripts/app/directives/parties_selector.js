@@ -1,4 +1,4 @@
-angular.module('parlmntDeps').directive('partiesSelector', ['$rootScope', 'party', function($rootScope, party) {
+angular.module('parlmntDeps').directive('partiesSelector', ['party', function(party) {
 
   return {
 
@@ -10,48 +10,19 @@ angular.module('parlmntDeps').directive('partiesSelector', ['$rootScope', 'party
       partyClick: '&'
     },
 
-    link: function(scope, element){
-
-      scope.$on('loaded', _recalcDims);
-
-      $(window).resize(_recalcDims);
-
-      //////////////////////
-
-      function _recalcDims(){
-        var width = element.width(),
-          total = scope.parties.sum(function(p){ return p.count });
-
-        scope.parties.each(function(partyObj){
-          partyObj.width = (partyObj.count / total) * width;
-        });
-
-        $rootScope.$$phase || $rootScope.$apply();
-      }
-
-    },
-
     controller: ['$scope', '$element', 'party', function($scope, $element, party) {
 
       $scope.parties = [];
 
       $scope.$watch('partySrc', function(partySrc) {
-        var func;
+        var func = partySrc === 'mps' ? party.getMps : (partySrc === 'lords' ? party.getLords : null);
 
-        if (partySrc) {
-          if (partySrc === 'mps') {
-            func = party.getMps;
-          } else if (partySrc === 'lords') {
-            func = party.getLords;
-          }
-
-          if (func) {
-            func().success(function(res){
-              $scope.parties = res;
-              _recalculateMetrics();
-              $scope.$broadcast('loaded');
-            });
-          }
+        if (func) {
+          func().success(function(res){
+            $scope.parties = res;
+            _recalculateMetrics();
+            $scope.$broadcast('loaded');
+          });
         }
       });
 
@@ -68,8 +39,9 @@ angular.module('parlmntDeps').directive('partiesSelector', ['$rootScope', 'party
       $scope.styles = function(party){
         var result = {};
 
-        result['background-color'] = party.colour;
-        result['width'] = party.width - 10;
+        result['background-color'] = party.backgroundColor;
+        result['width'] = party.width - 1 +  '%';
+        result['color'] = party.color;
 
         return result;
       };
@@ -95,12 +67,20 @@ angular.module('parlmntDeps').directive('partiesSelector', ['$rootScope', 'party
       // PRIVATE
 
       function _recalculateMetrics(){
-        var width = $element.width(),
-          total = $scope.parties.sum(function(p){ return p.count });
+        var total = $scope.parties.sum(function(p){ return p.count });
+
+        function contrast(hexcolor){
+          var r = parseInt(hexcolor.substr(0,2),16);
+          var g = parseInt(hexcolor.substr(2,2),16);
+          var b = parseInt(hexcolor.substr(4,2),16);
+          var yiq = ((r*299)+(g*587)+(b*114))/1000;
+          return (yiq >= 128) ? 'black' : 'white';
+        }
 
         $scope.parties.each(function(partyObj){
-          partyObj.width = (partyObj.count / total) * width;
-          partyObj.colour = party.getColourFor(partyObj);
+          partyObj.backgroundColor = party.getColourFor(partyObj);
+          partyObj.width = ((partyObj.count / total) * 100).round();
+          partyObj.color = partyObj.backgroundColor ? contrast(partyObj.backgroundColor.remove('#')) : 'black';
         });
       }
     }]
