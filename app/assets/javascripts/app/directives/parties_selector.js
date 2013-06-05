@@ -1,4 +1,4 @@
-angular.module('parlmntDeps').directive('partiesSelector', ['$timeout', 'party', function($timeout, party) {
+angular.module('parlmntDeps').directive('partiesSelector', ['$rootScope', 'party', function($rootScope, party) {
 
   return {
 
@@ -10,7 +10,7 @@ angular.module('parlmntDeps').directive('partiesSelector', ['$timeout', 'party',
       partyClick: '&'
     },
 
-    link: function(scope, element, attrs){
+    link: function(scope, element){
 
       scope.$on('loaded', _recalcDims);
 
@@ -26,16 +26,7 @@ angular.module('parlmntDeps').directive('partiesSelector', ['$timeout', 'party',
           partyObj.width = (partyObj.count / total) * width;
         });
 
-        $timeout(function(){
-          element.find('li').each(function(i){
-            var $li = $(this),
-              party = scope.parties[i],
-              padding = $li.css('padding-left').toNumber() + $li.css('padding-right').toNumber();
-
-            $li.width( party.width - padding  );
-          });
-
-        });
+        $rootScope.$$phase || $rootScope.$apply();
       }
 
     },
@@ -78,6 +69,7 @@ angular.module('parlmntDeps').directive('partiesSelector', ['$timeout', 'party',
         var result = {};
 
         result['background-color'] = party.colour;
+        result['width'] = party.width - 10;
 
         return result;
       };
