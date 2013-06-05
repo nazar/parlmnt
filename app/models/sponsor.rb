@@ -13,7 +13,7 @@ class Sponsor < ActiveRecord::Base
   validates_presence_of :name, :sponsor_type, :import_status
   validates_uniqueness_of :name, :scope => :sponsor_type
 
-  after_create :update_party_counter
+  after_save :update_party_counter
 
   attr_accessible :name, :url_details, :constituency_name, :sponsor_type, :party, :import_status, :email, :constituency_id
 

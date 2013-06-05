@@ -14,7 +14,10 @@ angular.module('parlmntDeps').factory('party', ['$http', function($http) {
     "social-democratic-&-labour-party": '#e7e7f0',
     "plaid-cymru": '#ececf5',
     "independent": '#f3f3fc',
-    "green": 'green'
+    "green": 'green',
+    "crossbench": '#a67fc0',
+    "bishops": '#c397e2',
+    "non-affiliated": '#ffe4ea'
   };
 
    party.getMps = function(){
@@ -26,7 +29,6 @@ angular.module('parlmntDeps').factory('party', ['$http', function($http) {
    };
 
   party.getColourFor = function(party){
-    console.log('dash', party.name.dasherize())
     return partyColours[party.name.dasherize()];
   };
 

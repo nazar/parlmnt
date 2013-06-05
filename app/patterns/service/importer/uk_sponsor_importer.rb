@@ -153,7 +153,9 @@ module UkSponsorImporter
       raise "Must be passed a block" unless block_given?
 
       result = sponsor_hash.clone.tap do |h|
-        h[:party] = Party.find_by_name(h.delete(:party_txt)).first
+        party_name = h.delete(:party_txt)
+
+        h[:party] = Party.where(:name => party_name).first_or_create
       end
 
       yield(result)
@@ -164,6 +166,8 @@ module UkSponsorImporter
       if sponsor.new_record?
         sponsor.import_status = 1
         sponsor.save!
+      else
+        sponsor.update_attributes(sponsor_hash)
       end
     end
 

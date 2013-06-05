@@ -48,49 +48,11 @@ class Party < ActiveRecord::Base
       where(:short => short_name)
     end
 
-    def find_by_name(name)
-      where(:name => name)
-    end
-
   end
 
   #class methods
 
   class << self
-
-
-
-
-    # Given an array of short party names (as scraped from MP list) create and return array of party objects referenced by short name
-    # @param [Array] short_names unique list of abbreviated party names
-    # @return [Hash] returns a Hash of party objects each referenced by short_name
-    def sync_short_party_names(short_names)
-      {}.tap do |result|
-        short_names.each do |short_name|
-          short = short_name.downcase.to_sym
-          name = PARTY_SHORT_TO_LONG[short]
-          if name.blank?
-            raise "#{short} is not a recognised party short_name"
-          else
-            party = find_by_short(short.to_s).first_or_create!(:name => name)
-          end
-          result[short_name] = party
-        end
-      end
-    end
-
-    def sync_party_names(names)
-      {}.tap do |result|
-        names.each do |party_name|
-          if PARTY_SHORT_TO_LONG.has_value?(party_name)
-            party = find_by_name(party_name).first_or_create!(:short => PARTY_SHORT_TO_LONG.invert[party_name])
-          else
-            raise "#{party_name} is not a valid party name"
-          end
-          result[party_name] = party
-        end
-      end
-    end
 
     def update_mp_counter(party, count)
       party.count_mps = count
