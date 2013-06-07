@@ -15,8 +15,8 @@
       <h1>{{sponsor.name}}</h1>
 
       <dl class="dl-horizontal">
-        <dt>Constituency:</dt>
-        <dd>{{sponsor.constituency_name}}</dd>
+        <dt ng-show="sponsor.constituency_name">Constituency:</dt>
+        <dd ng-show="sponsor.constituency_name">{{sponsor.constituency_name}}</dd>
         <dt>Parliament Bio:</dt>
         <dd><a href="{{sponsor.url_details}}" target="_blank">{{sponsor.name}}</a></dd>
         <dt>Party:</dt>
