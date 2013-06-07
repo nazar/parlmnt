@@ -209,6 +209,10 @@
   acts_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"acts",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// acts_stats => /stats/acts(.:format)
+  acts_stats_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"stats",false]],[7,"/",false]],[6,"acts",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // bill => /bills/:id(.:format)
   bill_path: function(_id, options) {
   return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"bills",false]],[7,"/",false]],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
@@ -216,6 +220,14 @@
 // bills => /bills(.:format)
   bills_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"bills",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// bills_acts_stats => /stats/bills_acts(.:format)
+  bills_acts_stats_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"stats",false]],[7,"/",false]],[6,"bills_acts",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// bills_stats => /stats/bills(.:format)
+  bills_stats_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"stats",false]],[7,"/",false]],[6,"bills",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
 // comment => /comments/:id(.:format)
   comment_path: function(_id, options) {

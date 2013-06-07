@@ -1,0 +1,24 @@
+<%= content_for(:sidebar) do %>
+  <%= render '/templates/charts/charts_sidebar' %>
+<% end %>
+
+<%= render :layout => '/layouts/left_fixed_sidebar_fluid' do %>
+<div class="span12">
+  <div id="charts">
+    <div ng-switch on="chart" class="chart-container">
+      <div ng-switch-when="bills">
+        <div chart-bills></div>
+        <p>The above chart represents proposed Bills in Parliament for each year Grouped by the party that sponsored the bill.</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <div chart-acts></div>
+        <p>The above chart represents all Acts of Parliament for each year Grouped by the party that sponsored the bill.</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <div chart-bills-acts></div>
+        <p>The above chart represents all Bills and Acts of Parliament for each year Grouped by the party that sponsored the bill.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end  %>

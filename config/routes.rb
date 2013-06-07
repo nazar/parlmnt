@@ -70,6 +70,14 @@ Votes::Application.routes.draw do
     end
   end
 
+  resource :stats, :only => [] do
+    collection do
+      get 'bills'
+      get 'acts'
+      get 'bills_acts'
+    end
+  end
+
   match '/templates/:section/:view' => 'templates#show', :as => 'tpl'
   match '/' => 'pages#landing'
 
