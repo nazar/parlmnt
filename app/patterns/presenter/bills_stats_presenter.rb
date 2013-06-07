@@ -5,9 +5,9 @@ class BillsStatsPresenter
   #end
 
   def bills_and_acts
-    Bill.select('bills.year, parties.name, count(1) count')
-      .joins(scope_joiner)
-      .group('bills.year, parties.name')
+    Bill.select('bills.year, parties.name, count(1) count').
+      joins(scope_joiner).
+      group('bills.year, parties.name')
   end
 
   def bills
