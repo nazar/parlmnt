@@ -32,7 +32,8 @@ angular.module('parlmntDeps').directive('chartBills', ['stats', function(stats) 
               stacking: 'normal'
             }
           },
-          series: data.series
+          series: data.series,
+          colors: data.colors
         });
       });
     }
