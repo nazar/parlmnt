@@ -32,6 +32,10 @@ angular.module('parlmntDeps').factory('party', ['$http', function($http) {
     return partyColours[party.name.dasherize()];
   };
 
+  party.getColourForName = function(name){
+    return partyColours[name.dasherize()];
+  };
+
   return party;
 
 }]);

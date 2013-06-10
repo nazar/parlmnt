@@ -1,4 +1,4 @@
-angular.module('parlmntDeps').factory('stats', ['$http', '$q', function($http, $q) {
+angular.module('parlmntDeps').factory('stats', ['$http', '$q', 'party', function($http, $q, party) {
 
   var stat = {};
 
@@ -24,6 +24,7 @@ angular.module('parlmntDeps').factory('stats', ['$http', '$q', function($http, $
   function _processStatsIntoObjects(res) {
     var $d = $q.defer(),
       series = [],
+      colors = [],
       parties,
       bills,
       years;
@@ -43,24 +44,26 @@ angular.module('parlmntDeps').factory('stats', ['$http', '$q', function($http, $
         return b.name;
       }).unique();
 
-    parties.each(function(party) {
+    parties.each(function(partyName) {
       var data;
 
       data = years.map(function(year) {
         var item = bills.find(function(b) {
-          return (b.year === year) && (b.name === party);
+          return (b.year === year) && (b.name === partyName);
         });
 
         return item ? item.count : 0;
       });
 
       series.push({
-        name: party,
+        name: partyName,
         data: data
       });
+
+      colors.push(party.getColourForName(partyName))
     });
 
-    $d.resolve({years: years, series: series});
+    $d.resolve({years: years, series: series, colors: colors});
 
     return $d.promise;
   }
