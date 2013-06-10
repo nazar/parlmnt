@@ -75,6 +75,8 @@ Votes::Application.routes.draw do
       get 'bills'
       get 'acts'
       get 'bills_acts'
+      get 'mps'
+      get 'lords'
     end
   end
 

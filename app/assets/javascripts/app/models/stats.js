@@ -4,24 +4,34 @@ angular.module('parlmntDeps').factory('stats', ['$http', '$q', 'party', function
 
   stat.billsAndActs = function() {
     return $http.get(Routes.bills_acts_stats_path())
-      .then(_processStatsIntoObjects);
+      .then(_processStatsIntoStackedChartObjects);
   };
 
   stat.bills = function() {
     return $http.get(Routes.bills_stats_path())
-      .then(_processStatsIntoObjects);
+      .then(_processStatsIntoStackedChartObjects);
   };
 
   stat.acts = function() {
     return $http.get(Routes.acts_stats_path())
-      .then(_processStatsIntoObjects);
+      .then(_processStatsIntoStackedChartObjects);
+  };
+
+  stat.mps = function() {
+    return $http.get(Routes.mps_stats_path())
+      .then(_processStatsIntoPieChartObjects);
+  };
+
+  stat.lords = function() {
+    return $http.get(Routes.lords_stats_path())
+      .then(_processStatsIntoPieChartObjects);
   };
 
 
 
   ///////////// PRIVATE
 
-  function _processStatsIntoObjects(res) {
+  function _processStatsIntoStackedChartObjects(res) {
     var $d = $q.defer(),
       series = [],
       colors = [],
@@ -64,6 +74,24 @@ angular.module('parlmntDeps').factory('stats', ['$http', '$q', 'party', function
     });
 
     $d.resolve({years: years, series: series, colors: colors});
+
+    return $d.promise;
+  }
+
+
+  function _processStatsIntoPieChartObjects(res){
+    var $d = $q.defer(),
+      series = [],
+      colors = [];
+
+    res.data.sortBy(function(party) {
+      return party.count * -1;
+    }).each(function(partyObj) {
+      colors.push(party.getColourForName(partyObj.name));
+      series.push( [partyObj.name, partyObj.count] )
+    });
+
+    $d.resolve({series: series, colors: colors});
 
     return $d.promise;
   }
