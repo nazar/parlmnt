@@ -1,9 +1,5 @@
 class BillsStatsPresenter
 
-  #def initialize(scope = Bill)
-  #  @scope = scope
-  #end
-
   def bills_and_acts
     Bill.select('bills.year, parties.name, count(1) count').
       joins(scope_joiner).

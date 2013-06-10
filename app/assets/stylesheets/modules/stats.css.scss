@@ -1,6 +1,15 @@
 .charts-sidebar{
+  li {
+    padding-bottom: 8px;
+  }
+  a {
+    padding: 6px;
+  }
   .active {
-    font-weight: bold;
+    border: 1px solid silver;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1);
   }
 }
 
