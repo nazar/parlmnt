@@ -14,7 +14,6 @@ angular.module('parlmntDeps').directive('pieLords', ['stats', function(stats) {
             ]
           };
         });
-
         $(element).highcharts({
           chart: {
             plotBackgroundColor: null,
@@ -25,8 +24,9 @@ angular.module('parlmntDeps').directive('pieLords', ['stats', function(stats) {
             text: 'Current Lords Party Breakdown'
           },
           tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            percentageDecimals: 1
+            formatter: function () {
+              return '{party}: <b>{percent}%</b>, <b>{seats}</b> seats'.assign({party: this.point.name, percent: Highcharts.numberFormat(this.percentage, 1), seats: this.y});
+            }
           },
           plotOptions: {
             pie: {
