@@ -25,8 +25,9 @@ angular.module('parlmntDeps').directive('pieMps', ['stats', function(stats) {
             text: 'Current MP Party Breakdown'
           },
           tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            percentageDecimals: 1
+            formatter: function () {
+              return '{party}: <b>{percent}%</b>, <b>{seats}</b> seats'.assign({party: this.point.name, percent: Highcharts.numberFormat(this.percentage, 1), seats: this.y});
+            }
           },
           plotOptions: {
             pie: {
